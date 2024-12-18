@@ -789,18 +789,14 @@ Returns a list of all the groups the current user is a part of.
       "Groups": [
         {
           "id": 1,
-          "name": "Beach Cleanup Crew",
-          "description": "A group of volunteers who clean up beaches monthly",
-          "groupImageUrl": "https://image-url.com/group1.jpg",
-          "membersCount": 15
+          "eventId": 6
+          "ownerId": 2
         },
         {
-          "id": 2,
-          "name": "Community Garden Volunteers",
-          "description": "Local residents working together to grow fresh produce",
-          "groupImageUrl": "https://image-url.com/group2.jpg",
-          "membersCount": 22
-        }
+          "id": 1,
+          "eventId": 6
+          "ownerId": 2
+        },
       ]
     }
     ```
@@ -835,25 +831,10 @@ Returns detailed information about a specific group, including the name, descrip
   * **Body**:
     ```json
     {
-      "Group": {
+      {
         "id": 1,
-        "name": "Beach Cleanup Crew",
-        "description": "A group of volunteers who clean up beaches monthly",
-        "groupImageUrl": "https://image-url.com/group1.jpg",
-        "members": [
-          {
-            "id": 1,
-            "firstName": "John",
-            "username": "johndoe",
-            "profileImageUrl": "https://image-url.com/profile1.jpg"
-          },
-          {
-            "id": 2,
-            "firstName": "Jane",
-            "username": "janesmith",
-            "profileImageUrl": "https://image-url.com/profile2.jpg"
-          }
-        ]
+        "eventId": 6
+        "ownerId": 2
       }
     }
     ```
@@ -883,11 +864,9 @@ Creates a new group and returns the newly created group's information.
     * `Content-Type: application/json`
   * **Body**:
     ```json
-    {
-      "name": "Beach Cleanup Crew",
-      "description": "A group of volunteers who clean up beaches monthly",
-      "groupImageUrl": "https://image-url.com/group1.jpg"
-    }
+        {
+          "eventId": 6
+        },
     ```
 
 * **Successful Response**
@@ -897,11 +876,10 @@ Creates a new group and returns the newly created group's information.
   * **Body**:
     ```json
     {
-      "Group": {
+      {
         "id": 1,
-        "name": "Beach Cleanup Crew",
-        "description": "A group of volunteers who clean up beaches monthly",
-        "groupImageUrl": "https://image-url.com/group1.jpg"
+        "eventId": 6
+        "ownerId": 2
       }
     }
     ```
@@ -915,8 +893,8 @@ Creates a new group and returns the newly created group's information.
     {
       "message": "Bad Request",
       "errors": {
-        "name": "Group name is required",
-        "description": "Group description is required"
+        "name": "Event choice is required",
+        "description": "Event choice is required"
       }
     }
     ```
@@ -937,8 +915,7 @@ Update a group's details.
   * **Body**:
     ```json
     {
-      "name": "Updated Group Name",
-      "description": "Updated description of the group",
+      "inviteId": 4,
     }
     ```
 
@@ -949,15 +926,29 @@ Update a group's details.
   * **Body**:
     ```json
     {
-      "Group": {
+      "Invites": [
+        {
         "id": 1,
-        "name": "Updated Group Name",
-        "description": "Updated description of the group",
-      }
+        "userId": "Updated Group Name",
+        "friendId": "Updated description of the group",
+        "groupId": 1,
+        "eventId": "Updated Group Name",
+        "status": "Updated description of the group",
+        "createdAt": "Updated description of the group",
+      },
+      {
+        "id": 1,
+        "userId": "Updated Group Name",
+        "friendId": "Updated description of the group",
+        "groupId": 1,
+        "eventId": "Updated Group Name",
+        "status": "Updated description of the group",
+        "createdAt": "Updated description of the group",
+      }]
     }
     ```
 
-* **Error Response: Group not found**
+* **Error Response: Invite not found**
   * **Status Code**: 404
   * **Headers**:
     * `Content-Type: application/json`
