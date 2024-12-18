@@ -1182,3 +1182,85 @@ Return events filtered by query parameters.
       }
     }
     ```
+
+### Notifications
+
+GET All Notifications
+
+Return all the notifications for a user specified by id.
+
+* Require Authentication: true
+* Request
+  * Method: GET
+  * Route path: /notifications/:user_id
+  * Body: none
+
+* Successful Response: 
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "Notifications": [
+        {
+         "id": 2,
+         "Invite": {
+            "user_id": 1,
+            "friend_id": 2,
+            "event_id": 1,
+            "id": 1,
+         },
+         "message": "Interesting information"
+        }
+      ]
+    }
+    ```
+
+* Error response: Couldn't find a Event with the specified id
+  * Status Code: 404
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "No notifications could be found"
+    }
+    ```
+
+### Delete a Notification
+
+Delete an existing Notification.
+
+* Require Authentication: true
+* Require proper authorization: Notification must belong to the current user
+* Request
+  * Method: DELETE
+  * Route path: /notification/:id
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Successfully deleted"
+    }
+    ```
+
+* Error response: Couldn't find a Notification with the specified id
+  * Status Code: 404
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Notification couldn't be found"
+    }
+    ```
