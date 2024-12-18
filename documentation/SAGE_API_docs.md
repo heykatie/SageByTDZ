@@ -72,7 +72,7 @@ All endpoints that require a current user to be logged in.
          }
       }
 
-* Successful Response when there is no logged in user
+* Successful Response when there is no logged in user.
   * Status Code: 200
   * Headers:
     * Content-Type: application/json
@@ -1042,4 +1042,3 @@ Returns a list of all members of a specific group.
     ```
 
 ---
-
