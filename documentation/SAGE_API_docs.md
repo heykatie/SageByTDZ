@@ -1590,7 +1590,6 @@ Update a group's details.
     {
       "name": "Updated Group Name",
       "description": "Updated description of the group",
-      "groupImageUrl": "https://image-url.com/updated-group1.jpg"
     }
     ```
 
@@ -1605,7 +1604,6 @@ Update a group's details.
         "id": 1,
         "name": "Updated Group Name",
         "description": "Updated description of the group",
-        "groupImageUrl": "https://image-url.com/updated-group1.jpg"
       }
     }
     ```
