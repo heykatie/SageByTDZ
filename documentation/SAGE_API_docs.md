@@ -375,17 +375,17 @@ Creates and returns a new Invites.
 * Require Authentication: true
 * Request
   * Method: POST
-  * Route path: /invites
+  * Route path: groups/:grouId/invites
   * Headers:
     * Content-Type: application/json
   * Body:
 
     ```json
     {
+      "id": 1,
       "user_id": 1,
       "friend_id": 2,
       "event_id": 1,
-      "id": 1,
       "created_at": "timestamp",
       "status": 1
     }
@@ -399,10 +399,10 @@ Creates and returns a new Invites.
 
     ```json
     {
+      "id": 1,
       "user_id": 1,
       "friend_id": 2,
       "event_id": 1,
-      "id": 1,
       "created_at": "timestamp",
       "status": 1
     }
@@ -431,7 +431,7 @@ Updates and returns an existing Invite.
 * Require proper authorization: Invite must belong to the current user
 * Request
   * Method: PUT
-  * Route path: /invites/:id/edit
+  * Route path: /groups/:groupId/invites
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -494,7 +494,7 @@ Deletes an existing Invite specific "friend".
 * Require proper authorization: Invite must belong to the current user
 * Request
   * Method: DELETE
-  * Route path: /invites/:id
+  * Route path: groups/:groupId/invites/:inviteId
   * Body: none
 
 * Successful Response
