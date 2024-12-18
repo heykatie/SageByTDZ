@@ -1,7 +1,7 @@
 Table friends {
   main_user_id integer
   friend_user_id integer
-  created_at timestamp 
+  created_at TimeStamp 
 }
 
 Table users {
@@ -11,7 +11,7 @@ Table users {
   firstName varchar
   lastName varchar
   city varchar
-  created_at timestamp
+  created_at TimeStamp
   saved_filters varchar
   badge_id integer
 }
@@ -28,8 +28,8 @@ Table events {
   event_date datetime
   start_time time
   end_time time
-  created_at timestamp
-  updated_at timestamp
+  created_at TimeStamp
+  updated_at TimeStamp
   badge_id integer
 }
 
@@ -55,7 +55,7 @@ Table Badges {
 Table ConfirmedEvents {
   event_id integer
   user_id integer
-  created_at timestamp
+  created_at TimeStamp
   
 }
 
@@ -64,8 +64,8 @@ Table Reviews {
   organizer_id integer
   id integer [primary key]
   review varchar
-  created_at timestamp
-  updated_at timestamp 
+  created_at TimeStamp
+  updated_at TimeStamp 
   stars integer 
 }
 
@@ -74,7 +74,7 @@ Table Invites{
   friend_id integer
   event_id integer
   id integer [primary key]
-  created_at timestamp
+  created_at TimeStamp
   status varchar 
   text varchar
 }

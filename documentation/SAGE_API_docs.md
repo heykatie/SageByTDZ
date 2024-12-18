@@ -2,7 +2,7 @@
 
 ![DB Schema](./db-schema/schema.png)
 
-Base URL:** '/'
+* Base URL: '/'
 
 ## All routes that require Authentication
 
@@ -66,7 +66,7 @@ All endpoints that require a current user to be logged in.
             "lastName":"'Markcul'",
             "birthday": "'November 16th, 1994'",
             "city": "'somecity'",
-            "create_at": "timstamp",
+            "create_at": "TimeStamp",
             "saved_filters":["Filter1", "Filter2"],
             "badge_id": [1, 3, 22]
          }
@@ -244,11 +244,11 @@ Returns all the Events.
       "Events": [{
 
               "id": 1,
-              "title": "help us",
+              "title": "Help Us",
               "description": "Helping people",
               "organizer_id": 1,
               "categories": ["Outdoor", "LGBT"],
-              "address": "1233 do good st.",
+              "address": "1233 Do Good St.",
               "'city'": "Great City",
               "state": "California",
               "event_date": "December 25, 2024",
@@ -282,11 +282,11 @@ Returns all the events accepted by the current user.
       "Events": [
         {
               "id": 1,
-              "title": "help us",
+              "title": "Help Us",
               "description": "Helping people",
               "organizer_id": 1,
               "categories": ["Outdoor", "LGBT"],
-              "address": "1233 do good st.",
+              "address": "1233 Do Good St.",
               "'city'": "Great City",
               "state": "California",
               "event_date": "December 25, 2024",
@@ -318,11 +318,11 @@ Returns the details of a event specified by its id.
     ```json
     {
       "id": 1,
-      "title": "help us",
+      "title": "Help Us",
       "description": "Helping people",
       "organizer_id": 1,
       "categories": ["Outdoor", "LGBT"],
-      "address": "1233 do good st.",
+      "address": "1233 Do Good St.",
       "'city'": "Great City",
       "state": "California",
       "event_date": "December 25, 2024",
@@ -386,7 +386,7 @@ Creates and returns a new Invites.
       "friend_id": 2,
       "event_id": 1,
       "id": 1,
-      "created_at": "timestamp",
+      "created_at": "TimeStamp",
       "status": 1
     }
     ```
@@ -403,7 +403,7 @@ Creates and returns a new Invites.
       "friend_id": 2,
       "event_id": 1,
       "id": 1,
-      "created_at": "timestamp",
+      "created_at": "TimeStamp",
       "status": 1
     }
     ```
@@ -440,7 +440,7 @@ Updates and returns an existing Invite.
     {
       "user_id": 1,
       "id": 1,
-      "created_at": "timestamp",
+      "created_at": "TimeStamp",
       "status": 1
     }
     ```
@@ -455,7 +455,7 @@ Updates and returns an existing Invite.
     {
       "user_id": 1,
       "id": 1,
-      "created_at": "timestamp",
+      "created_at": "TimeStamp",
       "status": 0
     }
     ```
@@ -547,11 +547,11 @@ Return all the Confirmed Events that the current user has made.
           "event_id": 1,
           "Event": {
             "id": 1,
-            "title": "help us",
+            "title": "Help Us",
             "description": "Helping people",
             "organizer_id": 1,
             "categories": ["Outdoor", "LGBT"],
-            "address": "1233 do good st.",
+            "address": "1233 Do Good St.",
             "city": "Great City",
             "state": "California",
             "event_date": "December 25, 2024",
@@ -594,8 +594,8 @@ Return all the attendees for a event specified by id.
       "Attendees": [
         {
           "user_id": 1,
-          "first_name": "Name",
-          "last_name": "Lastname"
+          "first_name": "FirstName",
+          "last_name": "LastName"
         }
       ]
     }

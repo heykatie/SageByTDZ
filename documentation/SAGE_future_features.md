@@ -23,9 +23,9 @@ Returns all the reviews written by the current user.
           "user_id": 1,
           "event_id": 1,
           "id": 1,
-          "review": "some Review",
-          "created_at": "timestamp",
-          "updated_at": "timestamp" ,
+          "review": "Some Review",
+          "created_at": "TimeStamp",
+          "updated_at": "TimeStamp" ,
           "User": {
             "id": 1,
             "firstName": "John",
@@ -33,11 +33,11 @@ Returns all the reviews written by the current user.
           },
           "Event": {
             "id": 1,
-            "title": "help us",
+            "title": "Help Us",
             "description": "Helping people",
             "organizer_id": 1,
             "categories": ["Outdoor", "LGBT"],
-            "address": "1233 do good st.",
+            "address": "1233 Do Good St.",
             "'city'": "Great City",
             "state": "California",
             "event_date": "December 25, 2024",
@@ -76,9 +76,9 @@ Returns all the reviews that belong to an Organizer specified by id.
           "user_id": 1,
           "organizer_id": 1,
           "id": 1,
-          "review": "some Review",
-          "created_at": "timestamp",
-          "updated_at": "timestamp" ,
+          "review": "Some Review",
+          "created_at": "TimeStamp",
+          "updated_at": "TimeStamp" ,
           "User": {
             "id": 1,
             "firstName": "John",
@@ -149,7 +149,7 @@ Create and return a new review for a organizer specified by id.
       "message": "Bad Request",
       "errors": {
         "review": "Review text is required",
-        "stars": "Stars must be an integer from 1 to 5",
+        "emoji": "User must select an emoji",
       }
     }
     ```
@@ -194,7 +194,7 @@ Update and return an existing review.
     ```json
     {
       "review": "This was an awesome experience!",
-      "stars": 5,
+      "emoji": ":)",
     }
     ```
 
@@ -210,7 +210,7 @@ Update and return an existing review.
       "userId": 1,
       "organizer_id": 1,
       "review": "This was an awesome experience!",
-      "stars": 5,
+      "emoji": ":)",
       "createdAt": "2021-11-19 20:39:36",
       "updatedAt": "2021-11-20 10:06:40"
     }
@@ -227,7 +227,7 @@ Update and return an existing review.
       "message": "Bad Request",
       "errors": {
         "review": "Review text is required",
-        "stars": "Stars must be an integer from 1 to 5",
+        "emoji": "User must select an emoji",
       }
     }
     ```
@@ -278,9 +278,9 @@ Delete an existing review.
     }
     ```
 
-### Create a ConfirmedEvent for a Event based on the invite's id
+### Create a Event for a Event based on the invite's id
 
-Create and return a new ConfirmedEvent for a invites specified by id.
+Create and return a new Event for a invites specified by id.
 
 * Require Authentication: true
 * Require proper authorization: you MUST be invited
@@ -328,8 +328,8 @@ Create and return a new ConfirmedEvent for a invites specified by id.
     {
       "message": "Bad Request",
       "errors": {
-        "start_time": "start_time cannot be in the past",
-        "end_time": "end_time cannot be on or before start_time",
+        "start_time": "Start time cannot be in the past",
+        "end_time": "End time cannot be on or before start time",
         "event_date": "Event date cannot be before current date?"
       }
     }
@@ -357,13 +357,13 @@ Create and return a new ConfirmedEvent for a invites specified by id.
     {
       "message": "Sorry, you have an event on these specified dates",
       "errors": {
-        "start_time": "start_time cannot be in the past",
-        "end_time": "end_time cannot be on or before start_time",
+        "start_time": "Start time cannot be in the past",
+        "end_time": "End time cannot be on or before start time",
         "event_date": "Event date cannot be before current date?"
       }
     }
     ```
-### Edit ConfirmedEvents
+### Edit Events
 
 Update and return an existing ConfirmedEvents.
 
@@ -402,7 +402,7 @@ Update and return an existing ConfirmedEvents.
     }
     ```
 
-* Error response: Couldn't find a ConfirmedEvent with the specified id
+* Error response: Couldn't find an event with the specified id
   * Status Code: 404
   * Headers:
     * Content-Type: application/json
@@ -410,11 +410,11 @@ Update and return an existing ConfirmedEvents.
 
     ```json
     {
-      "message": "Events couldn't be found"
+      "message": "Event couldn't be found"
     }
     ```
 
-* Error response: Can't edit a ConfirmedEvent that's past the end date
+* Error response: Can't edit an event that's past the end date
   * Status Code: 403
   * Headers:
     * Content-Type: application/json
@@ -422,7 +422,7 @@ Update and return an existing ConfirmedEvents.
 
     ```json
     {
-      "message": "Past ConfirmedEvent can't be modified"
+      "message": "Past event can't be modified"
     }
     ```
 
@@ -440,17 +440,17 @@ Update and return an existing ConfirmedEvents.
           "id": 1,
           "start_time":" 08:00 AM ",
           "end_time": " 11:00 pm ",
-          "event_date": "Have event on the same date."
+          "event_date": "Existing RSVP for same date and time in system."
         }
       }
     }
     ```
-### Delete a ConfirmedEvent
+### Delete a Confirmed Event
 
-Delete an existing ConfirmedEvent.
+Delete an existing event.
 
 * Require Authentication: true
-* Require proper authorization: ConfirmedEvent must belong to the current user
+* Require proper authorization: Event must belong to the current user
 * Request
   * Method: DELETE
   * Route path: /confirm/:id
@@ -468,7 +468,7 @@ Delete an existing ConfirmedEvent.
     }
     ```
 
-* Error response: Couldn't find a ConfirmedEvent with the specified id
+* Error response: Couldn't find an event with the specified id
   * Status Code: 404
   * Headers:
     * Content-Type: application/json
@@ -476,11 +476,11 @@ Delete an existing ConfirmedEvent.
 
     ```json
     {
-      "message": "ConfirmedEvent couldn't be found"
+      "message": "Event couldn't be found"
     }
     ```
 
-* Error response: ConfirmedEvents that have been started can't be deleted
+* Error response: Events that have been started can't be deleted
   * Status Code: 403
   * Headers:
     * Content-Type: application/json
@@ -522,7 +522,7 @@ Return events filtered by query parameters.
 
     ```json
     {
-      "Spots": [
+      "Events": [
         {
           "id": 1,
           "ownerId": 1,
