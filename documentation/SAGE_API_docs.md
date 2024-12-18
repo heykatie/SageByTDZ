@@ -1266,3 +1266,442 @@ Delete an existing Notification.
       "message": "Notification couldn't be found"
     }
     ```
+## **Friends API Documentation**
+
+---
+
+### **Get All Friends of the Current User**
+
+Returns a list of all the current user's friends. Users who have attended the same event together before will automatically be considered friends.
+
+* **Require Authentication**: true
+* **Request**
+  * **Method**: GET
+  * **Route path**: `/friends`
+  * **Body**: none
+
+* **Successful Response**
+  * **Status Code**: 200
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "Friends": [
+        {
+          "id": 1,
+          "firstName": "John",
+          "username": "johndoe",
+          "profileImageUrl": "https://image-url.com/profile1.jpg"
+        },
+        {
+          "id": 2,
+          "firstName": "Jane",
+          "username": "janesmith",
+          "profileImageUrl": "https://image-url.com/profile2.jpg"
+        }
+      ]
+    }
+    ```
+
+* **Error Response: No friends found**
+  * **Status Code**: 404
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "message": "No friends could be found"
+    }
+    ```
+
+---
+
+### **Get Limited Details of a Specific Friend**
+
+Returns limited information about a specific friend, including their first name, username, profile image, and a list of past events attended together.
+
+* **Require Authentication**: true
+* **Request**
+  * **Method**: GET
+  * **Route path**: `/friends/:friendId`
+  * **Body**: none
+
+* **Successful Response**
+  * **Status Code**: 200
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "Friend": {
+        "firstName": "John",
+        "username": "johndoe",
+        "profileImageUrl": "https://image-url.com/profile1.jpg",
+        "eventsAttendedTogether": [
+          {
+            "eventId": 1,
+            "eventName": "Beach Cleanup",
+            "eventDate": "2024-12-01"
+          },
+          {
+            "eventId": 2,
+            "eventName": "Food Bank Volunteering",
+            "eventDate": "2024-11-15"
+          }
+        ]
+      }
+    }
+    ```
+
+* **Error Response: Friend not found**
+  * **Status Code**: 404
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "message": "Friend not found"
+    }
+    ```
+
+---
+
+### **Get Events Attended with a Friend**
+
+Returns a list of all events that the current user and a specific friend have attended together.
+
+* **Require Authentication**: true
+* **Request**
+  * **Method**: GET
+  * **Route path**: `/friends/:friendId/events`
+  * **Body**: none
+
+* **Successful Response**
+  * **Status Code**: 200
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "EventsAttendedTogether": [
+        {
+          "eventId": 1,
+          "eventName": "Beach Cleanup",
+          "eventDate": "2024-12-01",
+          "organizer": "Save The Beaches Org",
+          "location": "Santa Monica Beach"
+        },
+        {
+          "eventId": 2,
+          "eventName": "Food Bank Volunteering",
+          "eventDate": "2024-11-15",
+          "organizer": "Local Food Bank",
+          "location": "Community Center, San Francisco"
+        }
+      ]
+    }
+    ```
+
+* **Error Response: No shared events found**
+  * **Status Code**: 404
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "message": "No shared events found"
+    }
+    ```
+
+---
+
+## **Groups API Documentation**
+
+---
+
+### **Get All Groups of the Current User**
+
+Returns a list of all the groups the current user is a part of.
+
+* **Require Authentication**: true
+* **Request**
+  * **Method**: GET
+  * **Route path**: `/groups`
+  * **Body**: none
+
+* **Successful Response**
+  * **Status Code**: 200
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "Groups": [
+        {
+          "id": 1,
+          "name": "Beach Cleanup Crew",
+          "description": "A group of volunteers who clean up beaches monthly",
+          "groupImageUrl": "https://image-url.com/group1.jpg",
+          "membersCount": 15
+        },
+        {
+          "id": 2,
+          "name": "Community Garden Volunteers",
+          "description": "Local residents working together to grow fresh produce",
+          "groupImageUrl": "https://image-url.com/group2.jpg",
+          "membersCount": 22
+        }
+      ]
+    }
+    ```
+
+* **Error Response: No groups found**
+  * **Status Code**: 404
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "message": "No groups could be found"
+    }
+    ```
+
+---
+
+### **Get Details of a Specific Group**
+
+Returns detailed information about a specific group, including the name, description, image, and member details.
+
+* **Require Authentication**: true
+* **Request**
+  * **Method**: GET
+  * **Route path**: `/groups/:groupId`
+  * **Body**: none
+
+* **Successful Response**
+  * **Status Code**: 200
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "Group": {
+        "id": 1,
+        "name": "Beach Cleanup Crew",
+        "description": "A group of volunteers who clean up beaches monthly",
+        "groupImageUrl": "https://image-url.com/group1.jpg",
+        "members": [
+          {
+            "id": 1,
+            "firstName": "John",
+            "username": "johndoe",
+            "profileImageUrl": "https://image-url.com/profile1.jpg"
+          },
+          {
+            "id": 2,
+            "firstName": "Jane",
+            "username": "janesmith",
+            "profileImageUrl": "https://image-url.com/profile2.jpg"
+          }
+        ]
+      }
+    }
+    ```
+
+* **Error Response: Group not found**
+  * **Status Code**: 404
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "message": "Group not found"
+    }
+    ```
+
+---
+
+### **Create a New Group**
+
+Creates a new group and returns the newly created group's information.
+
+* **Require Authentication**: true
+* **Request**
+  * **Method**: POST
+  * **Route path**: `/groups`
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "name": "Beach Cleanup Crew",
+      "description": "A group of volunteers who clean up beaches monthly",
+      "groupImageUrl": "https://image-url.com/group1.jpg"
+    }
+    ```
+
+* **Successful Response**
+  * **Status Code**: 201
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "Group": {
+        "id": 1,
+        "name": "Beach Cleanup Crew",
+        "description": "A group of volunteers who clean up beaches monthly",
+        "groupImageUrl": "https://image-url.com/group1.jpg"
+      }
+    }
+    ```
+
+* **Error Response: Validation errors**
+  * **Status Code**: 400
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "message": "Bad Request",
+      "errors": {
+        "name": "Group name is required",
+        "description": "Group description is required"
+      }
+    }
+    ```
+
+---
+
+### **Edit a Group**
+
+Update a group's details.
+
+* **Require Authentication**: true
+* **Require Proper Authorization**: User must be the creator of the group
+* **Request**
+  * **Method**: PUT
+  * **Route path**: `/groups/:groupId`
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "name": "Updated Group Name",
+      "description": "Updated description of the group",
+      "groupImageUrl": "https://image-url.com/updated-group1.jpg"
+    }
+    ```
+
+* **Successful Response**
+  * **Status Code**: 200
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "Group": {
+        "id": 1,
+        "name": "Updated Group Name",
+        "description": "Updated description of the group",
+        "groupImageUrl": "https://image-url.com/updated-group1.jpg"
+      }
+    }
+    ```
+
+* **Error Response: Group not found**
+  * **Status Code**: 404
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "message": "Group not found"
+    }
+    ```
+
+---
+
+### **Delete a Group**
+
+Deletes a group. Only the creator of the group is allowed to delete it.
+
+* **Require Authentication**: true
+* **Require Proper Authorization**: User must be the creator of the group
+* **Request**
+  * **Method**: DELETE
+  * **Route path**: `/groups/:groupId`
+  * **Body**: none
+
+* **Successful Response**
+  * **Status Code**: 200
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "message": "Successfully deleted group"
+    }
+    ```
+
+* **Error Response: Group not found**
+  * **Status Code**: 404
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "message": "Group not found"
+    }
+    ```
+
+---
+
+### **Get All Members of a Group**
+
+Returns a list of all members of a specific group.
+
+* **Require Authentication**: true
+* **Request**
+  * **Method**: GET
+  * **Route path**: `/groups/:groupId/members`
+  * **Body**: none
+
+* **Successful Response**
+  * **Status Code**: 200
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "Members": [
+        {
+          "id": 1,
+          "firstName": "John",
+          "username": "johndoe",
+          "profileImageUrl": "https://image-url.com/profile1.jpg"
+        },
+        {
+          "id": 2,
+          "firstName": "Jane",
+          "username": "janesmith",
+          "profileImageUrl": "https://image-url.com/profile2.jpg"
+        }
+      ]
+    }
+    ```
+
+* **Error Response: Group not found**
+  * **Status Code**: 404
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "message": "Group not found"
+    }
+    ```
+
+---
+
