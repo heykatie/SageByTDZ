@@ -1,10 +1,12 @@
 ## SAGE API Docs
 
+![DB Schema](./db-schema/schema.png)
+
 Base URL:** '/'
 
 ## All routes that require Authentication
 
-All endpoints that require a user to be logged in 
+All endpoints that require a user to be logged in
 
 All endpoints that require a current user to be logged in.
 
@@ -26,7 +28,7 @@ All endpoints that require a current user to be logged in.
 - Create Group
 - User DashBoard
 - Growth
-- 
+-
 
 * Request: endpoints that require proper authorization
 * Error Response: Require proper authorization
@@ -46,7 +48,7 @@ All endpoints that require a current user to be logged in.
  - Require Auth: False
 
  - Request
-    - Method: GET 
+    - Method: GET
     - Route Path: "/session"
     - Body: ?
  - Successful Response
@@ -54,8 +56,8 @@ All endpoints that require a current user to be logged in.
     - Headers
       - Content-Type: application/json --- *Sets to this when/if you are returning a JSON response using jsonify()
 
-    - Body 
-    ``` 
+    - Body
+    ```
       {
          "user": {
             id: 0
@@ -241,7 +243,7 @@ Returns all the Events.
     ```json
     {
       "Events": [{
-            
+
               "id": 1,
               "title": "help us",
               "description": "Helping people",
@@ -415,7 +417,7 @@ Creates and returns a new Invites.
 
     ```json
     {
-      "message": "Bad Request", 
+      "message": "Bad Request",
       "errors": {
         "friend_id": "Friend cannot be found",
         "event_id": "Event cannot be found",
@@ -471,7 +473,7 @@ Updates and returns an existing Invite.
 
     ```json
     {
-      "message": "You must be friends to invite user", 
+      "message": "You must be friends to invite user",
       "errors": {
         "friends_status": "Need to be friends"
       }
@@ -671,7 +673,7 @@ Create and return a new review for a organizer specified by id.
 
     ```json
     {
-      "message": "Bad Request", 
+      "message": "Bad Request",
       "errors": {
         "review": "Review text is required",
         "stars": "Stars must be an integer from 1 to 5",
@@ -749,7 +751,7 @@ Update and return an existing review.
 
     ```json
     {
-      "message": "Bad Request", 
+      "message": "Bad Request",
       "errors": {
         "review": "Review text is required",
         "stars": "Stars must be an integer from 1 to 5",
@@ -864,7 +866,7 @@ Return all the attendees for a event specified by id.
   * Route path: /confirm/:eventId
   * Body: none
 
-* Successful Response: 
+* Successful Response:
   * Status Code: 200
   * Headers:
     * Content-Type: application/json
@@ -978,7 +980,7 @@ Create and return a new ConfirmedEvent for a invites specified by id.
       }
     }
     ```
-### Edit ConfirmedEvents 
+### Edit ConfirmedEvents
 
 Update and return an existing ConfirmedEvents.
 
@@ -1195,7 +1197,7 @@ Return all the notifications for a user specified by id.
   * Route path: /notifications/:user_id
   * Body: none
 
-* Successful Response: 
+* Successful Response:
   * Status Code: 200
   * Headers:
     * Content-Type: application/json

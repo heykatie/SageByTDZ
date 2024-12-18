@@ -1,0 +1,148 @@
+Table friends {
+  main_user_id integer
+  friend_user_id integer
+  created_at timestamp
+}
+
+Table users {
+  id integer [primary key]
+  username varchar
+  email email
+  firstName varchar
+  lastName varchar
+  birthday date
+  city varchar
+  created_at timestamp
+  saved_filters varchar
+  badge_id integer
+}
+
+Table events {
+  id integer [primary key]
+  title varchar
+  description text [note: 'Content of the post']
+  organizer_id integer
+  categories varchar
+  address varchar
+  city varchar
+  state varchar
+  event_date datetime
+  start_time time
+  end_time time
+  created_at timestamp
+  updated_at timestamp
+  badge_id integer
+  status intger
+}
+
+Table Group {
+  id integer [primary key]
+  comment_id intger
+  event_id integer
+  user_id intger
+}
+
+Table Comments {
+  id integer [primary key]
+  comment varchar
+  user_id integer
+  group_id integer
+}
+
+Table Badges {
+  id integer [primary key]
+  url string
+}
+
+Table ConfirmedEvents {
+  event_id integer
+  user_id integer
+  created_at timestamp
+
+}
+
+Table Reviews {
+  user_id integer
+  organizer_id integer
+  id integer [primary key]
+  review varchar
+  created_at timestamp
+  updated_at timestamp
+  stars integer
+}
+
+Table Invites{
+  user_id integer
+  friend_id integer
+  event_id integer
+  id integer [primary key]
+  created_at timestamp
+  status varchar
+  text varchar
+}
+
+Table Notifs {
+  id integer [primary key]
+  invite_id integer
+  message varchar
+}
+
+Table Organizers{
+  id integer [primary key]
+  description varchar
+  logo url
+  link url
+  phone_number phone
+  email email
+  review_id integer
+}
+
+Table Images {
+  id integer [primary key]
+  event_id integer
+  url url
+  preview boolean
+}
+
+Ref: events.organizer_id > users.id // many-to-one
+
+Ref: users.id < friends.main_user_id
+
+Ref: users.id < friends.friend_user_id
+
+Ref: users.id < ConfirmedEvents.user_id
+
+Ref: "ConfirmedEvents"."event_id" > "events"."id"
+
+
+
+Ref: "Reviews"."user_id" < "users"."id"
+
+
+Ref: "Invites"."user_id" < "users"."id"
+
+Ref: "Invites"."event_id" < "events"."id"
+
+Ref: "Invites"."friend_id" < "friends"."friend_user_id"
+
+Ref: "Badges"."id" < "events"."badge_id"
+
+Ref: "Badges"."id" < "users"."badge_id"
+
+Ref: "Organizers"."review_id" < "Reviews"."id"
+
+Ref: "Notifs"."invite_id" < "Invites"."id"
+
+Ref: "Comments"."id" < "Group"."comment_id"
+
+Ref: "Group"."event_id" < "events"."id"
+
+Ref: "Group"."user_id" < "users"."id"
+
+Ref: "Comments"."user_id" < "users"."id"
+
+Ref: "Comments"."group_id" < "Group"."id"
+
+Ref: "Images"."event_id" < "events"."id"
+
+Ref: "Reviews"."organizer_id" < "Organizers"."id"
