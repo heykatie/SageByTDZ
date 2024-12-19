@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "abf7020a92d75c8d4064dc459eeacc9bb7ff3f2c4408513a7523a259cddfb989"
+            "sha256": "8d49321f5b5ac9f0e320db58d337dacee074457ad5867ef436dba02f863bb3c9"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -24,14 +24,6 @@
             "index": "pypi",
             "markers": "python_version >= '3.7'",
             "version": "==1.9.2"
-        },
-        "astroid": {
-            "hashes": [
-                "sha256:6aaea045f938c735ead292204afdb977a36e989522b7833ef6fea94de743f442",
-                "sha256:db676dc4f3ae6bfe31cda227dc60e03438378d7a896aec57422c95634e8d722f"
-            ],
-            "markers": "python_full_version >= '3.9.0'",
-            "version": "==3.3.6"
         },
         "click": {
             "hashes": [
@@ -184,14 +176,6 @@
             "index": "pypi",
             "markers": "python_version >= '3.8'",
             "version": "==6.9.0"
-        },
-        "isort": {
-            "hashes": [
-                "sha256:48fdfcb9face5d58a4f6dde2e72a1fb8dcaf8ab26f95ab49fab84c2ddefb0109",
-                "sha256:8ca5e72a8d85860d5a3fa69b8745237f2939afe12dbf656afbcb47fe72d947a6"
-            ],
-            "markers": "python_full_version >= '3.8.0'",
-            "version": "==5.13.2"
         },
         "itsdangerous": {
             "hashes": [
