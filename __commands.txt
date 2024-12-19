@@ -1,0 +1,20 @@
+# Make a New Branch
+
+git checkout -b <<new_branch_name>>
+
+# View All Branches
+
+git branch  (exit branch list with ':q' or 'q')
+
+# Switch Branches
+
+git checkout <<target_branch_name>>
+
+# Merge Branches
+
+git pull && git merge <<target_branch_name>>
+
+# Update branch to changes from another branch
+
+git rebase <<target_branch_name>>
+
