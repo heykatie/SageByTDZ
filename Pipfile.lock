@@ -277,48 +277,6 @@
             "markers": "python_version >= '3.7'",
             "version": "==2.1.2"
         },
-        "mccabe": {
-            "hashes": [
-                "sha256:348e0240c33b60bbdf4e523192ef919f28cb2c3d7d5c7794f74009290f236325",
-                "sha256:6c2d30ab6be0e4a46919781807b4f0d834ebdd6c6e3dca0bda5a15f863427b6e"
-            ],
-            "markers": "python_version >= '3.6'",
-            "version": "==0.7.0"
-        },
-        "packaging": {
-            "hashes": [
-                "sha256:09abb1bccd265c01f4a3aa3f7a7db064b36514d2cba19a2f694fe6150451a759",
-                "sha256:c228a6dc5e932d346bc5739379109d49e8853dd8223571c7c5b55260edc0b97f"
-            ],
-            "markers": "python_version >= '3.8'",
-            "version": "==24.2"
-        },
-        "platformdirs": {
-            "hashes": [
-                "sha256:357fb2acbc885b0419afd3ce3ed34564c13c9b95c89360cd9563f73aa5e2b907",
-                "sha256:73e575e1408ab8103900836b97580d5307456908a03e92031bab39e4554cc3fb"
-            ],
-            "markers": "python_version >= '3.8'",
-            "version": "==4.3.6"
-        },
-        "pycodestyle": {
-            "hashes": [
-                "sha256:46f0fb92069a7c28ab7bb558f05bfc0110dac69a0cd23c61ea0040283a9d78b3",
-                "sha256:6838eae08bbce4f6accd5d5572075c63626a15ee3e6f842df996bf62f6d73521"
-            ],
-            "index": "pypi",
-            "markers": "python_version >= '3.8'",
-            "version": "==2.12.1"
-        },
-        "pylint": {
-            "hashes": [
-                "sha256:77f068c287d49b8683cd7c6e624243c74f92890f767f106ffa1ddf3c0a54cb7a",
-                "sha256:9ec054ec992cd05ad30a6df1676229739a73f8feeabf3912c995d17601052b01"
-            ],
-            "index": "pypi",
-            "markers": "python_full_version >= '3.9.0'",
-            "version": "==3.3.2"
-        },
         "python-dateutil": {
             "hashes": [
                 "sha256:0123cacc1627ae19ddf3c27a5de5bd67ee4586fbdd6440d9748f8abb483d3e86",
@@ -347,26 +305,6 @@
             ],
             "index": "pypi",
             "version": "==1.0.4"
-        },
-        "pytoolconfig": {
-            "extras": [
-                "global"
-            ],
-            "hashes": [
-                "sha256:51e6bd1a6f108238ae6aab6a65e5eed5e75d456be1c2bf29b04e5c1e7d7adbae",
-                "sha256:5d8cea8ae1996938ec3eaf44567bbc5ef1bc900742190c439a44a704d6e1b62b"
-            ],
-            "markers": "python_version >= '3.8'",
-            "version": "==1.3.1"
-        },
-        "rope": {
-            "hashes": [
-                "sha256:51437d2decc8806cd5e9dd1fd9c1306a6d9075ecaf78d191af85fc1dfface880",
-                "sha256:b435a0c0971244fdcd8741676a9fae697ae614c20cc36003678a7782f25c0d6c"
-            ],
-            "index": "pypi",
-            "markers": "python_version >= '3.8'",
-            "version": "==1.13.0"
         },
         "setuptools": {
             "hashes": [
