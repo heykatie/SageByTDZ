@@ -400,7 +400,7 @@ Creates and returns a new Invites.
       "user_id": 1,
       "friend_id": 2,
       "event_id": 1,
-      "id": 1,
+      "groupId": 1,
       "created_at": "TimeStamp",
       "status": 1
     }
@@ -418,7 +418,7 @@ Creates and returns a new Invites.
       "user_id": 1,
       "friend_id": 2,
       "event_id": 1,
-      "id": 1,
+      "groupId": 1,
       "created_at": "TimeStamp",
       "status": 1
     }
@@ -454,8 +454,9 @@ Updates and returns an existing Invite.
 
     ```json
     {
-      "user_id": 1,
       "id": 1,
+      "user_id": 1,
+      "groupId": 1,
       "created_at": "TimeStamp",
       "status": 1
     }
@@ -469,8 +470,9 @@ Updates and returns an existing Invite.
 
     ```json
     {
-      "user_id": 1,
       "id": 1,
+      "user_id": 1,
+      "groupId": 1,
       "created_at": "TimeStamp",
       "status": 0
     }
