@@ -901,66 +901,6 @@ Creates a new group and returns the newly created group's information.
 
 ---
 
-### **Edit a Group**
-
-Update a group's details.
-
-* **Require Authentication**: true
-* **Require Proper Authorization**: User must be the creator of the group
-* **Request**
-  * **Method**: PUT
-  * **Route path**: `/groups/:groupId`
-  * **Headers**:
-    * `Content-Type: application/json`
-  * **Body**:
-    ```json
-    {
-      "inviteId": 4,
-    }
-    ```
-
-* **Successful Response**
-  * **Status Code**: 200
-  * **Headers**:
-    * `Content-Type: application/json`
-  * **Body**:
-    ```json
-    {
-      "Invites": [
-        {
-        "id": 1,
-        "userId": "Updated Group Name",
-        "friendId": "Updated description of the group",
-        "groupId": 1,
-        "eventId": "Updated Group Name",
-        "status": "Updated description of the group",
-        "createdAt": "Updated description of the group",
-      },
-      {
-        "id": 1,
-        "userId": "Updated Group Name",
-        "friendId": "Updated description of the group",
-        "groupId": 1,
-        "eventId": "Updated Group Name",
-        "status": "Updated description of the group",
-        "createdAt": "Updated description of the group",
-      }]
-    }
-    ```
-
-* **Error Response: Invite not found**
-  * **Status Code**: 404
-  * **Headers**:
-    * `Content-Type: application/json`
-  * **Body**:
-    ```json
-    {
-      "message": "Group not found"
-    }
-    ```
-
----
-
 ### **Delete a Group**
 
 Deletes a group. Only the creator of the group is allowed to delete it.
@@ -1014,17 +954,29 @@ Returns a list of all members of a specific group.
     ```json
     {
       "Members": [
+         {
+            "id": 0,
+            "username": "'VolunteerLyfe'",
+            "email": "'green4lyfe@planet.com'",
+            "firstName": "'Susan'",
+            "lastName":"'Markcul'",
+            "birthday": "'November 16th, 1994'",
+            "city": "'somecity'",
+            "create_at": "timstamp",
+            "saved_filters":["Filter1", "Filter2"],
+            "badge_id": [1, 3, 22]
+         },
         {
-          "id": 1,
-          "firstName": "John",
-          "username": "johndoe",
-          "profileImageUrl": "https://image-url.com/profile1.jpg"
-        },
-        {
-          "id": 2,
-          "firstName": "Jane",
-          "username": "janesmith",
-          "profileImageUrl": "https://image-url.com/profile2.jpg"
+            "id": 3,
+            "username": "'VolunteerLyfe1'",
+            "email": "'gre3en4lyfe@planet.com'",
+            "firstName": "'Suz'",
+            "lastName":"'Mark'",
+            "birthday": "'November 16th, 1993'",
+            "city": "'somewherecity'",
+            "create_at": "timestamp",
+            "saved_filters":["Filter1", "Filter2"],
+            "badge_id": [1, 3, 22]
         }
       ]
     }
