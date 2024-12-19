@@ -7,8 +7,12 @@ git branch
 # List all branches with more details
 git branch -v
 
-# Switch to an existing branch
-git checkout <branch_name>
+git branch  (exit branch list with ':q' or 'q')
+
+**Can't see all branches?
+
+1. Fetch all remote branches with: git fetch --all
+2. git fetch origin
 
 # Create a new branch and switch to it
 git checkout -b <branch_name>
@@ -25,8 +29,9 @@ git branch -m <old_name> <new_name>
 # See which branch is currently checked out
 git branch --show-current
 
-# Push a new branch to a remote repository
-git push origin <branch_name>
+git rebase <<target_branch_name>>
+
+
 
 # Merge a branch into the current branch
 git merge <branch_name>
