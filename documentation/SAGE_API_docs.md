@@ -64,11 +64,15 @@ All endpoints that require a current user to be logged in.
             "email": "'green4lyfe@planet.com'",
             "firstName": "'Susan'",
             "lastName":"'Markcul'",
-            "birthday": "'November 16th, 1994'",
-            "city": "'somecity'",
+            "address": "1322 Money Dr",
+            "city": "'someCity'",
+            "state": "someState",
             "create_at": "TimeStamp",
+            /*
+            PREFERENCES COMING SOON
             "saved_filters":["Filter1", "Filter2"],
-            "badge_id": [1, 3, 22]
+            */
+            "badges": [1, 3, 22]
          }
       }
 
@@ -116,7 +120,9 @@ information.
         "first_name": "Susan",
         "last_name": "Markcul",
         "email": "green4lyfe@planet.com",
-        "username": "Volunteer4Lyfe"
+        "username": "Volunteer4Lyfe",
+        "city": "someCity",
+        "state": "someState"
       }
     }
     ```
@@ -144,7 +150,9 @@ information.
       "message": "Bad Request",
       "errors": {
         "credential": "Email or username is required",
-        "password": "Password is required"
+        "password": "Password is required",
+        "city": "City is required",
+        "state": "State is required",
       }
     }
     ```
@@ -167,7 +175,10 @@ user's information.
       "last_name": "Smith",
       "email": "john.smith@gmail.com",
       "username": "JohnSmith",
-      "password": "secret password"
+      "password": "secret password",
+      "address": "1322 Money Dr",
+      "city": "'someCity'",
+      "state": "someState"
     }
     ```
 
@@ -184,7 +195,9 @@ user's information.
         "first_name": "John",
         "last_name": "Smith",
         "email": "john.smith@gmail.com",
-        "username": "JohnSmith"
+        "username": "JohnSmith",
+        "city": "'someCity'",
+        "state": "someState"
       }
     }
     ```
@@ -218,7 +231,9 @@ user's information.
         "email": "Invalid email",
         "username": "Username is required",
         "first_name": "First Name is required",
-        "last_name": "Last Name is required"
+        "last_name": "Last Name is required",
+        "city": "City is required",
+        "state": "State is required"
       }
     }
     ```
@@ -246,16 +261,16 @@ Returns all the Events.
               "id": 1,
               "title": "Help Us",
               "description": "Helping people",
-              "organizer_id": 1,
               "categories": ["Outdoor", "LGBT"],
               "address": "1233 Do Good St.",
               "'city'": "Great City",
               "state": "California",
               "event_date": "December 25, 2024",
+              "start_time": "9:00:00 EST",
+              "end_time": "13:30:00 EST",
               "created_at": "TimeStamp",
               "updated_at": "TimeStamp",
               "badge_id": 12,
-              "review_id": [11, 10, 5],
               "status" : 1
         }
       ]
@@ -284,16 +299,16 @@ Returns all the events accepted by the current user.
               "id": 1,
               "title": "Help Us",
               "description": "Helping people",
-              "organizer_id": 1,
               "categories": ["Outdoor", "LGBT"],
               "address": "1233 Do Good St.",
               "'city'": "Great City",
               "state": "California",
               "event_date": "December 25, 2024",
+              "start_time": "9:00:00 EST",
+              "end_time": "13:30:00 EST",
               "created_at": "TimeStamp",
               "updated_at": "TimeStamp",
               "badge_id": 12,
-              "review_id": [11, 10, 5],
               "status" : 1
         }
       ]
@@ -320,16 +335,16 @@ Returns the details of a event specified by its id.
       "id": 1,
       "title": "Help Us",
       "description": "Helping people",
-      "organizer_id": 1,
       "categories": ["Outdoor", "LGBT"],
       "address": "1233 Do Good St.",
       "'city'": "Great City",
       "state": "California",
       "event_date": "December 25, 2024",
+      "start_time": "9:00:00 EST",
+      "end_time": "13:30:00 EST",
       "created_at": "TimeStamp",
       "updated_at": "TimeStamp",
       "badge_id": 12,
-      "review_id": [11, 10, 5],
       "status" : 1,
       "EventImages": [
         {
@@ -343,16 +358,15 @@ Returns the details of a event specified by its id.
           "preview": false
         }
       ],
-      <!-- Future Feature "Organizer": {
+       "Organizer": {
         "id": 1,
         "description": "Some stuff about the Organizer",
+        "name": "the Organizer",
         "logo": "URL",
         "link": "URL",
         "phone_number": 801-555-5555,
-        "avgStarRating": 4.5,
-        "numReviews": 5,
         "email": "someemail@someplace.org"
-      } -->
+      }
     }
     ```
 
