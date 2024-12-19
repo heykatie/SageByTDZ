@@ -6,6 +6,11 @@ git checkout -b <<new_branch_name>>
 
 git branch  (exit branch list with ':q' or 'q')
 
+**Can't see all branches?
+
+1. Fetch all remote branches with: git fetch --all
+2. git fetch origin
+
 # Switch Branches
 
 git checkout <<target_branch_name>>
@@ -17,4 +22,6 @@ git pull && git merge <<target_branch_name>>
 # Update branch to changes from another branch
 
 git rebase <<target_branch_name>>
+
+
 
