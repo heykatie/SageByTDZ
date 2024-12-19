@@ -276,14 +276,14 @@ Returns all the Events.
       ]
     }
     ```
-### Get all My Events by the Current User
+### Get all My Events from the Current User's Dashboard
 
-Returns all the events accepted by the current user.
+Returns all event invites, RSVPs and groups formed by the current user, located on the user's Dashboard.
 
 * Require Authentication: true
 * Request
   * Method: GET
-  * Route path: /:UserId/events
+  * Route path: /profile/events
   * Body: none
 
 * Successful Response
@@ -539,16 +539,16 @@ Deletes an existing Invite specific "friend".
     }
     ```
 
-## Confirmed Events
+## RSVPs
 
-### Get all of the Current User's Confirmed Events
+### Get all of the Current User's RSVPs
 
-Return all the Confirmed Events that the current user has made.
+Return all the RSVPs that the current user has made.
 
 * Require Authentication: true
 * Request
   * Method: GET
-  * Route path: /:userId/confirm
+  * Route path: /events/rsvps
   * Body: none
 
 * Successful Response
@@ -591,14 +591,15 @@ Return all the Confirmed Events that the current user has made.
     }
     ```
 
-### Get all Attendees for a event based on the event's id
 
-Return all the attendees for a event specified by id.
+### Get all Event RSVPs based on the event's id
+
+Return all the RSVPs for a event specified by id.
 
 * Require Authentication: true
 * Request
   * Method: GET
-  * Route path: /confirm/:eventId
+  * Route path: /events/:eventId/rsvps
   * Body: none
 
 * Successful Response:
