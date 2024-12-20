@@ -29,9 +29,8 @@ git branch -m <old_name> <new_name>
 # See which branch is currently checked out
 git branch --show-current
 
-git rebase <<target_branch_name>>
-
-
+# Push a new branch to a remote repository
+git push origin <branch_name>
 
 # Merge a branch into the current branch
 git merge <branch_name>
