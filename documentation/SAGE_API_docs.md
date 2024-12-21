@@ -2,24 +2,24 @@
 
 ![DB Schema](./db-schema/schema.png)
 
-* Base URL: '/'
+* Base URL: `/api`
 
 ## All routes that require Authentication
 
-All endpoints that require a user to be logged in
+All endpoints that require a user to be logged in:
 - Notifications
-- Reviews
-- Create Group
+- Feedback
+- Create Events
 - User DashBoard
 - Growth -- Bonus
 All endpoints that require a current user to be logged in.
 
-* Request: endpoints that require authentication
-* Error Response: Require authentication
-  * Status Code: 401
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+* **Request**: endpoints that require authentication
+* **Error Response**: Require authentication
+  * **Status Code**: 401
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
 
     ```json
     {
@@ -27,14 +27,12 @@ All endpoints that require a current user to be logged in.
     }
     ```
 
-
-
-* Request: endpoints that require proper authorization
-* Error Response: Require proper authorization
-  * Status Code: 403
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+* **Request**: Endpoints that require proper authorization
+* **Error Response**: Require proper authorization
+  * **Status Code**: 403
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
 
     ```json
     {
@@ -44,61 +42,70 @@ All endpoints that require a current user to be logged in.
 
 ## Get Current User
 
- - Require Auth: False
+ - **Require Auth**: False
 
- - Request
-    - Method: GET
+ - **Request**:
+    - **Method**: GET
     - Route Path: "/session"
-    - Body: ?
- - Successful Response
+    - **Body**: none
+ - **Successful Response**:
     - status: 200
     - Headers
-      - Content-Type: application/json --- *Sets to this when/if you are returning a JSON response using jsonify()
+      - Content-Type: application/json ## Messages
+      
+      ### Create a Message
+      
+      ###  *Sets to this when/if you are returning a JSON response using jsonify()
 
-    - Body
+    - **Body**:
     ```json
       {
          "user": {
             "id": 0,
-            "username": "'VolunteerLyfe'",
-            "email": "'green4lyfe@planet.com'",
-            "firstName": "'Susan'",
-            "lastName":"'Markcul'",
+            "username": "VolunteerLyfe",
+            "email": "green4lyfe@planet.com",
+            "firstName": "Susan",
+            "lastName":"Markcul",
             "address": "1322 Money Dr",
-            "city": "'someCity'",
+            "city": "someCity",
             "state": "someState",
-            "create_at": "TimeStamp",
+            "organizer": "true",
+            "description": "Description of organizer",
+            "phoneNumber": 801-555-5555,
+            "logo": "logo url",
+            "link": "site url",
             /*
             PREFERENCES COMING SOON
-            "saved_filters":["Filter1", "Filter2"],
+            "savedFilters":["Filter1", "Filter2"],
             */
-            "badges": [1, 3, 22]
+            "Badges": [1, 3, 22]
          }
       }
 
-* Successful Response when there is no logged in user.
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+* **Successful Response**:when there is no logged in user.
+  * **Status Code**: 200
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
 
     ```json
     {
-      "user": "None"
+      "user": "Null"
     }
     ```
+
 ### Log In a User
 
 Logs in a current user with valid credentials and returns the current user's
 information.
 
-* Require Authentication: false
-* Request
-  * Method: POST
-  * Route path: /session
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+* **Require Authentication**: false
+* **Request**
+  * **Method**: POST
+  * **Route path**: `/session`
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
 
     ```json
     {
@@ -107,31 +114,39 @@ information.
     }
     ```
 
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+* **Successful Response**
+  * **Status Code**: 200
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
 
     ```json
     {
       "user": {
         "id": 1,
-        "first_name": "Susan",
-        "last_name": "Markcul",
+        "firstName": "Susan",
+        "lastName": "Markcul",
         "email": "green4lyfe@planet.com",
         "username": "Volunteer4Lyfe",
         "city": "someCity",
-        "state": "someState"
+        "state": "someState",
+        "organizer": "true",
+        "description": "Description of organizer",
+        "phoneNumber": 801-555-5555,
+        "logo": "logo url",
+        "link": "site url",
+        "Badges": [1, 3, 22],
+        "createdAt": "2021-11-19 20:39:36",
+        "updatedAt": "2021-11-19 20:39:36"
       }
     }
     ```
 
-* Error Response: Invalid credentials
-  * Status Code: 401
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+* **Error Response**: Invalid credentials
+  * **Status Code**: 401
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
 
     ```json
     {
@@ -139,11 +154,11 @@ information.
     }
     ```
 
-* Error response: Body validation errors
-  * Status Code: 400
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+* **Error response**: Body validation errors
+  * **Status Code**: 400
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
 
     ```json
     {
@@ -161,52 +176,64 @@ information.
 Creates a new user, logs them in as the current user, and returns the current
 user's information.
 
-* Require Authentication: false
-* Request
-  * Method: POST
-  * Route path: /users
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+* **Require Authentication**: false
+* **Request**
+  * **Method**: POST
+  * **Route path**: `/users`
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
 
     ```json
     {
-      "first_name": "John",
-      "last_name": "Smith",
+      "firstName": "John",
+      "lastName": "Smith",
       "email": "john.smith@gmail.com",
       "username": "JohnSmith",
       "password": "secret password",
       "address": "1322 Money Dr",
-      "city": "'someCity'",
-      "state": "someState"
+      "city": "someCity",
+      "state": "someState",
+      "organizer": "True",
+      "description": "Description of organizer",
+      "phoneNumber": 801-555-5555,
+      "link": "site url",
+      "logo": "logo url"
     }
     ```
 
-* Successful Response
-  * Status Code: 201
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+* **Successful Response**
+  * **Status Code**: 201
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
 
     ```json
     {
       "user": {
         "id": 1,
-        "first_name": "John",
-        "last_name": "Smith",
+        "firstName": "John",
+        "lastName": "Smith",
         "email": "john.smith@gmail.com",
         "username": "JohnSmith",
-        "city": "'someCity'",
-        "state": "someState"
+        "city": "someCity",
+        "state": "someState",
+        "organizer": "True",
+        "description": "Description of organizer",
+        "phoneNumber": 801-555-5555,
+        "link": "site url",
+        "logo": "logo url",
+        "createdAt": "2021-11-19 20:39:36",
+        "updatedAt": "2021-11-19 20:39:36"
       }
     }
     ```
 
-* Error response: User already exists with the specified email or username
-  * Status Code: 500
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+* **Error response**: User already exists with the specified email or username
+  * **Status Code**: 500
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
 
     ```json
     {
@@ -218,11 +245,11 @@ user's information.
     }
     ```
 
-* Error response: Body validation errors
-  * Status Code: 400
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+* **Error response**: Body validation errors
+  * **Status Code**: 400
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
 
     ```json
     {
@@ -230,86 +257,90 @@ user's information.
       "errors": {
         "email": "Invalid email",
         "username": "Username is required",
-        "first_name": "First Name is required",
-        "last_name": "Last Name is required",
+        "firstName": "First Name is required",
+        "lastName": "Last Name is required",
         "city": "City is required",
         "state": "State is required"
       }
     }
     ```
 
+## Events
+
 ### Get all Events
 
 Returns all the Events.
 
-* Require Authentication: false
-* Request
-  * Method: GET
-  * Route path: /events
-  * Body: none
+* **Require Authentication**: false
+* **Request**
+  * **Method**: GET
+  * **Route path**: `/events`
+  * **Body**: none
 
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "Events": [{
-
-              "id": 1,
-              "title": "Help Us",
-              "description": "Helping people",
-              "categories": ["Outdoor", "LGBT"],
-              "address": "1233 Do Good St.",
-              "'city'": "Great City",
-              "state": "California",
-              "event_date": "December 25, 2024",
-              "start_time": "9:00:00 EST",
-              "end_time": "13:30:00 EST",
-              "created_at": "TimeStamp",
-              "updated_at": "TimeStamp",
-              "badge_id": 12,
-              "status" : 1
-        }
-      ]
-    }
-    ```
-### Get all My Events from the Current User's Dashboard
-
-Returns all event invites, RSVPs and groups formed by the current user, located on the user's Dashboard.
-
-* Require Authentication: true
-* Request
-  * Method: GET
-  * Route path: /profile/events
-  * Body: none
-
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+* **Successful Response**
+  * **Status Code**: 200
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
 
     ```json
     {
       "Events": [
         {
-              "id": 1,
-              "title": "Help Us",
-              "description": "Helping people",
-              "categories": ["Outdoor", "LGBT"],
-              "address": "1233 Do Good St.",
-              "'city'": "Great City",
-              "state": "California",
-              "event_date": "December 25, 2024",
-              "start_time": "9:00:00 EST",
-              "end_time": "13:30:00 EST",
-              "created_at": "TimeStamp",
-              "updated_at": "TimeStamp",
-              "badge_id": 12,
-              "status" : 1
+          "id": 1,
+          "title": "Help Us",
+          "description": "Helping people",
+          "organizerId": 2,
+          "categories": ["Outdoor", "LGBT"],
+          "address": "1233 Do Good St.",
+          "city": "Great City",
+          "state": "California",
+          "eventDate": "December 25, 2024",
+          "startTime": "9:00:00 EST",
+          "endTime": "13:30:00 EST",
+          "createdAt": "2021-11-19 20:39:36",
+          "updatedAt": "2021-11-19 20:39:36",
+          "badgeId": 12,
+          "badgeUrl": "photo url",
+          "status" : 1
+        }
+      ]
+    }
+    ```
+### View User Events from Dashboard
+
+Returns all event invites and RSVPs of the current user.
+
+* **Require Authentication**: true
+* **Request**
+  * **Method**: GET
+  * **Route path**: `/profile/events`
+  * **Body**: none
+
+* **Successful Response**
+  * **Status Code**: 200
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
+
+    ```json
+    {
+      "Events": [
+        {
+          "id": 1,
+          "title": "Help Us",
+          "description": "Helping people",
+          "categories": ["Outdoor", "LGBT"],
+          "address": "1233 Do Good St.",
+          "city": "Great City",
+          "state": "California",
+          "eventDate": "December 25, 2024",
+          "startTime": "9:00:00 EST",
+          "endTime": "13:30:00 EST",
+          "createdAt": "2021-11-19 20:39:36",
+          "updatedAt": "2021-11-19 20:39:36",
+          "badgeId": 12,
+          "status" : 1
         }
       ]
     }
@@ -318,17 +349,17 @@ Returns all event invites, RSVPs and groups formed by the current user, located 
 
 Returns the details of a event specified by its id.
 
-* Require Authentication: false
-* Request
-  * Method: GET
-  * Route path: /events/:id
-  * Body: none
+* **Require Authentication**: false
+* **Request**
+  * **Method**: GET
+  * **Route path**: `/events/:eventId`
+  * **Body**: none
 
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+* **Successful Response**
+  * **Status Code**: 200
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
 
     ```json
     {
@@ -337,14 +368,14 @@ Returns the details of a event specified by its id.
       "description": "Helping people",
       "categories": ["Outdoor", "LGBT"],
       "address": "1233 Do Good St.",
-      "'city'": "Great City",
+      "city": "Great City",
       "state": "California",
-      "event_date": "December 25, 2024",
-      "start_time": "9:00:00 EST",
-      "end_time": "13:30:00 EST",
-      "created_at": "TimeStamp",
-      "updated_at": "TimeStamp",
-      "badge_id": 12,
+      "eventDate": "December 25, 2024",
+      "startTime": "9:00:00 EST",
+      "endTime": "13:30:00 EST",
+      "createdAt": "2021-11-19 20:39:36",
+      "updatedAt": "2021-11-19 20:39:36",
+      "badgeId": 12,
       "status" : 1,
       "EventImages": [
         {
@@ -364,17 +395,17 @@ Returns the details of a event specified by its id.
         "name": "the Organizer",
         "logo": "URL",
         "link": "URL",
-        "phone_number": 801-555-5555,
+        "phoneNumber": 801-555-5555,
         "email": "someemail@someplace.org"
       }
     }
     ```
 
-* Error response: Couldn't find a Event with the specified id
-  * Status Code: 404
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+* **Error response**: Couldn't find a Event with the specified id
+  * **Status Code**: 404
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
 
     ```json
     {
@@ -382,160 +413,558 @@ Returns the details of a event specified by its id.
     }
     ```
 
-### Create an Invite
+### **Create an Event**
 
-Creates and returns a new Invites.
+Creates a new Event and returns the newly created Event's information.
 
-* Require Authentication: true
-* Request
-  * Method: POST
-  * Route path: groups/:grouId/invites
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+* **Require Authentication**: true
+* **Request**
+  * **Method**: POST
+  * **Route path**: `/events`
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+        {
+          "title": "Help Us",
+          "description": "Helping people",
+          "categories": ["Outdoor", "LGBT"],
+          "address": "1233 Do Good St.",
+          "city": "Great City",
+          "state": "California",
+          "eventDate": "December 25, 2024",
+          "startTime": "9:00:00 EST",
+          "endTime": "13:30:00 EST",
+          "badgeUrl": "photo url",
+          "eventImages": ["image url"]
+        },
+    ```
 
+* **Successful Response**
+  * **Status Code**: 201
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
     ```json
     {
       "id": 1,
-      "user_id": 1,
-      "friend_id": 2,
-      "event_id": 1,
-      "groupId": 1,
-      "created_at": "TimeStamp",
-      "status": 1
+      "title": "Help Us",
+      "description": "Helping people",
+      "categories": ["Outdoor", "LGBT"],
+      "address": "1233 Do Good St.",
+      "city": "Great City",
+      "state": "California",
+      "eventDate": "December 25, 2024",
+      "startTime": "9:00:00 EST",
+      "endTime": "13:30:00 EST",
+      "createdAt": "2021-11-19 20:39:36",
+      "updatedAt": "2021-11-19 20:39:36",
+      "badgeId": 12,
+      "badgeUrl": "image url",
+      "status" : 1,
+      "EventImages": [
+        {
+          "id": 1,
+          "url": "image url",
+          "preview": true
+        },
+        {
+          "id": 2,
+          "url": "image url",
+          "preview": false
+        }
+      ],
+       "organizerId": 2
     }
     ```
 
-* Successful Response
-  * Status Code: 201
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "id": 1,
-      "user_id": 1,
-      "friend_id": 2,
-      "event_id": 1,
-      "groupId": 1,
-      "created_at": "TimeStamp",
-      "status": 1
-    }
-    ```
-
-* Error Response: Body validation errors
-  * Status Code: 400
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
+* **Error Response**: Validation errors**
+  * **Status Code**: 400
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
     ```json
     {
       "message": "Bad Request",
       "errors": {
-        "friend_id": "Friend cannot be found",
-        "event_id": "Event cannot be found",
+        "title": "Title is required",
+        "description": "Description is required",
+        "address": "Address is required.",
+        "city": "City is required",
+        "state": "State is required",
+        "eventDate": "Date is required",
+        "startTime": "Start time is required",
+        "endTime": "13:30:00 EST",
       }
     }
     ```
-### Edit a Invite
 
-Updates and returns an existing Invite.
+### **Edit an Event**
 
-* Require Authentication: true
-* Require proper authorization: Invite must belong to the current user
-* Request
-  * Method: PUT
-  * Route path: /groups/:groupId/invites
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+Edits an event if user is organizer of event.
 
+* **Require Authentication**: true
+* **Require Authorization**: User must be organizer of event to make edits
+* **Request**
+  * **Method**: PUT
+  * **Route path**: `/events/:eventId`
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+        {
+          "title": "Help Us Help You",
+          "description": "Helping people",
+          "categories": ["Outdoor", "LGBT"],
+          "address": "420 Disney Ln",
+          "city": "Los Angeles",
+          "state": "California",
+          "eventDate": "December 26, 2024",
+          "startTime": "9:00:00 EST",
+          "endTime": "13:30:00 EST",
+          "badgeUrl": "photo url",
+          "eventImages": ["image url"]
+        },
+    ```
+
+* **Successful Response**
+  * **Status Code**: 201
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
     ```json
     {
       "id": 1,
-      "user_id": 1,
-      "groupId": 1,
-      "created_at": "TimeStamp",
-      "status": 1
+      "title": "Help Us Help You",
+      "description": "Helping people",
+      "categories": ["Outdoor", "LGBT"],
+      "address": "420 Disney Ln",
+      "city": "Los Angeles",
+      "state": "California",
+      "eventDate": "December 26, 2024",
+      "startTime": "9:00:00 EST",
+      "endTime": "13:30:00 EST",
+      "updatedAt": "2021-11-19 20:39:36",
+      "badgeId": 12,
+      "badgeUrl": "image url",
+      "status" : 1,
+      "EventImages": [
+        {
+          "id": 1,
+          "url": "image url",
+          "preview": true
+        },
+        {
+          "id": 2,
+          "url": "image url",
+          "preview": false
+        }
+      ],
+       "organizerId": 2
     }
     ```
 
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
+* **Error Response**: **Validation errors**
+  * **Status Code**: 400
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
     ```json
     {
-      "id": 1,
-      "user_id": 1,
-      "groupId": 1,
-      "created_at": "TimeStamp",
-      "status": 0
-    }
-    ```
-
-* Error Response: Body validation errors
-  * Status Code: 400
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "message": "You must be friends to invite user",
+      "message": "Bad Request",
       "errors": {
-        "friends_status": "Need to be friends"
+        "title": "Title is required",
+        "description": "Description is required",
+        "address": "Address is required.",
+        "city": "City is required",
+        "state": "State is required",
+        "eventDate": "Date is required",
+        "startTime": "Start time is required",
+        "endTime": "13:30:00 EST",
       }
     }
     ```
 
-* Error response: Couldn't find a Group with the specified id
-  * Status Code: 404
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+### **Delete an Event**
 
+Deletes an Event. Only the creator of the Event is allowed to delete it.
+
+* **Require Authentication**: true
+* **Require Authorization**: User must be the creator of the Event
+* **Request**
+  * **Method**: DELETE
+  * **Route path**: `/events/:eventId`
+  * **Body**: none
+
+* **Successful Response**
+  * **Status Code**: 200
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
     ```json
     {
-      "message": "Invite couldn't be found"
-    }
-    ```
-## Delete a Invite
-
-Deletes an existing Invite specific "friend".
-
-* Require Authentication: true
-* Require proper authorization: Invite must belong to the current user
-* Request
-  * Method: DELETE
-  * Route path: groups/:groupId/invites/:inviteId
-  * Body: none
-
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "message": "Successfully deleted"
+      "message": "Successfully deleted event"
     }
     ```
 
-* Error response: Couldn't find a Spot with the specified id
-  * Status Code: 404
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+* **Error Response**: Group not found**
+  * **Status Code**: 404
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "message": "Group not found"
+    }
+    ```
+
+* **Error Response**: User not authorized**
+  * **Status Code**: 403
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "message": "Forbidden"
+    }
+    ```
+
+## Messages
+
+### View all Group Messages
+
+Return all the Messages associated with an Event
+
+* **Require Authentication**: true
+* **Request**
+  * **Method**: GET
+  * **Route path**: `/events/:eventId/messages`
+  * **Body**: none
+
+* **Successful Response**:
+  * **Status Code**: 200
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
 
     ```json
     {
-      "message": "Invite couldn't be found"
+      "Messages": [
+        {
+          "id": 1,
+          "creatorId": 2,
+          "message": "Message text"
+        },
+        {
+          "id": 2,
+          "creatorId": 4,
+          "message": "Message text"
+        },
+        {
+          "id": 3,
+          "creatorId": 1,
+          "message": "Message text"
+        }
+      ]
+    }
+    ```
+* **Error response**: Couldn't find any Messages with the specified Event id
+  * **Status Code**: 404
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
+
+    ```json
+    {
+      "message": "No messages found"
+    }
+    ```
+
+### View all current User Messages
+
+Return all the Messages sent and received by current User
+
+* **Require Authentication**: true
+* **Request**
+  * **Method**: GET
+  * **Route path**: `/profile/messages`
+  * **Body**: none
+
+* **Successful Response**:
+  * **Status Code**: 200
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
+
+    ```json
+    {
+      "Messages": [
+        {
+          "id": 1,
+          "creatorId": 2,
+          "eventId": 1,
+          "message": "Message text"
+        },
+        {
+          "id": 2,
+          "creatorId": 4,
+          "eventId": 3,
+          "message": "Message text"
+        },
+        {
+          "id": 3,
+          "creatorId": 1,
+          "eventId": 4,
+          "message": "Message text"
+        }
+      ]
+    }
+    ```
+* **Error response**: Couldn't find any Messages for current user
+  * **Status Code**: 404
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
+
+    ```json
+    {
+      "message": "No messages found"
+    }
+    ```
+
+### Create a Group Message
+
+Creates Message for an Event and returns the newly created Message's information.
+
+* **Require Authentication**: true
+* **Require Authorization**: User must not be organizer of Event, must have RSVPd 'yes' to event
+* **Request**
+  * **Method**: POST
+  * **Route path**: `/events/:eventId/messages`
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+      {
+        "message": "Looking forward to the event!"
+      }
+    ```
+
+* **Successful Response**
+  * **Status Code**: 201
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "id": 1,
+      "eventId": 2,
+      "creatorId": 2,
+      "message": "Looking forward to the event!"
+    }
+    ```
+
+* **Error Response**: **Validation errors**
+  * **Status Code**: 400
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "message": "Bad Request",
+      "errors": {
+        "message": "Message cannot be blank",
+      }
+    }
+    ```
+
+* **Error Response**: User is event Organizer or has not RSVPd to event
+  * **Status Code**: 403
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "message": "Forbidden",
+    }
+    ```
+
+### Edit a Group Message on Event Page
+
+Edits Message on Event page if user is creator.
+
+* **Require Authentication**: true
+* **Require Authorization**: User must be creator of Message to make edits
+* **Request**
+  * **Method**: PUT
+  * **Route path**: `/events/:eventId/messages/:messageId`
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+      {
+        "message": "What landmarks should I look for at the event meeting spot?"
+      },
+    ```
+
+* **Successful Response**
+  * **Status Code**: 201
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "id": 3,
+      "eventId": 1,
+      "creatorId": 2,
+      "message": "What landmarks should I look for at the event meeting spot?"
+    }
+    ```
+
+* **Error Response**: **Validation errors**
+  * **Status Code**: 400
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "message": "Bad Request",
+      "errors": {
+        "message": "Message cannot be blank"
+      }
+    }
+    ```
+
+* **Error Response**: Message does not belong to user
+  * **Status Code**: 403
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "message": "Forbidden",
+    }
+    ```
+* **Error Response**: Message not found
+  * **Status Code**: 404
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "message": "Message not found",
+    }
+    ```
+
+### Edit a Group Message on User Dashboard
+
+Edits Message on Event page if user is creator.
+
+* **Require Authentication**: true
+* **Require Authorization**: User must be creator of Message to make edits
+* **Request**
+  * **Method**: PUT
+  * **Route path**: `/profile/messages/:messageId`
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+      {
+        "message": "What landmarks should I look for at the event meeting spot?"
+      },
+    ```
+
+* **Successful Response**
+  * **Status Code**: 201
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "id": 3,
+      "eventId": 1,
+      "creatorId": 2,
+      "message": "What landmarks should I look for at the event meeting spot?"
+    }
+    ```
+
+* **Error Response**: **Validation errors**
+  * **Status Code**: 400
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "message": "Bad Request",
+      "errors": {
+        "message": "Message cannot be blank"
+      }
+    }
+    ```
+
+* **Error Response**: Message not found
+  * **Status Code**: 404
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "message": "Message not found",
+    }
+    ```
+
+### Delete a Group Message
+
+Removes a Group Message
+
+* **Require Authentication**: true
+* **Require Authorization**: Message must belong to the current user
+* **Request**
+  * **Method**: DELETE
+  * **Route path**: `/events/:eventId/messages/:messageId`
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
+
+    ```json
+    {
+      "messageId": 2,
+    }
+    ```
+
+* **Successful Response**
+  * **Status Code**: 200
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
+
+    ```json
+    {
+      "message": "Message removed seccessfully"
+    }
+    ```
+
+* **Error Response**: Message does not belong to user
+  * **Status Code**: 400
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
+
+    ```json
+    {
+      "message": "Forbidden"
+    }
+    ```
+
+* **Error response**: Couldn't find a Message with the specified id
+  * **Status Code**: 404
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
+
+    ```json
+    {
+      "message": "Message couldn't be found"
     }
     ```
 
@@ -545,86 +974,112 @@ Deletes an existing Invite specific "friend".
 
 Return all the RSVPs that the current user has made.
 
-* Require Authentication: true
-* Request
-  * Method: GET
-  * Route path: /events/rsvps
-  * Body: none
+* **Require Authentication**: true
+* **Request**
+  * **Method**: GET
+  * **Route path**: `/rsvps`
+  * **Body**: none
 
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+* **Successful Response**:
+  * **Status Code**: 200
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
 
     ```json
     {
-      "ConfirmedEvents": [
+      "RSVPs": [
         {
           "id": 1,
-          "event_id": 1,
+          "eventId": 1,
           "Event": {
             "id": 1,
             "title": "Help Us",
             "description": "Helping people",
-            "organizer_id": 1,
+            "organizerId": 1,
             "categories": ["Outdoor", "LGBT"],
             "address": "1233 Do Good St.",
             "city": "Great City",
             "state": "California",
-            "event_date": "December 25, 2024",
-            "created_at": "TimeStamp",
-            "updated_at": "TimeStamp",
-            "badge_id": 12,
-            "review_id": [11, 10, 5],
+            "eventDate": "December 25, 2024",
+            "createdAt": "2021-11-19 20:39:36",
+            "updatedAt": "2021-11-19 20:39:36",
+            "badgeId": 12,
+            "reviewId": [11, 10, 5],
             "status" : 1,
-            "preview_Img": "URL"
+            "previewImg": "URL"
           },
-          "user_id": 2,
-          "start_time": "2021-11-19",
-          "end_time": "2021-11-20",
-          "event_date": "2021-11-19",
-          "created_at": "2021-11-19 20:39:36",
-          "updated_at": "2021-11-19 20:39:36"
+          "userId": 2,
+          "startTime": "2021-11-19",
+          "endTime": "2021-11-20",
+          "eventDate": "2021-11-19",
+          "createdAt": "2021-11-19 20:39:36",
+          "updatedAt": "2021-11-19 20:39:36"
         }
       ]
     }
     ```
 
-
-### Get all Event RSVPs based on the event's id
-
-Return all the RSVPs for a event specified by id.
-
-* Require Authentication: true
-* Request
-  * Method: GET
-  * Route path: /events/:eventId/rsvps
-  * Body: none
-
-* Successful Response:
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+* **Error response**: Couldn't find any RSVPs for current user
+  * **Status Code**: 404
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
 
     ```json
     {
-      "Attendees": [
+      "message": "No RSVPs found"
+    }
+    ```
+
+
+### Get all Event RSVPs based on the Event's id
+
+Return all the RSVPs for a Event specified by id (these will be the event groups)
+
+* **Require Authentication**: true
+* **Request**
+  * **Method**: GET
+  * **Route path**: `/events/:eventId/rsvps`
+  * **Body**: none
+
+* **Successful Response**:
+  * **Status Code**: 200
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
+
+    ```json
+    {
+      "RSVPs": [
         {
-          "user_id": 1,
-          "first_name": "FirstName",
-          "last_name": "LastName"
+            "id": 0,
+            "username": "VolunteerLyfe",
+            "email": "green4lyfe@planet.com",
+            "firstName": "Susan",
+            "lastName":"Markcul",
+            "city": "somecity",
+            "Badges": [1, 3, 22]
+         },
+        {
+            "id": 3,
+            "username": "VolunteerLyfe1",
+            "email": "gre3en4lyfe@planet.com",
+            "firstName": "Suz",
+            "lastName":"Mark",
+            "birthday": "November 16th, 1993",
+            "city": "somewherecity",
+            "Badges": [1, 3, 22]
         }
       ]
     }
     ```
 
-* Error response: Couldn't find a Event with the specified id
-  * Status Code: 404
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+* **Error response**: Couldn't find a Event with the specified id
+  * **Status Code**: 404
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
 
     ```json
     {
@@ -634,9 +1089,7 @@ Return all the RSVPs for a event specified by id.
 
 
 
-## **Friends API Documentation**
-
----
+## **Friends**
 
 ### **Get All Friends of the Current User**
 
@@ -658,32 +1111,30 @@ Returns a list of all the current user's friends. Users who have attended the sa
       "Friends": [
         {
           "id": 1,
-          "first_name": "John",
+          "firstName": "John",
           "username": "johndoe",
-          "profile_image_url": "https://image-url.com/profile1.jpg"
+          "profileImageUrl": "https://image-url.com/profile1.jpg"
         },
         {
           "id": 2,
-          "first_name": "Jane",
+          "firstName": "Jane",
           "username": "janesmith",
-          "profile_image_url": "https://image-url.com/profile2.jpg"
+          "profileImageUrl": "https://image-url.com/profile2.jpg"
         }
       ]
     }
     ```
 
-* **Error Response: No friends found**
+* **Error Response**: No friends found**
   * **Status Code**: 404
   * **Headers**:
     * `Content-Type: application/json`
   * **Body**:
     ```json
     {
-      "message": "No friends could be found"
+      "message": "No friends found"
     }
     ```
-
----
 
 ### **Get Limited Details of a Specific Friend**
 
@@ -722,7 +1173,7 @@ Returns limited information about a specific friend, including their first name,
     }
     ```
 
-* **Error Response: Friend not found**
+* **Error Response**: Friend not found**
   * **Status Code**: 404
   * **Headers**:
     * `Content-Type: application/json`
@@ -733,159 +1184,229 @@ Returns limited information about a specific friend, including their first name,
     }
     ```
 
----
+### Create a Friend Request
 
-### **Get Events Attended with a Friend**
-
-Returns a list of all events that the current user and a specific friend have attended together.
+Invites a member of an event group to become a personal friend.
 
 * **Require Authentication**: true
 * **Request**
-  * **Method**: GET
-  * **Route path**: `/friends/:friendId/events`
-  * **Body**: none
+  * **Method**: POST
+  * **Route path**: `events/:eventId/rsvps`
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
+
+    ```json
+    {
+      "id": 1,
+      "sendingUserId": 1,
+      "receivingUserId": 2,
+      "eventId": 1
+    }
+    ```
+
+* **Successful Response**
+  * **Status Code**: 201
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
+
+    ```json
+    {
+      "id": 1,
+      "sendingUserId": 1,
+      "receivingUserId": 2,
+      "eventId": 1,
+      "createdAt": "2021-11-19 20:39:36",
+      "updatedAt": "2021-11-19 20:39:36",
+      "accepted": 0
+    }
+    ```
+
+* **Error Response**: Body validation errors
+  * **Status Code**: 400
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
+
+    ```json
+    {
+      "message": "Bad Request",
+      "errors": {
+        "friendId": "Friend cannot be found",
+        "eventId": "Event cannot be found",
+      }
+    }
+    ```
+### Remove a Friend Request
+
+Removes a sent friend request
+
+* **Require Authentication**: true
+* **Require Authorization**: Request must belong to the current user
+* **Request**
+  * **Method**: DELETE
+  * **Route path**: `/events/:eventId/rsvps`
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
+
+    ```json
+    {
+      "receivingUserId": 2,
+    }
+    ```
 
 * **Successful Response**
   * **Status Code**: 200
   * **Headers**:
-    * `Content-Type: application/json`
+    * ```Content-Type: application/json```
   * **Body**:
+
     ```json
     {
-      "EventsAttendedTogether": [
+      "message": "Request removed seccessfully"
+    }
+    ```
+
+* **Error Response**: Request does not belong to user
+  * **Status Code**: 400
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
+
+    ```json
+    {
+      "message": "Forbidden"
+    }
+    ```
+
+* **Error response**: Couldn't find a Request with the specified id
+  * **Status Code**: 404
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
+
+    ```json
+    {
+      "message": "Request couldn't be found"
+    }
+    ```
+
+## Feedback
+
+### View Feedback
+
+Return all the Feedback for a Organizer
+
+* **Require Authentication**: true
+* **Request**
+  * **Method**: GET
+  * **Route path**: `/profile/feedback`
+  * **Body**: none
+
+* **Successful Response**:
+  * **Status Code**: 200
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
+
+    ```json
+    {
+      "Feedback": [
         {
-          "eventId": 1,
-          "eventName": "Beach Cleanup",
-          "eventDate": "2024-12-01",
-          "organizer": "Save The Beaches Org",
-          "location": "Santa Monica Beach"
+          "id": 0,
+          "userId": 4,
+          "reaction": ":)",
+          "message": "Well organized event",
         },
         {
-          "eventId": 2,
-          "eventName": "Food Bank Volunteering",
-          "eventDate": "2024-11-15",
-          "organizer": "Local Food Bank",
-          "location": "Community Center, San Francisco"
+          "id": 0,
+          "userId": 4,
+          "reaction": ":|",
+          "message": "Event started late, nowhere to sit",
         }
       ]
     }
     ```
 
-* **Error Response: No shared events found**
+* **Error response**: Couldn't find Feedback associated with Organizer
   * **Status Code**: 404
   * **Headers**:
-    * `Content-Type: application/json`
+    * ```Content-Type: application/json```
   * **Body**:
+
     ```json
     {
-      "message": "No shared events found"
+      "message": "No feedback found"
     }
     ```
 
----
+### View Feedback based on Event id
 
-## **Groups API Documentation**
-
----
-
-### **Get All Groups of the Current User**
-
-Returns a list of all the groups the current user is a part of.
+Return all the Feedback for a Event based on id
 
 * **Require Authentication**: true
+* **Require Authorization**: User must be Organizer of Event
 * **Request**
   * **Method**: GET
-  * **Route path**: `/groups`
+  * **Route path**: `/events/:eventId/feedback`
   * **Body**: none
 
-* **Successful Response**
+* **Successful Response**:
   * **Status Code**: 200
   * **Headers**:
-    * `Content-Type: application/json`
+    * ```Content-Type: application/json```
   * **Body**:
+
     ```json
     {
-      "Groups": [
+      "Feedback": [
         {
-          "id": 1,
-          "eventId": 6
-          "ownerId": 2
+          "id": 0,
+          "userId": 4,
+          "reaction": ":)",
+          "message": "Well organized event",
         },
         {
-          "id": 1,
-          "eventId": 6
-          "ownerId": 2
-        },
+          "id": 0,
+          "userId": 4,
+          "reaction": ":|",
+          "message": "Event started late, nowhere to sit",
+        }
       ]
     }
     ```
 
-* **Error Response: No groups found**
+* **Error response**: Couldn't find a Feedback associated with Event
   * **Status Code**: 404
   * **Headers**:
-    * `Content-Type: application/json`
+    * ```Content-Type: application/json```
   * **Body**:
+
     ```json
     {
-      "message": "No groups could be found"
+      "message": "No feedback found"
     }
     ```
 
----
+### Create Feedback
 
-### **Get Details of a Specific Group**
-
-Returns detailed information about a specific group, including the name, description, image, and member details.
+Creates Feedback for an Event and returns the newly created Feedback's information.
 
 * **Require Authentication**: true
-* **Request**
-  * **Method**: GET
-  * **Route path**: `/groups/:groupId`
-  * **Body**: none
-
-* **Successful Response**
-  * **Status Code**: 200
-  * **Headers**:
-    * `Content-Type: application/json`
-  * **Body**:
-    ```json
-    {
-      {
-        "id": 1,
-        "eventId": 6
-        "ownerId": 2
-      }
-    }
-    ```
-
-* **Error Response: Group not found**
-  * **Status Code**: 404
-  * **Headers**:
-    * `Content-Type: application/json`
-  * **Body**:
-    ```json
-    {
-      "message": "Group not found"
-    }
-    ```
-
----
-
-### **Create a New Group**
-
-Creates a new group and returns the newly created group's information.
-
-* **Require Authentication**: true
+* **Require Authorization**: User must not be organizer of Event, must have earned Event Badge, and must not have left previous feedback
 * **Request**
   * **Method**: POST
-  * **Route path**: `/groups`
+  * **Route path**: `/events/:eventId/feedback`
   * **Headers**:
     * `Content-Type: application/json`
   * **Body**:
     ```json
-        {
-          "eventId": 6
-        },
+      {
+        "reaction": ";)",
+        "message": "Had a great time"
+      }
     ```
 
 * **Successful Response**
@@ -895,15 +1416,14 @@ Creates a new group and returns the newly created group's information.
   * **Body**:
     ```json
     {
-      {
-        "id": 1,
-        "eventId": 6
-        "ownerId": 2
-      }
+      "id": 1,
+      "eventId": 2,
+      "reaction": ";)",
+      "message": "Had a great time"
     }
     ```
 
-* **Error Response: Validation errors**
+* **Error Response**: **Validation errors**
   * **Status Code**: 400
   * **Headers**:
     * `Content-Type: application/json`
@@ -912,104 +1432,138 @@ Creates a new group and returns the newly created group's information.
     {
       "message": "Bad Request",
       "errors": {
-        "name": "Event choice is required",
-        "description": "Event choice is required"
+        "reaction": "Please select a reaction",
+        "message": "Message cannot be blank",
       }
     }
     ```
 
----
+* **Error Response**: Feedback does not belong to user
+  * **Status Code**: 403
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "message": "Forbidden",
+    }
+    ```
 
-### **Delete a Group**
+### Edit Feedback
 
-Deletes a group. Only the creator of the group is allowed to delete it.
+Edits Feedback if user is creator.
 
 * **Require Authentication**: true
-* **Require Proper Authorization**: User must be the creator of the group
+* **Require Authorization**: User must be creator of feeback to make edits
+* **Request**
+  * **Method**: PUT
+  * **Route path**: `/events/:eventId/feedback/:feedbackId` OR `/profile/feedback/:feedbackId`
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+      {
+        "reaction": ";)",
+        "message": "Had a great time"
+      },
+    ```
+
+* **Successful Response**
+  * **Status Code**: 201
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "id": 4,
+      "reaction": ";)",
+      "message": "Had a great time"
+    }
+    ```
+
+* **Error Response**: **Validation errors**
+  * **Status Code**: 400
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "message": "Bad Request",
+      "errors": {
+        "message": "Message cannot be blank",
+        "reaction": "Please select a reaction"
+      }
+    }
+    ```
+
+* **Error Response**: Feedback does not belong to user
+  * **Status Code**: 403
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "message": "Forbidden",
+    }
+    ```
+
+### Delete Feedback
+
+Removes Feedback user has sent to an Organizer
+
+* **Require Authentication**: true
+* **Require Authorization**: Feedback must belong to the current user
 * **Request**
   * **Method**: DELETE
-  * **Route path**: `/groups/:groupId`
-  * **Body**: none
+  * **Route path**: `/profile/feedback/:feedbackId`
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
+
+    ```json
+    {
+      "feedbackId": 2,
+    }
+    ```
 
 * **Successful Response**
   * **Status Code**: 200
   * **Headers**:
-    * `Content-Type: application/json`
+    * ```Content-Type: application/json```
   * **Body**:
+
     ```json
     {
-      "message": "Successfully deleted group"
+      "message": "Request removed seccessfully"
     }
     ```
 
-* **Error Response: Group not found**
+* **Error Response**: Feedback does not belong to user
+  * **Status Code**: 403
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
+
+    ```json
+    {
+      "message": "Forbidden"
+    }
+    ```
+
+* **Error response**: Couldn't find a Request with the specified id
   * **Status Code**: 404
   * **Headers**:
-    * `Content-Type: application/json`
+    * ```Content-Type: application/json```
   * **Body**:
+
     ```json
     {
-      "message": "Group not found"
+      "message": "Request couldn't be found"
     }
     ```
 
----
+## Notifications
 
-### **Get All Members of a Group**
+### View Notifications
 
-Returns a list of all members of a specific group.
-
-* **Require Authentication**: true
-* **Request**
-  * **Method**: GET
-  * **Route path**: `/groups/:groupId/members`
-  * **Body**: none
-
-* **Successful Response**
-  * **Status Code**: 200
-  * **Headers**:
-    * `Content-Type: application/json`
-  * **Body**:
-    ```json
-    {
-      "Members": [
-         {
-            "id": 0,
-            "username": "'VolunteerLyfe'",
-            "email": "'green4lyfe@planet.com'",
-            "firstName": "'Susan'",
-            "lastName":"'Markcul'",
-            "birthday": "'November 16th, 1994'",
-            "city": "'somecity'",
-            "create_at": "timstamp",
-            "saved_filters":["Filter1", "Filter2"],
-            "badge_id": [1, 3, 22]
-         },
-        {
-            "id": 3,
-            "username": "'VolunteerLyfe1'",
-            "email": "'gre3en4lyfe@planet.com'",
-            "firstName": "'Suz'",
-            "lastName":"'Mark'",
-            "birthday": "'November 16th, 1993'",
-            "city": "'somewherecity'",
-            "create_at": "timestamp",
-            "saved_filters":["Filter1", "Filter2"],
-            "badge_id": [1, 3, 22]
-        }
-      ]
-    }
-    ```
-
-* **Error Response: Group not found**
-  * **Status Code**: 404
-  * **Headers**:
-    * `Content-Type: application/json`
-  * **Body**:
-    ```json
-    {
-      "message": "Group not found"
-    }
-    ```
-
----
+### Delete Notifications
