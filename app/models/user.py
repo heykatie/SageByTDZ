@@ -2,7 +2,7 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 import datetime
-from .badge import Badge
+# from .badge import Badge
 
 
 class User(db.Model, UserMixin):
@@ -20,7 +20,7 @@ class User(db.Model, UserMixin):
     state = db.Column(db.String(255), nullable=False)
     address = db.Column(db.String(255), nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.datetime.now())
-    badge_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod(Badge.id)), nullable=True)
+    # badge_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod(Badge.id)), nullable=True)
     # badge = db.relationship('Badge', backref=db.backref('users', lazy=True))
     hashed_password = db.Column(db.String(255), nullable=False)
 
@@ -48,5 +48,5 @@ class User(db.Model, UserMixin):
             'city': self.city,
             'state': self.state,
             'address': self.address,
-            'badge_id': self.badge_id
+            # 'badge_id': self.badge_id
         }
