@@ -6,11 +6,29 @@ from sqlalchemy.sql import text
 # Adds a demo user, you can add other users here if you want
 def seed_organizers():
     redCross = Organizer(
-        name='Red Cross', description='This is an organizer description.', logo='logoURL', link='linkURL', phone_number='786-306-5050', email='redcross@aa.io')
+        name='Red Cross',
+        description='This is an organizer description.',
+        logo='logoURL',
+        link='linkURL',
+        phone_number='786-306-5050',
+        email='redcross@aa.io'
+        )
     peta = Organizer(
-        name='PETA', description='This is an organizer description.', logo='logoURL', link='linkURL', phone_number='222-306-3467', email='peta@aa.io')
+        name='PETA',
+        description='This is an organizer description.',
+        logo='logoURL',
+        link='linkURL',
+        phone_number='222-306-3467',
+        email='peta@aa.io'
+        )
     blm = Organizer(
-        name='BLM', description='This is an organizer description.', logo='logoURL', link='linkURL', phone_number='888-546-8907', email='blm@aa.io' )
+        name='BLM',
+        description='This is an organizer description.',
+        logo='logoURL',
+        link='linkURL',
+        phone_number='888-546-8907',
+        email='blm@aa.io'
+        )
 
     db.session.add(redCross)
     db.session.add(peta)
@@ -26,7 +44,7 @@ def seed_organizers():
 # it will reset the primary keys for you as well.
 def undo_organizers():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.organizers RESTART IDENTITY CASCADE;")
     else:
         db.session.execute(text("DELETE FROM organizers"))
 
