@@ -1,5 +1,6 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from app.models import User, Event, Feedback, RSVP
+from app.forms import ProfileForm
 from flask_login import current_user, login_required
 import datetime
 
@@ -28,4 +29,22 @@ def rsvps():
         return {'rsvps': [Event.query.get(eventId).to_dict() for eventId in rsvpList]}
     return {'errors': {'message': "No RSVPS could be found"}}, 404
 
-# @profile_routes.route('/edit', methods=["PATCH"])
+@profile_routes.route('/edit', methods=["PATCH"])
+@login_required
+def edit_profile():
+    form = ProfileForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        userId = current_user.get_id()
+        user = User.query.get(userId)
+
+        user.username = form.data['username']
+        user.email = form.data['email']
+        user.password = form.data['password']
+        user.address = form.data['address']
+        user.city = form.data['city']
+        user.state = form.data['state']
+
+        db.session.commit()
+        return user.to_dict()
+    return form.errors, 401
