@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, request
 from flask_login import login_required, current_user
 from ..models.db import db
 from ..models.invites import Invites
@@ -26,7 +26,7 @@ def user_invites():
         'going': invite.going
         })
 
-    return jsonify(invites_list.to_dict())
+    return invites_list.to_dict()
 
 
 @invite_route.route('/<int:user_id>')
@@ -51,7 +51,7 @@ def group_invites():
         'going': invite.going
         })
 
-    return jsonify(invites_list.to_dict())
+    return invites_list.to_dict()
 
 
 @invite_route.route('/create', methods=['POST'])
@@ -68,7 +68,7 @@ def create_invite():
 
     db.session.commit()
 
-    return jsonify(new_invite.to_dict())
+    return new_invite.to_dict()
 
 
 @invite_route.route('/update/<int:invite_id>', methods=['PUT'])
@@ -82,7 +82,7 @@ def update_invite(invite_id):
     invite = Invites.query.get(invite_id)
 
     if not invite:
-        return jsonify({ 'message': 'Invite not found'})
+        return { 'message': 'Invite not found'}
 
     if 'going' in data and invite.user_id == current_user.id:
         invite.going = data['going'] # Updata the response to an invite you have received
@@ -92,7 +92,7 @@ def update_invite(invite_id):
 
     db.sesstion.commit()
 
-    return jsonify( invite.to_dict())
+    return invite.to_dict()
 
 
 @invite_route.route('/<int:invite_id>', methods=['DELETE'])
@@ -104,12 +104,12 @@ def delete_invite(invite_id):
     invite = Invites.query.get(invite_id)
 
     if not invite:
-        return jsonify({ 'message': 'Invite not found'})
+        return { 'message': 'Invite not found'}
     
     if invite.user_id != current_user.id:
-        return jsonify({ 'message': 'Permission denied'})
+        return { 'message': 'Permission denied'}
     
     db.session.delete(invite)
     db.session.commit()
 
-    return jsonify({ 'message': 'Invite deleted successfully' })
+    return { 'message': 'Invite deleted successfully' }
