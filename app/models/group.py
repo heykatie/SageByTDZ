@@ -1,4 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
+from .event import Event
+from .user import User
 
 
 class Group(db.Model):
@@ -8,7 +10,7 @@ class Group(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    # event_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('events.id')), nullable=False)
+    event_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('events.id')), nullable=False)
     owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
 
     # Relationships
@@ -17,6 +19,6 @@ class Group(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
-            # 'event_id': self.event_id,
+            'event_id': self.event_id,
             'owner_id': self.owner_id
         }

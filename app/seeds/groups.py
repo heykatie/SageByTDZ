@@ -4,15 +4,15 @@ from sqlalchemy.sql import text
 # Adds some demo groups, you can add more groups here if you want
 def seed_groups():
     group1 = Group(
-        # event_id=1,
+        event_id=1,
         owner_id=1
     )
     group2 = Group(
-        # event_id=2,
+        event_id=2,
         owner_id=2
     )
     group3 = Group(
-        # event_id=3,
+        event_id=3,
         owner_id=3
     )
 

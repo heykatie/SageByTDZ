@@ -82,6 +82,14 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    op.create_table('groups',
+    sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
+    sa.Column('event_id', sa.Integer(), nullable=False),
+    sa.Column('owner_id', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['event_id'], ['events.id'], ),
+    sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
     # ### end Alembic commands ###
 
 
@@ -92,4 +100,5 @@ def downgrade():
     op.drop_table('events')
     op.drop_table('users')
     op.drop_table('organizers')
+    op.drop_table('groups')
     # ### end Alembic commands ###
