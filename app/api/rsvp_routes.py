@@ -4,7 +4,7 @@ from app.models import RSVP
 
 rsvp_routes = Blueprint('rsvps', __name__)
 
-@rsvp_routes.route('/')
+@rsvp_routes.route('/', methods=['POST'])
 @login_required
 def add_rsvp(id):
     userId = current_user.get_id()
@@ -16,7 +16,7 @@ def add_rsvp(id):
     db.session.commit()
     return rsvp.to_dict(), 201
 
-@rsvp_routes.route('/delete')
+@rsvp_routes.route('/delete', methods=['DELETE'])
 @login_required
 def delete_rsvp(id):
     userId = current_user.get_id()

@@ -49,7 +49,7 @@ def edit_profile():
         return user.to_dict()
     return form.errors, 401
 
-@profile_routes.route('/delete')
+@profile_routes.route('/delete', methods=['DELETE'])
 @login_required
 def delete_profile(id):
     user = User.query.get(id)
