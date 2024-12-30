@@ -103,6 +103,26 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    op.create_table('messages',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('group_id', sa.Integer(), nullable=False),
+    sa.Column('message', sa.String(length=255), nullable=False),
+    sa.Column('created_at', sa.String(length=255), nullable=True),
+    sa.Column('updated_at', sa.String(length=255), nullable=True),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['group_id'], ['groups.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('requests',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('sender_id', sa.Integer(), nullable=False),
+    sa.Column('receiver_id', sa.Integer(), nullable=False),
+    sa.Column('created_at', sa.String(length=255), nullable=True),
+    sa.Column('accepted', sa.Boolean(), nullable=True),
+    sa.ForeignKeyConstraint(['sender_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
     # ### end Alembic commands ###
 
 
@@ -115,4 +135,6 @@ def downgrade():
     op.drop_table('organizers')
     op.drop_table('groups')
     op.drop_table('invites')
+    op.drop_table('messages')
+    op.drop_table('requests')
     # ### end Alembic commands ###

@@ -6,3 +6,5 @@ from .feedback import Feedback
 from .rsvp import RSVP
 from .invites import Invites
 from .group import Group
+from .message import Message
+from .request import Request

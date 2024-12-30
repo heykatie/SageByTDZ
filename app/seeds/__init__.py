@@ -6,6 +6,8 @@ from .organizers import seed_organizers, undo_organizers
 from .rsvps import seed_rsvps, undo_rsvps
 from .groups import seed_groups, undo_groups
 from .invites import seed_invites, undo_invites
+from .messages import seed_messages, undo_messages
+from .requests import seed_requests, undo_requests
 from app.models.db import db, environment, SCHEMA
 
 # Creates a seed group to hold our commands
@@ -28,6 +30,8 @@ def seed():
         undo_rsvps()
         undo_groups()
         undo_invites()
+        undo_messages()
+        undo_requests()
     seed_users()
     seed_feedback()
     seed_events()
@@ -35,6 +39,8 @@ def seed():
     seed_rsvps()
     seed_groups()
     seed_invites()
+    seed_messages()
+    seed_requests()
 
     # Add other seed functions here
 
@@ -49,4 +55,6 @@ def undo():
     undo_rsvps()
     undo_groups()
     undo_invites()
+    undo_messages()
+    undo_requests()
     # Add other undo functions here

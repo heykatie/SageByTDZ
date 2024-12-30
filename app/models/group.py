@@ -12,6 +12,7 @@ class Group(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     event_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('events.id')), nullable=False)
     owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+    messages = db.relationship('Message', backref='author', cascade='all, delete-orphan')
 
     # Relationships
     # event = db.relationship('Event', backref='groups', lazy=True)
