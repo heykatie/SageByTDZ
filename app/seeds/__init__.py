@@ -4,6 +4,7 @@ from .feedback import seed_feedback, undo_feedback
 from .events import seed_events, undo_events
 from .organizers import seed_organizers, undo_organizers
 from .rsvps import seed_rsvps, undo_rsvps
+from .groups import seed_groups, undo_groups
 
 from app.models.db import db, environment, SCHEMA
 
@@ -25,11 +26,14 @@ def seed():
         undo_events()
         undo_organizers()
         undo_rsvps()
+        undo_groups()
     seed_users()
     seed_feedback()
     seed_events()
     seed_organizers()
     seed_rsvps()
+    seed_groups()
+
     # Add other seed functions here
 
 
@@ -41,4 +45,5 @@ def undo():
     undo_events()
     undo_organizers()
     undo_rsvps()
+    undo_groups()
     # Add other undo functions here
