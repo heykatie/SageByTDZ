@@ -5,11 +5,35 @@ from sqlalchemy.sql import text
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     cam = User(
-        username='KingCam', firstName='Cam', lastName='Williamson', email='cam@aa.io', password='password', city='Houston', state='Texas', address='3456 University Dr.', )
+        username='KingCam',
+        firstName='Cam',
+        lastName='Williamson',
+        email='cam@aa.io',
+        password='password',
+        city='Houston',
+        state='Texas',
+        address='3456 University Dr.',
+        )
     jen = User(
-        username='JenniBear', firstName='Jen', lastName='Jenkins', email='jen@aa.io', password='password1', city='Salt Lake City', state='Utah', address='6708 Mountainview Cirle',)
+        username='JenniBear',
+        firstName='Jen',
+        lastName='Jenkins',
+        email='jen@aa.io',
+        password='password1',
+        city='Salt Lake City',
+        state='Utah',
+        address='6708 Mountainview Cirle',
+        )
     sydney = User(
-        username='SydKid', firstName='Sydney', lastName='Sydneyson', email='sydney@aa.io', password='password2', city='New York', state='New York', address='2367 Apple St. Apt 4B', badge_id=1)
+        username='SydKid',
+        firstName='Sydney',
+        lastName='Sydneyson',
+        email='sydney@aa.io',
+        password='password2',
+        city='New York',
+        state='New York',
+        address='2367 Apple St. Apt 4B',
+        )
 
     db.session.add(cam)
     db.session.add(jen)

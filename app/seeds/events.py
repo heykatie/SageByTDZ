@@ -6,11 +6,47 @@ from sqlalchemy.sql import text
 # Adds a demo user, you can add other users here if you want
 def seed_events():
     beachCleanUp = Event(
-        title='Beach Clean Up', description='This an event description.', category_id=1, event_date='Janurary 10, 2025', start_time='8:00:00', end_time='14:00:00', city='Houston', state='Texas', address='3456 University Dr.', organizer_id=1)
+        title='Beach Clean Up',
+        description='This an event description.',
+        organizer_id=1,
+        categories="Outdoors, Climate Change",
+        address='3456 University Dr.',
+        city='Houston',
+        state='Texas',
+        event_date='2025-01-10',
+        start_time='8:00:00',
+        end_time='14:00:00',
+        badge_url='badgeOneURL',
+        preview='previewImageURL'
+        )
     xmasToyDrive = Event(
-        title='XMAS Toy Drive', description='This an event description.', category_id=3, event_date='December 19, 2024', start_time='10:30:00', end_time='16:30:00', city='Salt Lake City', state='Utah', address='6708 Mountainview Cirle',organizer_id=2)
+        title='XMAS Toy Drive',
+        description='This an event description.',
+        organizer_id=3,
+        categories='Indoors, Virtual',
+        address='6708 Mountainview Cirle',
+        city='Salt Lake City',
+        state='Utah',
+        event_date='2024-12-19',
+        start_time='10:30:00',
+        end_time='16:30:00',
+        badge_url='badgeTwoURL',
+        preview='previewImageURL'
+        )
     soupKitchen = Event(
-        title='Soup Kitchen', description='This an event description.', category_id=2, event_date='Janurary 6, 2025', start_time='7:00:00', end_time='20:15:00', city='New York', state='New York', address='2367 Apple St. Apt 4B', organizer_id=1)
+        title='Soup Kitchen',
+        description='This an event description.',
+        organizer_id=2,
+        categories='Indoors, Handicap Accessible',
+         address='2367 Apple St. Apt 4B',
+        city='New York',
+        state='New York',
+        event_date='2025-01-06',
+        start_time='7:00:00',
+        end_time='20:15:00',
+        badge_url='badgeThreeURL',
+        preview='previewImageURL'
+        )
 
     db.session.add(beachCleanUp)
     db.session.add(xmasToyDrive)
@@ -26,7 +62,7 @@ def seed_events():
 # it will reset the primary keys for you as well.
 def undo_events():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.events RESTART IDENTITY CASCADE;")
     else:
         db.session.execute(text("DELETE FROM events"))
 
