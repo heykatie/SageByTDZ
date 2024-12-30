@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify
-from app.models import Event, Organizer, Feedback
+from app.models import Event, Organizer, Feedback, RSVP, User
 
 event_routes = Blueprint('events', __name__)
 
@@ -15,10 +15,13 @@ def event(id):
         organizer = Organizer.query.get(event.organizer_id)
         feedback = Feedback.query.filter(Feedback.organizer_id == organizer.id)
         feedbackList = [feedback.reaction for feedback in feedback]
-        
+        rsvps = RSVP.query.filter(RSVP.event_id == id)
+        rsvpList = [rsvp.user_id for rsvp in rsvps]
+
         return {
         'event': event.to_dict(),
         'organizer': organizer.to_dict(),
-        'avgFeedback': round(sum(feedbackList)/ len(feedbackList))
+        'avgFeedback': round(sum(feedbackList)/ len(feedbackList)),
+        'rsvps': [User.query.get(userId).firstName for userId in rsvpList]
         }
     return {'errors': {'message': "Event couldn't be found"}}, 404
