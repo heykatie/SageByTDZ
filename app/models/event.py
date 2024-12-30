@@ -1,6 +1,4 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-from .category import Category
-from .organizer import Organizer
 import datetime
 
 
@@ -13,7 +11,7 @@ class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(40), nullable=False, unique=True)
     description = db.Column(db.String(255), nullable=False)
-    category_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('categories.id')), nullable=True)
+    # category_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('categories.id')), nullable=True)
     city = db.Column(db.String(255), nullable=False)
     state = db.Column(db.String(255), nullable=False)
     address = db.Column(db.String(255), nullable=True)
@@ -39,3 +37,6 @@ class Event(db.Model):
             'end_time': self.end_time,
             'organizer_id': self.organizer_id,
         }
+
+
+from .organizer import Organizer

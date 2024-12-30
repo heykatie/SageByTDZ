@@ -53,6 +53,15 @@ def upgrade():
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('title')
     )
+    op.create_table('invites',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('friend_id', sa.Integer(), nullable=True),
+    sa.Column('group_id', sa.String(length=255), nullable=False),
+    sa.Column('event_id', sa.String(length=255), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=True),
+    sa.Column('going', sa.Boolean(), nullable=True)
+    )
     op.create_table('organizers',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=40), nullable=False),
@@ -75,7 +84,7 @@ def upgrade():
     sa.Column('address', sa.String(length=255), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('badge_id', sa.Integer(), nullable=True),
-    sa.Column('hashed_password', sa.String(length=255), nullable=False),
+    sa.Column('hashed_password', sa.String(length=256), nullable=False),
     sa.ForeignKeyConstraint(['badge_id'], ['badges.id'], ),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
@@ -91,4 +100,5 @@ def downgrade():
     op.drop_table('events')
     op.drop_table('categories')
     op.drop_table('badges')
+    op.drop_table('invites')
     # ### end Alembic commands ###

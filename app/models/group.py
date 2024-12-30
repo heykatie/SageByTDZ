@@ -20,3 +20,5 @@ class Group(db.Model):
             # 'event_id': self.event_id,
             'owner_id': self.owner_id
         }
+
+from .user import User
