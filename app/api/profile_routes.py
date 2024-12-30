@@ -17,7 +17,7 @@ def badges():
         events = [Event.query.get(eventId) for eventId in rsvpList]
         pastEvents = [event for event in events if currentDate > event.event_date]
         return [event.to_dict() for event in pastEvents]
-    return {'errors': {'message': "No RSVPS could be found"}}, 404
+    return {'errors': {'message': "No badges could be found"}}, 404
 
 @profile_routes.route('/confirm')
 @login_required
@@ -48,3 +48,14 @@ def edit_profile():
         db.session.commit()
         return user.to_dict()
     return form.errors, 401
+
+@profile_routes.route('/delete')
+@login_required
+def delete_profile(id):
+    user = User.query.get(id)
+    if user:
+        db.session.delete(user)
+        db.session.commit()
+        return { 'message': "Successfully deleted" }
+
+    return {'errors': {'message': "User could not be found"}}, 404

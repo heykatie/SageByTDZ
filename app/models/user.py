@@ -19,6 +19,7 @@ class User(db.Model, UserMixin):
     city = db.Column(db.String(255), nullable=False)
     state = db.Column(db.String(255), nullable=False)
     address = db.Column(db.String(255), nullable=True)
+    profile_pic = db.Column(db.String(255), nullable=True, default='assets/sprout.png')
     created_at = db.Column(db.DateTime, default=datetime.datetime.now())
     # badge_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod(Badge.id)), nullable=True)
     # badge = db.relationship('Badge', backref=db.backref('users', lazy=True))
@@ -45,5 +46,6 @@ class User(db.Model, UserMixin):
             'city': self.city,
             'state': self.state,
             'address': self.address,
+            'profile_pic': self.profile_pic
             # 'badge_id': self.badge_id
         }

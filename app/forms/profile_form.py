@@ -26,3 +26,4 @@ class ProfileForm(FlaskForm):
     address = StringField('address', validators=[DataRequired()])
     city = StringField('city', validators=[DataRequired()])
     state = StringField('state', validators=[DataRequired()])
+    profile_pic = StringField('profile_pic', validators=[DataRequired()])
