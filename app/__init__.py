@@ -13,11 +13,8 @@ from .api.profile_routes import profile_routes
 from .api.rsvp_routes import rsvp_routes
 from .api.message_routes import message_routes
 from .api.request_routes import request_routes
-<<<<<<< HEAD
 from .api.group_routes import group_routes
-=======
 from .api.friends_routes import friends_routes
->>>>>>> friends
 from .seeds import seed_commands
 from .config import Config
 

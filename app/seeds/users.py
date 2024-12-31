@@ -34,10 +34,43 @@ def seed_users():
         state='New York',
         address='2367 Apple St. Apt 4B',
         )
+    sarah = User(
+        username = 'MissSarah',
+        firstName = 'Sarah',
+        lastName = 'Smiles',
+        email = 'sarah@aa.io',
+        password = 'password3',
+        city = 'New York',
+        state = 'New York',
+        address = '123 My St. Apt 1'
+    )
+    theo = User(
+        username = 'TioTheo',
+        firstName = 'Theo',
+        lastName = 'Smithe',
+        email = 'theo@aa.io',
+        password = 'password4',
+        city = 'Sandy',
+        state = 'Utah',
+        address = '12345 My St. Apt 1'
+    )
+    jerry = User(
+        username = 'JerJer',
+        firstName = 'Jerry',
+        lastName = 'Sands',
+        email = 'jerry@aa.io',
+        password = 'password5',
+        city = 'Sandy',
+        state = 'Oregon',
+        address = '1234 My St. Apt 1'
+    )
 
     db.session.add(cam)
     db.session.add(jen)
     db.session.add(sydney)
+    db.session.add(sarah)
+    db.session.add(theo)
+    db.session.add(jerry)
     db.session.commit()
 
 
