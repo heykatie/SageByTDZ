@@ -22,6 +22,7 @@ class User(db.Model, UserMixin):
     profile_pic = db.Column(db.String(255), nullable=True, default='assets/sprout.png')
     created_at = db.Column(db.DateTime, default=datetime.datetime.now())
     requests = db.relationship('Request', backref='sender', cascade='all, delete-orphan')
+    invites = db.relationship('Invites', backref='sender', cascade='all, delete-orphan')
     # badge_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod(Badge.id)), nullable=True)
     # badge = db.relationship('Badge', backref=db.backref('users', lazy=True))
     hashed_password = db.Column(db.String(255), nullable=False)

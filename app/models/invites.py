@@ -14,7 +14,7 @@ class Invites(db.Model):
     group_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('groups.id')), nullable=False)
     event_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('events.id')), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.datetime.now())
-    going = db.Column(db.Boolean, default=None)
+    going = db.Column(db.Boolean, default=False)
 
 
     def to_dict(self):
