@@ -45,11 +45,8 @@ app.register_blueprint(profile_routes, url_prefix='/api/profile')
 app.register_blueprint(rsvp_routes, url_prefix='/api/rsvps')
 app.register_blueprint(message_routes, url_prefix='/api/messages')
 app.register_blueprint(request_routes, url_prefix='/api/requests')
-<<<<<<< HEAD
 app.register_blueprint(group_routes, url_prefix='/api/groups')
-=======
 app.register_blueprint(friends_routes, url_prefix='/api/friends')
->>>>>>> friends
 db.init_app(app)
 Migrate(app, db)
 
