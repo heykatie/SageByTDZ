@@ -688,7 +688,7 @@ Creates Message for an Event and returns the newly created Message's information
 * **Require Authorization**: User must not be organizer of Event, must have RSVPd 'yes' to event
 * **Request**
   * **Method**: POST
-  * **Route path**: `/events/:eventId/messages`
+  * **Route path**: `/groups/:groupId/messages`
   * **Headers**:
     * `Content-Type: application/json`
   * **Body**:
@@ -745,7 +745,7 @@ Edits Message on Event page if user is creator.
 * **Require Authorization**: User must be creator of Message to make edits
 * **Request**
   * **Method**: PUT
-  * **Route path**: `/events/:eventId/messages/:messageId`
+  * **Route path**: `/groups/:groupId/messages/:messageId`
   * **Headers**:
     * `Content-Type: application/json`
   * **Body**:
@@ -812,7 +812,7 @@ Removes a Group Message
 * **Require Authorization**: Message must belong to the current user
 * **Request**
   * **Method**: DELETE
-  * **Route path**: `/events/:eventId/messages/:messageId`
+  * **Route path**: `/groups/:groupId/messages/:messageId`
   * **Headers**:
     * ```Content-Type: application/json```
   * **Body**:
