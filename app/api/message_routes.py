@@ -17,6 +17,7 @@ def edit_messages(messageId):
     editedMessage = data.get("message")
 
     message.message = editedMessage
+    message.updated_at = datetime.datetime.now().strftime("%H:%M:%S")
     db.session.commit()
     return message.to_dict()
 
@@ -26,7 +27,7 @@ def delete_message(messageId):
     message = Message.query.get(messageId)
     if not message or not message.user_id == current_user.get_id():
         return { 'errors': { 'message': 'No message found.' } }
-        
+
     db.session.delete(message)
     db.session.commit()
     return { 'message': 'Message successfully deleted.' }

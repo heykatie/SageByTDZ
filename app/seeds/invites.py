@@ -10,10 +10,19 @@ def seed_invites():
         user_id=3, friend_id=1, group_id=2, event_id=2, going= None )
     invite3 = Invites(
         user_id=1, friend_id=3, group_id=1, event_id=1, going= None )
+    invite4 = Invites(
+        user_id=6, friend_id=4, group_id=3, event_id=2, going= None )
+    invite5 = Invites(
+        user_id=5, friend_id=2, group_id=4, event_id=3, going= None )
+    invite6 = Invites(
+        user_id=5, friend_id=3, group_id=4, event_id=3, going= None )
 
     db.session.add(invite1)
     db.session.add(invite2)
     db.session.add(invite3)
+    db.session.add(invite4)
+    db.session.add(invite5)
+    db.session.add(invite6)
     db.session.commit()
 
 

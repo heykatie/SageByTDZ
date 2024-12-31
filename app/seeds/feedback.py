@@ -20,10 +20,28 @@ def seed_feedback():
         organizer_id=1,
         reaction=2,
         )
+    feedbackFour = Feedback(
+        user_id=4,
+        organizer_id=2,
+        reaction=2,
+        )
+    feedbackFive = Feedback(
+        user_id=2,
+        organizer_id=3,
+        reaction=3,
+        )
+    feedbackSix = Feedback(
+        user_id=5,
+        organizer_id=3,
+        reaction=1,
+        )
 
     db.session.add(feedbackOne)
     db.session.add(feedbackTwo)
     db.session.add(feedbackThree)
+    db.session.add(feedbackFour)
+    db.session.add(feedbackFive)
+    db.session.add(feedbackSix)
     db.session.commit()
 
 

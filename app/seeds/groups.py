@@ -9,16 +9,45 @@ def seed_groups():
     )
     group2 = Group(
         event_id=2,
-        owner_id=2
+        owner_id=4
     )
     group3 = Group(
         event_id=3,
+        owner_id=1
+    )
+    group4 = Group(
+        event_id=4,
+        owner_id=2
+    )
+    group5 = Group(
+        event_id=5,
         owner_id=3
     )
+    group6 = Group(
+        event_id=6,
+        owner_id=4
+    )
+    group7 = Group(
+        event_id=7,
+        owner_id=1
+    )
+    group8 = Group(
+        event_id=8,
+        owner_id=2
+    )
+    group9 = Group(
+        event_id=9,
+        owner_id=3
+    )
+    group10 = Group(
+        event_id=10,
+        owner_id=6
+    )
 
-    db.session.add(group1)
-    db.session.add(group2)
-    db.session.add(group3)
+    db.session.add_all([
+        group1, group2, group3, group4, group5,
+        group6, group7, group8, group9, group10
+    ])
     db.session.commit()
 
 
