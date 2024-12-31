@@ -27,8 +27,7 @@ class User(db.Model, UserMixin):
     # badge = db.relationship('Badge', backref=db.backref('users', lazy=True))
     hashed_password = db.Column(db.String(255), nullable=False)
 
-    owned_groups = db.relationship('Group', backref='owner')
-
+    owned_groups = db.relationship('Group', backref='owner', cascade='all, delete-orphan')
 
     @property
     def password(self):
