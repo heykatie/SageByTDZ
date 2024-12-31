@@ -6,7 +6,6 @@ import "./SignupForm.css";
 
 function SignupFormModal() {
   const dispatch = useDispatch();
-  const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -44,13 +43,6 @@ function SignupFormModal() {
       <h1>Sign Up</h1>
       {errors.server && <p>{errors.server}</p>}
       <form onSubmit={handleSubmit}>
-        <label>
-          First Name
-          <input
-          type="text"
-          value={firstName} 
-          />
-        </label>
         <label>
           Email
           <input
