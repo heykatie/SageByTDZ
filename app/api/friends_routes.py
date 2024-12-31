@@ -17,8 +17,8 @@ def get_all_friends():
     all_reqs = {'sent': [req.to_dict() for req in sent_reqs], 'recieved': [req.to_dict() for req in received_reqs]}
     if all_reqs:
         # change this to a loop!
-        friend_ids.append(all_reqs['sent'][0]['receiver_id'])
-        friend_ids.append(all_reqs['recieved'][0]['sender_id'])
+        [friend_ids.append(req['receiver_id']) for req in all_reqs['sent']]
+        [friend_ids.append(req['sender_id']) for req in all_reqs['recieved']]
         return {'friends': [User.query.get(friend_id).to_dict() for friend_id in friend_ids] }
     return {'errors': {'message': "No friends found"}}
 
@@ -29,17 +29,17 @@ def view_friend(friend_id):
     if all_friends:
         friend = [friend for friend in all_friends if friend['id'] == friend_id]
         if not friend:
-            return {'errors': {'message': "Friend not found"}} 
+            return {'errors': {'message': "Friend not found"}}
         return friend
     return {'errors': {'message': "Friend not found"}}
-    
+
 @friends_routes.route('/<int:friend_id>/events')
 @login_required
 def shared_events(friend_id):
     target_friend = view_friend(friend_id=friend_id)
     if type(target_friend) == list:
-        def friend_badges():
-            userId = friend_id
+        def get_badges(id):
+            userId = id
             currentDate = datetime.datetime.now().strftime("%Y-%m-%d")
             rsvps = RSVP.query.filter(RSVP.user_id == userId)
             if rsvps:
@@ -47,8 +47,11 @@ def shared_events(friend_id):
                 events = [Event.query.get(event_id) for event_id in rsvp_list]
                 past_events = [event for event in events if currentDate > event.event_date]
                 return [event.to_dict() for event in past_events]
-        if not friend_badges():
+        friend_badges = get_badges(friend_id)
+        user_badges = get_badges(current_user.id)
+        if not friend_badges:
             return {'errors': {'message': "No shared events found"}}
-        # what to return if there are shared events?
-        return badges()
+        # return{'user': user_badges, 'friend': friend_badges}
+        return [shared_badges for shared_badges in user_badges if shared_badges in friend_badges]
+
     return {'message': 'Friend not found'}

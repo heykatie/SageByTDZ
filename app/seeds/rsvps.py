@@ -25,12 +25,22 @@ def seed_rsvps():
         user_id=1,
         event_id=2,
         )
+    RSVPSix = RSVP(
+        user_id=2,
+        event_id=2,
+        )
+    RSVPSeven = RSVP(
+        user_id=3,
+        event_id=2,
+        )
 
     db.session.add(RSVPOne)
     db.session.add(RSVPTwo)
     db.session.add(RSVPThree)
     db.session.add(RSVPFour)
     db.session.add(RSVPFive)
+    db.session.add(RSVPSix)
+    db.session.add(RSVPSeven)
     db.session.commit()
 
 
