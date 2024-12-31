@@ -11,6 +11,7 @@ def seed_requests():
     request2 = Request(
         sender_id=2,
         receiver_id=3,
+        accepted=False
     )
     request3 = Request(
         sender_id=3,
