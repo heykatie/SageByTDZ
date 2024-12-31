@@ -52,9 +52,9 @@ All endpoints that require a current user to be logged in.
     - status: 200
     - Headers
       - Content-Type: application/json ## Messages
-      
+
       ### Create a Message
-      
+
       ###  *Sets to this when/if you are returning a JSON response using jsonify()
 
     - **Body**:
@@ -680,58 +680,6 @@ Return all the Messages associated with an Event
     }
     ```
 
-### View all current User Messages
-
-Return all the Messages sent and received by current User
-
-* **Require Authentication**: true
-* **Request**
-  * **Method**: GET
-  * **Route path**: `/profile/messages`
-  * **Body**: none
-
-* **Successful Response**:
-  * **Status Code**: 200
-  * **Headers**:
-    * ```Content-Type: application/json```
-  * **Body**:
-
-    ```json
-    {
-      "Messages": [
-        {
-          "id": 1,
-          "creatorId": 2,
-          "eventId": 1,
-          "message": "Message text"
-        },
-        {
-          "id": 2,
-          "creatorId": 4,
-          "eventId": 3,
-          "message": "Message text"
-        },
-        {
-          "id": 3,
-          "creatorId": 1,
-          "eventId": 4,
-          "message": "Message text"
-        }
-      ]
-    }
-    ```
-* **Error response**: Couldn't find any Messages for current user
-  * **Status Code**: 404
-  * **Headers**:
-    * ```Content-Type: application/json```
-  * **Body**:
-
-    ```json
-    {
-      "message": "No messages found"
-    }
-    ```
-
 ### Create a Group Message
 
 Creates Message for an Event and returns the newly created Message's information.
@@ -845,63 +793,6 @@ Edits Message on Event page if user is creator.
       "message": "Forbidden",
     }
     ```
-* **Error Response**: Message not found
-  * **Status Code**: 404
-  * **Headers**:
-    * `Content-Type: application/json`
-  * **Body**:
-    ```json
-    {
-      "message": "Message not found",
-    }
-    ```
-
-### Edit a Group Message on User Dashboard
-
-Edits Message on Event page if user is creator.
-
-* **Require Authentication**: true
-* **Require Authorization**: User must be creator of Message to make edits
-* **Request**
-  * **Method**: PUT
-  * **Route path**: `/profile/messages/:messageId`
-  * **Headers**:
-    * `Content-Type: application/json`
-  * **Body**:
-    ```json
-      {
-        "message": "What landmarks should I look for at the event meeting spot?"
-      },
-    ```
-
-* **Successful Response**
-  * **Status Code**: 201
-  * **Headers**:
-    * `Content-Type: application/json`
-  * **Body**:
-    ```json
-    {
-      "id": 3,
-      "eventId": 1,
-      "creatorId": 2,
-      "message": "What landmarks should I look for at the event meeting spot?"
-    }
-    ```
-
-* **Error Response**: **Validation errors**
-  * **Status Code**: 400
-  * **Headers**:
-    * `Content-Type: application/json`
-  * **Body**:
-    ```json
-    {
-      "message": "Bad Request",
-      "errors": {
-        "message": "Message cannot be blank"
-      }
-    }
-    ```
-
 * **Error Response**: Message not found
   * **Status Code**: 404
   * **Headers**:
@@ -1559,6 +1450,234 @@ Removes Feedback user has sent to an Organizer
     ```json
     {
       "message": "Request couldn't be found"
+    }
+    ```
+
+## **Groups API Documentation**
+
+---
+
+### **Get All Groups of the Current User**
+
+Returns a list of all the groups the current user is a part of.
+
+* **Require Authentication**: true
+* **Request**
+  * **Method**: GET
+  * **Route path**: `/groups`
+  * **Body**: none
+
+* **Successful Response**
+  * **Status Code**: 200
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "Groups": [
+        {
+          "id": 1,
+          "eventId": 6
+          "ownerId": 2
+        },
+        {
+          "id": 1,
+          "eventId": 6
+          "ownerId": 2
+        },
+      ]
+    }
+    ```
+
+* **Error Response: No groups found**
+  * **Status Code**: 404
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "message": "No groups could be found"
+    }
+    ```
+
+---
+
+### **Get Details of a Specific Group**
+
+Returns detailed information about a specific group, including the name, description, image, and member details.
+
+* **Require Authentication**: true
+* **Request**
+  * **Method**: GET
+  * **Route path**: `/groups/:groupId`
+  * **Body**: none
+
+* **Successful Response**
+  * **Status Code**: 200
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      {
+        "id": 1,
+        "eventId": 6
+        "ownerId": 2
+      }
+    }
+    ```
+
+* **Error Response: Group not found**
+  * **Status Code**: 404
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "message": "Group not found"
+    }
+    ```
+
+---
+
+### **Create a New Group**
+
+Creates a new group and returns the newly created group's information.
+
+* **Require Authentication**: true
+* **Request**
+  * **Method**: POST
+  * **Route path**: `/groups`
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+        {
+          "eventId": 6
+        },
+    ```
+
+* **Successful Response**
+  * **Status Code**: 201
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      {
+        "id": 1,
+        "eventId": 6
+        "ownerId": 2
+      }
+    }
+    ```
+
+* **Error Response: Validation errors**
+  * **Status Code**: 400
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "message": "Bad Request",
+      "errors": {
+        "name": "Event choice is required",
+        "description": "Event choice is required"
+      }
+    }
+    ```
+
+---
+
+### **Delete a Group**
+
+Deletes a group. Only the creator of the group is allowed to delete it.
+
+* **Require Authentication**: true
+* **Require Proper Authorization**: User must be the creator of the group
+* **Request**
+  * **Method**: DELETE
+  * **Route path**: `/groups/:groupId`
+  * **Body**: none
+
+* **Successful Response**
+  * **Status Code**: 200
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "message": "Successfully deleted group"
+    }
+    ```
+
+* **Error Response: Group not found**
+  * **Status Code**: 404
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "message": "Group not found"
+    }
+    ```
+
+---
+
+### **Get All Members of a Group**
+
+Returns a list of all members of a specific group.
+
+* **Require Authentication**: true
+* **Request**
+  * **Method**: GET
+  * **Route path**: `/groups/:groupId/members`
+  * **Body**: none
+
+* **Successful Response**
+  * **Status Code**: 200
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "Members": [
+         {
+            "id": 0,
+            "username": "'VolunteerLyfe'",
+            "email": "'green4lyfe@planet.com'",
+            "firstName": "'Susan'",
+            "lastName":"'Markcul'",
+            "birthday": "'November 16th, 1994'",
+            "city": "'somecity'",
+            "create_at": "timstamp",
+            "saved_filters":["Filter1", "Filter2"],
+            "badge_id": [1, 3, 22]
+         },
+        {
+            "id": 3,
+            "username": "'VolunteerLyfe1'",
+            "email": "'gre3en4lyfe@planet.com'",
+            "firstName": "'Suz'",
+            "lastName":"'Mark'",
+            "birthday": "'November 16th, 1993'",
+            "city": "'somewherecity'",
+            "create_at": "timestamp",
+            "saved_filters":["Filter1", "Filter2"],
+            "badge_id": [1, 3, 22]
+        }
+      ]
+    }
+    ```
+
+* **Error Response: Group not found**
+  * **Status Code**: 404
+  * **Headers**:
+    * `Content-Type: application/json`
+  * **Body**:
+    ```json
+    {
+      "message": "Group not found"
     }
     ```
 
