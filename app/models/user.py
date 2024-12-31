@@ -27,7 +27,7 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
 
     owned_groups = db.relationship('Group', backref='owner')
-
+    owned_groups = db.relationship('Group', back_populates='owner', cascade='all, delete-orphan')
 
     @property
     def password(self):
