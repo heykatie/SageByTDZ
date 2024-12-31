@@ -12,21 +12,10 @@ def user_invites():
     Query all the invites sent 
     """
     id = current_user.get_id()
-    invites = Invites.query.filter(Invites.user_id == id)
+    invites_sent = Invites.query.filter(Invites.user_id == id)
+    invites_received = Invites.query.filter(Invites.friend_id == id)
 
-    invites_group = []
-    for invite in invites:
-        invites_group.append({
-        'id': invite.id,
-        'user_id': invite.user_id,
-        'friend_id': invite.friend_id,
-        'group_id': invite.group_id,
-        'event_id': invite.event_id,
-        'created_at': invite.created_at,
-        'going': invite.going
-        })
-
-    return {'invites': [invite for invite in invites_group]}
+    return {'invites_sent': [invite.to_dict() for invite in invites_sent], 'invites_received': [invite.to_dict() for invite in invites_received]}
 
 
 @invite_route.route('/create', methods=['POST'])
@@ -46,7 +35,7 @@ def create_invite():
     return new_invite.to_dict()
 
 
-@invite_route.route('/update/<int:invite_id>', methods=['PUT'])
+@invite_route.route('/<int:invite_id>', methods=['PUT'])
 @login_required
 def update_invite(invite_id):
     """
@@ -59,13 +48,13 @@ def update_invite(invite_id):
     if not invite:
         return { 'message': 'Invite not found'}
 
-    if 'going' in data and invite.user_id == current_user.id:
+    if 'going' in data and invite.friend_id == current_user.id:
         invite.going = data['going'] # Updata the response to an invite you have received
 
-    if 'group_id' in data and invite.user_id == current_user.id:
-        invite.group_id = data['group_id']
+    # if 'group_id' in data and invite.user_id == current_user.id:
+    #     invite.group_id = data['group_id']
 
-    db.sesstion.commit()
+    db.session.commit()
 
     return invite.to_dict()
 

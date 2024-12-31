@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify, request
+from app.models.db import db
 from app.models import User, Event, Feedback, RSVP
 from app.forms import ProfileForm
 from flask_login import current_user, login_required
@@ -51,8 +52,8 @@ def edit_profile():
 
 @profile_routes.route('/delete', methods=['DELETE'])
 @login_required
-def delete_profile(id):
-    user = User.query.get(id)
+def delete_profile():
+    user = User.query.get(current_user.get_id())
     if user:
         db.session.delete(user)
         db.session.commit()
