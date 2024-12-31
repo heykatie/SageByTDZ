@@ -638,7 +638,7 @@ Return all the Messages associated with an Event
 * **Require Authentication**: true
 * **Request**
   * **Method**: GET
-  * **Route path**: `/events/:eventId/messages`
+  * **Route path**: `/groups/:groupId/messages`
   * **Body**: none
 
 * **Successful Response**:
