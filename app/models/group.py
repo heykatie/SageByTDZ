@@ -16,8 +16,8 @@ class Group(db.Model):
 
     # Relationships
     # event = db.relationship('Event', backref='groups', lazy=True)
-    event = db.relationship('Event', back_populates='groups')
-    owner = db.relationship('User', back_populates='owned_groups')
+    # event = db.relationship('Event', back_populates='groups')
+    # owner = db.relationship('User', back_populates='owned_groups')
 
     def to_dict(self):
         return {
