@@ -11,11 +11,47 @@ def user_invites():
     """
     Query all the invites sent
     """
-    id = current_user.get_id()
-    invites_sent = Invites.query.filter(Invites.user_id == id)
-    invites_received = Invites.query.filter(Invites.friend_id == id)
 
-    return {'invites_sent': [invite.to_dict() for invite in invites_sent], 'invites_received': [invite.to_dict() for invite in invites_received]}
+    invites = Invites.query.all()
+
+    invites_list = []
+    for invite in invites:
+        invites_list.append({
+        'id': invite.id,
+        'user_id': invite.user_id,
+        'friend_id': invite.friend_id,
+        'group_id': invite.group_id,
+        'event_id': invite.event_id,
+        'created_at': invite.created_at,
+        'going': invite.going
+        })
+
+    return invites_list
+
+
+@invite_route.route('/<int:user_id>')
+@login_required
+def group_invites():
+    """
+    Query all the invites of a user
+    """
+
+    user_id = current_user.id
+    invites = Invites.query.filter_by(user_id=user_id).all()
+
+    invites_list = []
+    for invite in invites:
+        invites_list.append({
+        'id': invite.id,
+        'user_id': invite.user_id,
+        'friend_id': invite.friend_id,
+        'group_id': invite.group_id,
+        'event_id': invite.event_id,
+        'created_at': invite.created_at,
+        'going': invite.going
+        })
+
+    return invites_list.to_dict()
 
 
 @invite_route.route('/create', methods=['POST'])
