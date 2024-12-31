@@ -26,7 +26,7 @@ def user_invites():
         'going': invite.going
         })
 
-    return invites_list.to_dict()
+    return invites_list
 
 
 @invite_route.route('/<int:user_id>')

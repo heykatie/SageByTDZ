@@ -13,6 +13,7 @@ from .api.profile_routes import profile_routes
 from .api.rsvp_routes import rsvp_routes
 from .api.message_routes import message_routes
 from .api.request_routes import request_routes
+from .api.friends_routes import friends_routes
 from .seeds import seed_commands
 from .config import Config
 
@@ -40,6 +41,7 @@ app.register_blueprint(profile_routes, url_prefix='/api/profile')
 app.register_blueprint(rsvp_routes, url_prefix='/api/rsvps')
 app.register_blueprint(message_routes, url_prefix='/api/messages')
 app.register_blueprint(request_routes, url_prefix='/api/requests')
+app.register_blueprint(friends_routes, url_prefix='/api/friends')
 db.init_app(app)
 Migrate(app, db)
 
