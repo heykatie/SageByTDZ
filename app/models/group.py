@@ -10,8 +10,8 @@ class Group(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    event_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('events.id', ondelete='CASCADE')), nullable=False)
-    owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id', ondelete='CASCADE')), nullable=False)
+    event_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('events.id')), nullable=False)
+    owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     messages = db.relationship('Message', backref='author', cascade='all, delete-orphan')
 
     # Relationships
