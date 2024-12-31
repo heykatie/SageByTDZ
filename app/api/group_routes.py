@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
-from app.models import User, Group, RSVP, Invites
+from app.models import User, Group, RSVP, Invites, Message
 from app.models.db import db
 
 group_routes = Blueprint('groups', __name__)
@@ -81,3 +81,47 @@ def get_group_members(groupId):
     ).all()
 
     return {"Members": [member.to_dict() for member in members]}
+
+@group_routes.route('/<int:groupId>/messages')
+@login_required
+def get_all_messages(groupId):
+    messages = Message.query.filter(Message.group_id == groupId)
+    if messages:
+        return {'messages': [message.to_dict() for message in messages]}
+    return { 'error': { 'message': 'No messages found' } }
+
+@group_routes.route('/<int:groupId>/messages', methods=['POST'])
+@login_required
+def create_message(groupId):
+    data = request.get_json()
+    message = data.get('message')
+
+    newMessage = Message(
+        group_id=groupId,
+        user_id=current_user.get_id(),
+        message=message
+    )
+
+    db.session.add(newMessage)
+    db.session.commit()
+    return newMessage.to_dict(), 201
+
+# @group_routes.route('/<int:groupId>/messages/<int:messageId>')
+# @login_required
+# def edit_messages(groupId, messageId):
+    # message = Message.query.get(messageId)
+
+    # allMessages = get_all_messages(groupId)['messages']
+    # if not allMessages:
+    #     return { 'errors': { 'message': 'No messages found.' } }
+    # message = [message for message in allMessages if message['id'] == messageId]
+    # if not message:
+    #     return { 'errors': {'message': 'No message found.' } }
+    # data = request.get_json()
+    # editedMessage = data.get("message")
+    # orginalMessage = Message.query.get(messageId)
+    # return message.to_dict()
+
+# @group_routes.route('/<int:id>', methods=['DELETE'])
+# @login_required
+# def delete_message():
