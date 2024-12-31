@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
 from flask_login import current_user, login_required
-from app.models import User, Group, RSVP
+from app.models import User, Group, RSVP, Invites
 
 group_routes = Blueprint('groups', __name__)
 
@@ -8,9 +8,10 @@ group_routes = Blueprint('groups', __name__)
 @login_required
 def get_user_groups():
     """
-    Get all groups owned by current user.
+    Get all groups the current user is in.
     """
-    groups = Group.query.filter(Group.owner_id == current_user.id).all()
+
+    groups = Invites.query.filter(Invites.going and Invites.user_id == current_user.id).all()
     if not groups:
         return {"message": "No groups could be found"}, 404
     return {"Groups": [group.to_dict() for group in groups]}

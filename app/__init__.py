@@ -105,4 +105,4 @@ def not_found(e):
     return app.send_static_file('index.html')
 
 
- #, Invites, Category, Event, RSVP, Organizer
+#, Invites, Category, Event, RSVP, Organizer
