@@ -1184,6 +1184,174 @@ Removes a sent friend request
     }
     ```
 
+## Requests
+
+### Create a Request
+
+Send a request to another user.
+
+* **Require Authentication**: true
+* **Request**
+  * **Method**: POST
+  * **Route path**: `/api/requests`
+  * **Body**:
+
+    ```json
+    {
+      "sender_id": 1,
+      "receiver_id": 2
+    }
+    ```
+
+* **Successful Response**:
+  * **Status Code**: 201
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
+
+    ```json
+    {
+      "id": 10,
+      "sender_id": 1,
+      "receiver_id": 2,
+      "created_at": "2024-12-30T18:00:00Z",
+      "accepted": null
+    }
+    ```
+
+* **Error Response**: Invalid or missing data
+  * **Status Code**: 400
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
+
+    ```json
+    {
+      "message": "Invalid request data"
+    }
+    ```
+
+---
+
+### View Requests
+
+Retrieve all requests for the authenticated user.
+
+* **Require Authentication**: true
+* **Request**
+  * **Method**: GET
+  * **Route path**: `/api/requests`
+  * **Query Parameters**:
+    * `type` (optional): `sent` or `received`
+  * **Body**: none
+
+* **Successful Response**:
+  * **Status Code**: 200
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
+
+    ```json
+    {
+      "Requests": [
+        {
+          "id": 10,
+          "sender_id": 1,
+          "receiver_id": 2,
+          "created_at": "2024-12-30T18:00:00Z",
+          "accepted": null
+        }
+      ]
+    }
+    ```
+
+* **Error Response**: Invalid query parameters
+  * **Status Code**: 400
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
+
+    ```json
+    {
+      "message": "Invalid query parameters"
+    }
+    ```
+
+---
+
+### Respond to a Request
+
+Accept or reject a request.
+
+* **Require Authentication**: true
+* **Request**
+  * **Method**: PUT
+  * **Route path**: `/api/requests/:id`
+  * **Body**:
+
+    ```json
+    {
+      "accepted": true
+    }
+    ```
+
+* **Successful Response**:
+  * **Status Code**: 200
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
+
+    ```json
+    {
+      "id": 10,
+      "sender_id": 1,
+      "receiver_id": 2,
+      "created_at": "2024-12-30T18:00:00Z",
+      "accepted": true
+    }
+    ```
+
+* **Error Response**: Request not found
+  * **Status Code**: 404
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
+
+    ```json
+    {
+      "message": "Request not found"
+    }
+    ```
+
+---
+
+### Delete a Request
+
+Cancel a sent request or remove a received request.
+
+* **Require Authentication**: true
+* **Request**
+  * **Method**: DELETE
+  * **Route path**: `/api/requests/:id`
+  * **Body**: none
+
+* **Successful Response**:
+  * **Status Code**: 204
+  * **Headers**: none
+  * **Body**: none
+
+* **Error Response**: Request not found
+  * **Status Code**: 404
+  * **Headers**:
+    * ```Content-Type: application/json```
+  * **Body**:
+
+    ```json
+    {
+      "message": "Request not found"
+    }
+    ```
+
 ## Feedback
 
 ### View Feedback
