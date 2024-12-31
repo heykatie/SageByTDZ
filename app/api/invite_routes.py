@@ -9,7 +9,7 @@ invite_route = Blueprint('invites', __name__ )
 @login_required
 def user_invites():
     """
-    Query all the invites sent 
+    Query all the invites sent
     """
     id = current_user.get_id()
     invites_sent = Invites.query.filter(Invites.user_id == id)
@@ -39,8 +39,8 @@ def create_invite():
 @login_required
 def update_invite(invite_id):
     """
-    Update an invite either the reponse of the invite you recieved changes going
-    or and invite you have sent for a group 
+    Update an invite either the response of the invite you received changes going
+    or and invite you have sent for a group
     """
     data = request.json
     invite = Invites.query.get(invite_id)
@@ -69,10 +69,10 @@ def delete_invite(invite_id):
 
     if not invite:
         return { 'message': 'Invite not found'}
-    
+
     if invite.user_id != current_user.id:
         return { 'message': 'Permission denied'}
-    
+
     db.session.delete(invite)
     db.session.commit()
 
