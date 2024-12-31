@@ -1,6 +1,7 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
 from app.models import User, Group, RSVP, Invites
+from app.models.db import db
 
 group_routes = Blueprint('groups', __name__)
 
