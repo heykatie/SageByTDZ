@@ -49,7 +49,7 @@ def update_invite(invite_id):
         return { 'message': 'Invite not found'}
 
     if 'going' in data and invite.friend_id == current_user.id:
-        invite.going = data['going'] # Updata the response to an invite you have received
+        invite.going = data['going'] # Update the response to an invite you have received
 
     # if 'group_id' in data and invite.user_id == current_user.id:
     #     invite.group_id = data['group_id']
