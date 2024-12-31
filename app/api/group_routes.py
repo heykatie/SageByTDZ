@@ -8,7 +8,7 @@ group_routes = Blueprint('groups', __name__)
 @login_required
 def get_user_groups():
     """
-    Get all groups for the current user.
+    Get all groups owned by current user.
     """
     groups = Group.query.filter(Group.owner_id == current_user.id).all()
     if not groups:

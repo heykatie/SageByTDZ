@@ -8,6 +8,8 @@ from sqlalchemy import pool
 
 from alembic import context
 
+from app.models import db as target_metadata
+
 import os
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
