@@ -212,7 +212,7 @@ def seed_events():
 # it will reset the primary keys for you as well.
 def undo_events():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.events RESTART IDENTITY CASCADE;")
+        db.session.execute(text("TRUNCATE table {SCHEMA}.events RESTART IDENTITY CASCADE;"))
     else:
         db.session.execute(text("DELETE FROM events"))
 
