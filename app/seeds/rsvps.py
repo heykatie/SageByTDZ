@@ -52,7 +52,7 @@ def seed_rsvps():
 # it will reset the primary keys for you as well.
 def undo_rsvps():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.rsvps RESTART IDENTITY CASCADE;")
+        db.session.execute(text("TRUNCATE table {SCHEMA}.rsvps RESTART IDENTITY CASCADE;"))
     else:
         db.session.execute(text("DELETE FROM rsvps"))
 

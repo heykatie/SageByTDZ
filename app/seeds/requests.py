@@ -32,7 +32,7 @@ def seed_requests():
 # to remove all data, which also resets primary keys.
 def undo_requests():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.requests RESTART IDENTITY CASCADE;")
+        db.session.execute(text("TRUNCATE table {SCHEMA}.requests RESTART IDENTITY CASCADE;"))
     else:
         db.session.execute(text("DELETE FROM requests"))
 
