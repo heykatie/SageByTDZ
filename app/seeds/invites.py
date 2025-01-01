@@ -34,7 +34,7 @@ def seed_invites():
 # it will reset the primary keys for you as well.
 def undo_invites():
     if environment == "production":
-        db.session.execute(text("TRUNCATE table {SCHEMA}.invites RESTART IDENTITY CASCADE;"))
+        db.session.execute(f"TRUNCATE table {SCHEMA}.invites RESTART IDENTITY CASCADE;")
     else:
         db.session.execute(text("DELETE FROM invites"))
 

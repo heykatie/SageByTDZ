@@ -171,7 +171,7 @@ def seed_messages():
 # to remove all data, which also resets primary keys.
 def undo_messages():
     if environment == "production":
-        db.session.execute(text("TRUNCATE table {SCHEMA}.messages RESTART IDENTITY CASCADE;"))
+        db.session.execute(f"TRUNCATE table {SCHEMA}.messages RESTART IDENTITY CASCADE;")
     else:
         db.session.execute(text("DELETE FROM messages"))
 
