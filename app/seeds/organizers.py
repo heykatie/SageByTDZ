@@ -44,7 +44,7 @@ def seed_organizers():
 # it will reset the primary keys for you as well.
 def undo_organizers():
     if environment == "production":
-        db.session.execute(text("TRUNCATE table {SCHEMA}.organizers RESTART IDENTITY CASCADE;"))
+        db.session.execute(f"TRUNCATE table {SCHEMA}.organizers RESTART IDENTITY CASCADE;")
     else:
         db.session.execute(text("DELETE FROM organizers"))
 
