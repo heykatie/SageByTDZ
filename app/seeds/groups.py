@@ -58,7 +58,7 @@ def seed_groups():
 # to remove all data, which also resets primary keys.
 def undo_groups():
     if environment == "production":
-        db.session.execute(text("TRUNCATE table {SCHEMA}.groups RESTART IDENTITY CASCADE;"))
+        db.session.execute(f"TRUNCATE table {SCHEMA}.groups RESTART IDENTITY CASCADE;")
     else:
         db.session.execute(text("DELETE FROM groups"))
 

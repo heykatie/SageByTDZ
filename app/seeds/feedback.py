@@ -53,7 +53,7 @@ def seed_feedback():
 # it will reset the primary keys for you as well.
 def undo_feedback():
     if environment == "production":
-        db.session.execute(text("TRUNCATE table {SCHEMA}.feedback RESTART IDENTITY CASCADE;"))
+        db.session.execute(f"TRUNCATE table {SCHEMA}.feedback RESTART IDENTITY CASCADE;")
     else:
         db.session.execute(text("DELETE FROM feedback"))
 
