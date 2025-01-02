@@ -1,32 +1,16 @@
-<<<<<<<< HEAD:migrations/versions/0be9da75eeb4_.py
 """empty message
 
 Revision ID: 0be9da75eeb4
-Revises: 
+Revises:
 Create Date: 2025-01-02 09:28:26.828423
-========
-"""fresh migrate
-
-Revision ID: d113d2db59ca
-Revises: 
-Create Date: 2024-12-31 14:00:58.726642
->>>>>>>> 1df0a7d (delete old migrations & reinitialized db with fresh migration - Files: migrations/README migrations/alembic.ini migrations/env.py migrations/versions/20201120_150602_create_users_table.py migrations/versions/20241219_164519_create_group_table.py migrations/versions/20241220_104742_create_badges_categories_events_.py migrations/versions/20241229_153324_remove_categories_badges_add_feedback.py migrations/versions/20241229_175259_create_rsvp.py migrations/versions/20241229_175944_.py migrations/versions/20241230_105039_.py migrations/versions/d113d2db59ca_fresh_migrate.py):migrations/versions/d113d2db59ca_fresh_migrate.py
 
 """
 from alembic import op
 import sqlalchemy as sa
 
-import os
-environment = os.getenv("FLASK_ENV")
-SCHEMA = os.environ.get("SCHEMA")
-
 
 # revision identifiers, used by Alembic.
-<<<<<<<< HEAD:migrations/versions/0be9da75eeb4_.py
 revision = '0be9da75eeb4'
-========
-revision = 'd113d2db59ca'
->>>>>>>> 1df0a7d (delete old migrations & reinitialized db with fresh migration - Files: migrations/README migrations/alembic.ini migrations/env.py migrations/versions/20201120_150602_create_users_table.py migrations/versions/20241219_164519_create_group_table.py migrations/versions/20241220_104742_create_badges_categories_events_.py migrations/versions/20241229_153324_remove_categories_badges_add_feedback.py migrations/versions/20241229_175259_create_rsvp.py migrations/versions/20241229_175944_.py migrations/versions/20241230_105039_.py migrations/versions/d113d2db59ca_fresh_migrate.py):migrations/versions/d113d2db59ca_fresh_migrate.py
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -45,10 +29,6 @@ def upgrade():
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('name')
     )
-
-    if environment == "production":
-        op.execute(f"ALTER TABLE organizers SET SCHEMA {SCHEMA};")
-
     op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('username', sa.String(length=40), nullable=False),
@@ -65,10 +45,6 @@ def upgrade():
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
     )
-
-    if environment == "production":
-        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
-
     op.create_table('events',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=40), nullable=False),
@@ -89,10 +65,6 @@ def upgrade():
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('title')
     )
-
-    if environment == "production":
-        op.execute(f"ALTER TABLE events SET SCHEMA {SCHEMA};")
-
     op.create_table('feedback',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
@@ -102,13 +74,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-<<<<<<<< HEAD:migrations/versions/0be9da75eeb4_.py
-
-    if environment == "production":
-        op.execute(f"ALTER TABLE feedback SET SCHEMA {SCHEMA};")
-
-========
->>>>>>>> 1df0a7d (delete old migrations & reinitialized db with fresh migration - Files: migrations/README migrations/alembic.ini migrations/env.py migrations/versions/20201120_150602_create_users_table.py migrations/versions/20241219_164519_create_group_table.py migrations/versions/20241220_104742_create_badges_categories_events_.py migrations/versions/20241229_153324_remove_categories_badges_add_feedback.py migrations/versions/20241229_175259_create_rsvp.py migrations/versions/20241229_175944_.py migrations/versions/20241230_105039_.py migrations/versions/d113d2db59ca_fresh_migrate.py):migrations/versions/d113d2db59ca_fresh_migrate.py
     op.create_table('requests',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('sender_id', sa.Integer(), nullable=False),
@@ -118,10 +83,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['sender_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-
-    if environment == "production":
-        op.execute(f"ALTER TABLE requests SET SCHEMA {SCHEMA};")
-
     op.create_table('groups',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('event_id', sa.Integer(), nullable=False),
@@ -130,14 +91,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-<<<<<<<< HEAD:migrations/versions/0be9da75eeb4_.py
-
-    if environment == "production":
-        op.execute(f"ALTER TABLE groups SET SCHEMA {SCHEMA};")
-
-
-========
->>>>>>>> 1df0a7d (delete old migrations & reinitialized db with fresh migration - Files: migrations/README migrations/alembic.ini migrations/env.py migrations/versions/20201120_150602_create_users_table.py migrations/versions/20241219_164519_create_group_table.py migrations/versions/20241220_104742_create_badges_categories_events_.py migrations/versions/20241229_153324_remove_categories_badges_add_feedback.py migrations/versions/20241229_175259_create_rsvp.py migrations/versions/20241229_175944_.py migrations/versions/20241230_105039_.py migrations/versions/d113d2db59ca_fresh_migrate.py):migrations/versions/d113d2db59ca_fresh_migrate.py
     op.create_table('rsvps',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
@@ -146,14 +99,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-<<<<<<<< HEAD:migrations/versions/0be9da75eeb4_.py
-
-    if environment == "production":
-        op.execute(f"ALTER TABLE rsvps SET SCHEMA {SCHEMA};")
-
-
-========
->>>>>>>> 1df0a7d (delete old migrations & reinitialized db with fresh migration - Files: migrations/README migrations/alembic.ini migrations/env.py migrations/versions/20201120_150602_create_users_table.py migrations/versions/20241219_164519_create_group_table.py migrations/versions/20241220_104742_create_badges_categories_events_.py migrations/versions/20241229_153324_remove_categories_badges_add_feedback.py migrations/versions/20241229_175259_create_rsvp.py migrations/versions/20241229_175944_.py migrations/versions/20241230_105039_.py migrations/versions/d113d2db59ca_fresh_migrate.py):migrations/versions/d113d2db59ca_fresh_migrate.py
     op.create_table('invites',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
@@ -167,10 +112,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-
-    if environment == "production":
-        op.execute(f"ALTER TABLE invites SET SCHEMA {SCHEMA};")
-
     op.create_table('messages',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
@@ -182,12 +123,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-<<<<<<<< HEAD:migrations/versions/0be9da75eeb4_.py
-
-    if environment == "production":
-        op.execute(f"ALTER TABLE messages SET SCHEMA {SCHEMA};")
-========
->>>>>>>> 1df0a7d (delete old migrations & reinitialized db with fresh migration - Files: migrations/README migrations/alembic.ini migrations/env.py migrations/versions/20201120_150602_create_users_table.py migrations/versions/20241219_164519_create_group_table.py migrations/versions/20241220_104742_create_badges_categories_events_.py migrations/versions/20241229_153324_remove_categories_badges_add_feedback.py migrations/versions/20241229_175259_create_rsvp.py migrations/versions/20241229_175944_.py migrations/versions/20241230_105039_.py migrations/versions/d113d2db59ca_fresh_migrate.py):migrations/versions/d113d2db59ca_fresh_migrate.py
     # ### end Alembic commands ###
 
 
