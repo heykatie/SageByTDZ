@@ -10,8 +10,8 @@ class RSVP(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod(User.id)), nullable=False)
-    event_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod(Event.id)), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+    event_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('events.id')), nullable=False)
     # going = db.Column(db.Boolean, default=False)
 
     def to_dict(self):
