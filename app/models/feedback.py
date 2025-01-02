@@ -11,7 +11,7 @@ class Feedback(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod(User.id)), nullable=False)
-    organizer_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod(Organizer.id)), nullable=False)
+    organizer_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('organizers.id')), nullable=False)
     reaction = db.Column(db.Integer, nullable=False)
 
     def to_dict(self):
