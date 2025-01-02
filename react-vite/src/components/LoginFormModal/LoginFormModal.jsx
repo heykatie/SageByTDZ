@@ -24,6 +24,7 @@ function LoginFormModal() {
     if (serverResponse) {
       setErrors(serverResponse);
     } else {
+      console.log(email)
       closeModal();
     }
   };

@@ -7,4 +7,4 @@ export const getEvents = createSelector(
 )
 
 //token verification
-import { csrfFetch } from './csrf'
+// import { csrfFetch } from './csrf'

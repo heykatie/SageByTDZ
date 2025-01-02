@@ -1,3 +1,3 @@
-import EditProfileModal from './EditProfileModal';
+// import EditProfileModal from './EditProfileModal';
 
-export default EditProfileModal;
+// export default EditProfileModal;

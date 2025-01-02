@@ -31,22 +31,22 @@ function SignupFormModal() {
 
     const serverResponse = await dispatch(
       thunkSignup({
-        firstName,
-        lastName,
-        email,
-        username,
-        city,
-        state,
-        address,
-        password,
-        profilePic
+        first_name: firstName,
+        last_name: lastName,
+        email: email,
+        username: username,
+        city: city,
+        state: state,
+        address: address,
+        password: password,
+        profile_pic: profilePic
       })
     );
 
     if (serverResponse) {
       setErrors(serverResponse);
     } else {
-      return serverResponse.then(closeModal)
+      closeModal()
     }
   };
 
