@@ -6,8 +6,8 @@ from sqlalchemy.sql import text
 def seed_users():
     cam = User(
         username='KingCam',
-        firstName='Cam',
-        lastName='Williamson',
+        first_name='Cam',
+        last_name='Williamson',
         email='cam@aa.io',
         password='password',
         city='Houston',
@@ -16,8 +16,8 @@ def seed_users():
         )
     jen = User(
         username='JenniBear',
-        firstName='Jen',
-        lastName='Jenkins',
+        first_name='Jen',
+        last_name='Jenkins',
         email='jen@aa.io',
         password='password1',
         city='Salt Lake City',
@@ -26,8 +26,8 @@ def seed_users():
         )
     sydney = User(
         username='SydKid',
-        firstName='Sydney',
-        lastName='Sydneyson',
+        first_name='Sydney',
+        last_name='Sydneyson',
         email='sydney@aa.io',
         password='password2',
         city='New York',
@@ -36,8 +36,8 @@ def seed_users():
         )
     sarah = User(
         username = 'MissSarah',
-        firstName = 'Sarah',
-        lastName = 'Smiles',
+        first_name = 'Sarah',
+        last_name = 'Smiles',
         email = 'sarah@aa.io',
         password = 'password3',
         city = 'New York',
@@ -46,8 +46,8 @@ def seed_users():
     )
     theo = User(
         username = 'TioTheo',
-        firstName = 'Theo',
-        lastName = 'Smithe',
+        first_name = 'Theo',
+        last_name = 'Smithe',
         email = 'theo@aa.io',
         password = 'password4',
         city = 'Sandy',
@@ -56,8 +56,8 @@ def seed_users():
     )
     jerry = User(
         username = 'JerJer',
-        firstName = 'Jerry',
-        lastName = 'Sands',
+        first_name = 'Jerry',
+        last_name = 'Sands',
         email = 'jerry@aa.io',
         password = 'password5',
         city = 'Sandy',
