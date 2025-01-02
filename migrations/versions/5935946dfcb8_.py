@@ -7,7 +7,9 @@ Create Date: 2024-12-31 21:38:16.951175
 """
 from alembic import op
 import sqlalchemy as sa
-
+import os
+environment = os.getenv("FLASK_ENV")
+SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
 revision = 'acb76dba6ff3'
@@ -30,6 +32,8 @@ def upgrade():
     sa.UniqueConstraint('name'),
     schema='sage_bae'
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE organizers SET SCHEMA {SCHEMA};")
     op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('username', sa.String(length=40), nullable=False),
@@ -47,6 +51,8 @@ def upgrade():
     sa.UniqueConstraint('username'),
     schema='sage_bae'
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
     op.create_table('events',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=40), nullable=False),
@@ -68,6 +74,8 @@ def upgrade():
     sa.UniqueConstraint('title'),
     schema='sage_bae'
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE events SET SCHEMA {SCHEMA};")
     op.create_table('feedback',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
@@ -78,6 +86,8 @@ def upgrade():
     sa.PrimaryKeyConstraint('id'),
     schema='sage_bae'
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE feedback SET SCHEMA {SCHEMA};")
     op.create_table('requests',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('sender_id', sa.Integer(), nullable=False),
@@ -88,6 +98,8 @@ def upgrade():
     sa.PrimaryKeyConstraint('id'),
     schema='sage_bae'
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE requests SET SCHEMA {SCHEMA};")
     op.create_table('groups',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('event_id', sa.Integer(), nullable=False),
@@ -97,6 +109,8 @@ def upgrade():
     sa.PrimaryKeyConstraint('id'),
     schema='sage_bae'
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE groups SET SCHEMA {SCHEMA};")
     op.create_table('rsvps',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
@@ -106,6 +120,8 @@ def upgrade():
     sa.PrimaryKeyConstraint('id'),
     schema='sage_bae'
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE rsvps SET SCHEMA {SCHEMA};")
     op.create_table('invites',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
@@ -120,6 +136,8 @@ def upgrade():
     sa.PrimaryKeyConstraint('id'),
     schema='sage_bae'
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE invites SET SCHEMA {SCHEMA};")
     op.create_table('messages',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
@@ -132,6 +150,8 @@ def upgrade():
     sa.PrimaryKeyConstraint('id'),
     schema='sage_bae'
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE messages SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
 
 
