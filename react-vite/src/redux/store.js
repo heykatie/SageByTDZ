@@ -6,11 +6,19 @@ import {
 } from "redux";
 import thunk from "redux-thunk";
 import sessionReducer from "./session";
+<<<<<<< Updated upstream
 import eventsReducer from "./event";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   events: eventsReducer
+=======
+import userReducer from './user';
+
+const rootReducer = combineReducers({
+  session: sessionReducer,
+  user: userReducer,
+>>>>>>> Stashed changes
 });
 
 let enhancer;
