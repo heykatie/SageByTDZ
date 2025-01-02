@@ -5,6 +5,7 @@ import SignupFormPage from '../components/SignupFormPage';
 // import EventDetails from '../components/EventDetails';
 // import EditProfileModal from '../components/EditProfileModal';
 // import UpcominngEvents from '../components/UpcomingEvents';
+import Friends from '../components/Friends';
 import Layout from './Layout';
 
 export const router = createBrowserRouter([
@@ -39,6 +40,10 @@ export const router = createBrowserRouter([
         path: "profile/rsvps",
         // element: <UpcominngEvents />,
       },
+      {
+        path: "friends",
+        element: <Friends />
+      }
     ],
   },
 ]);
