@@ -1,10 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
 import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
-// import EventsIndex from '../components/EventsIndex';
-// import EventDetails from '../components/EventDetails';
-// import EditProfileModal from '../components/EditProfileModal';
-// import UpcominngEvents from '../components/UpcomingEvents';
+import ListEvents from '../components/ListEvents';
+import EventDetails from '../components/EventDetails';
+import EditProfileModal from '../components/EditProfileModal';
+import UpcominngEvents from '../components/UpcomingEvents';
 import Layout from './Layout';
 
 export const router = createBrowserRouter([
@@ -25,19 +25,23 @@ export const router = createBrowserRouter([
       },
       {
         path: "events",
-        // element: <EventDetails />,
+        element: <EventDetails />,
       },
       {
         path: "events/:eventId",
-        // element: <EventsIndex />,
+        element: <ListEvents />,
+      },
+      {
+        path: "events/:eventId",
+        element: <ListEvents />,
       },
       {
         path: "profile/edit",
-        // element: <EditProfileModal />,
+        element: <EditProfileModal />,
       },
       {
         path: "profile/rsvps",
-        // element: <UpcominngEvents />,
+        element: <UpcominngEvents />,
       },
     ],
   },
