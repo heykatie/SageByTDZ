@@ -1,18 +1,16 @@
 """empty message
 
-Revision ID: acb76dba6ff3
+Revision ID: 0be9da75eeb4
 Revises: 
-Create Date: 2024-12-31 21:38:16.951175
+Create Date: 2025-01-02 09:28:26.828423
 
 """
 from alembic import op
 import sqlalchemy as sa
-import os
-environment = os.getenv("FLASK_ENV")
-SCHEMA = os.environ.get("SCHEMA")
+
 
 # revision identifiers, used by Alembic.
-revision = 'acb76dba6ff3'
+revision = '0be9da75eeb4'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -29,11 +27,8 @@ def upgrade():
     sa.Column('phone_number', sa.String(length=255), nullable=False),
     sa.Column('email', sa.String(length=255), nullable=False),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('name'),
-    schema='sage_bae'
+    sa.UniqueConstraint('name')
     )
-    if environment == "production":
-        op.execute(f"ALTER TABLE organizers SET SCHEMA {SCHEMA};")
     op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('username', sa.String(length=40), nullable=False),
@@ -48,11 +43,8 @@ def upgrade():
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
-    sa.UniqueConstraint('username'),
-    schema='sage_bae'
+    sa.UniqueConstraint('username')
     )
-    if environment == "production":
-        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
     op.create_table('events',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=40), nullable=False),
@@ -71,11 +63,8 @@ def upgrade():
     sa.Column('preview', sa.String(length=255), nullable=False),
     sa.ForeignKeyConstraint(['organizer_id'], ['organizers.id'], ),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('title'),
-    schema='sage_bae'
+    sa.UniqueConstraint('title')
     )
-    if environment == "production":
-        op.execute(f"ALTER TABLE events SET SCHEMA {SCHEMA};")
     op.create_table('feedback',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
@@ -83,11 +72,8 @@ def upgrade():
     sa.Column('reaction', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['organizer_id'], ['organizers.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id'),
-    schema='sage_bae'
+    sa.PrimaryKeyConstraint('id')
     )
-    if environment == "production":
-        op.execute(f"ALTER TABLE feedback SET SCHEMA {SCHEMA};")
     op.create_table('requests',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('sender_id', sa.Integer(), nullable=False),
@@ -95,33 +81,24 @@ def upgrade():
     sa.Column('accepted', sa.Boolean(), nullable=True),
     sa.Column('created_at', sa.String(length=255), nullable=True),
     sa.ForeignKeyConstraint(['sender_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id'),
-    schema='sage_bae'
+    sa.PrimaryKeyConstraint('id')
     )
-    if environment == "production":
-        op.execute(f"ALTER TABLE requests SET SCHEMA {SCHEMA};")
     op.create_table('groups',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('event_id', sa.Integer(), nullable=False),
     sa.Column('owner_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['event_id'], ['events.id'], ),
     sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id'),
-    schema='sage_bae'
+    sa.PrimaryKeyConstraint('id')
     )
-    if environment == "production":
-        op.execute(f"ALTER TABLE groups SET SCHEMA {SCHEMA};")
     op.create_table('rsvps',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('event_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['event_id'], ['events.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id'),
-    schema='sage_bae'
+    sa.PrimaryKeyConstraint('id')
     )
-    if environment == "production":
-        op.execute(f"ALTER TABLE rsvps SET SCHEMA {SCHEMA};")
     op.create_table('invites',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
@@ -133,11 +110,8 @@ def upgrade():
     sa.ForeignKeyConstraint(['event_id'], ['events.id'], ),
     sa.ForeignKeyConstraint(['group_id'], ['groups.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id'),
-    schema='sage_bae'
+    sa.PrimaryKeyConstraint('id')
     )
-    if environment == "production":
-        op.execute(f"ALTER TABLE invites SET SCHEMA {SCHEMA};")
     op.create_table('messages',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
@@ -147,23 +121,20 @@ def upgrade():
     sa.Column('updated_at', sa.String(length=255), nullable=True),
     sa.ForeignKeyConstraint(['group_id'], ['groups.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id'),
-    schema='sage_bae'
+    sa.PrimaryKeyConstraint('id')
     )
-    if environment == "production":
-        op.execute(f"ALTER TABLE messages SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
 
 
 def downgrade():
     # ### commands auto generated by Alembic - please adjust! ###
-    op.drop_table('messages', schema='sage_bae')
-    op.drop_table('invites', schema='sage_bae')
-    op.drop_table('rsvps', schema='sage_bae')
-    op.drop_table('groups', schema='sage_bae')
-    op.drop_table('requests', schema='sage_bae')
-    op.drop_table('feedback', schema='sage_bae')
-    op.drop_table('events', schema='sage_bae')
-    op.drop_table('users', schema='sage_bae')
-    op.drop_table('organizers', schema='sage_bae')
+    op.drop_table('messages')
+    op.drop_table('invites')
+    op.drop_table('rsvps')
+    op.drop_table('groups')
+    op.drop_table('requests')
+    op.drop_table('feedback')
+    op.drop_table('events')
+    op.drop_table('users')
+    op.drop_table('organizers')
     # ### end Alembic commands ###
