@@ -51,10 +51,10 @@ function SignupFormModal() {
   };
 
   return (
-    <>
+    <div className="signup-modal">
       <h1>Sign Up</h1>
-      {errors.server && <p>{errors.server}</p>}
-      <form onSubmit={handleSubmit}>
+      {errors.server && <p className="error">{errors.server}</p>}
+      <form className="signup-form" onSubmit={handleSubmit}>
         <label>
           First Name
           <input
@@ -64,7 +64,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.firstName && <p>{errors.firstName}</p>}
+        {errors.firstName && <p className="error">{errors.firstName}</p>}
         <label>
           Last Name
           <input
@@ -74,7 +74,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.lastName && <p>{errors.lastName}</p>}
+        {errors.lastName && <p className="error">{errors.lastName}</p>}
         <label>
           Email
           <input
@@ -84,7 +84,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.email && <p>{errors.email}</p>}
+        {errors.email && <p className="error">{errors.email}</p>}
         <label>
           Username
           <input
@@ -94,7 +94,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.username && <p>{errors.username}</p>}
+        {errors.username && <p className="error">{errors.username}</p>}
         <label>
           City
           <input
@@ -104,7 +104,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.city && <p>{errors.city}</p>}
+        {errors.city && <p className="error">{errors.city}</p>}
         <label>
           State
           <input
@@ -114,7 +114,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.state && <p>{errors.state}</p>}
+        {errors.state && <p className="error">{errors.state}</p>}
         <label>
           Address
           <input
@@ -124,7 +124,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.address && <p>{errors.address}</p>}
+        {errors.address && <p className="error">{errors.address}</p>}
         <label>
           Password
           <input
@@ -134,7 +134,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.password && <p>{errors.password}</p>}
+        {errors.password && <p className="error">{errors.password}</p>}
         <label>
           Confirm Password
           <input
@@ -144,7 +144,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+        {errors.confirmPassword && <p className="error">{errors.confirmPassword}</p>}
         <label>
           Profile Picture
           <input
@@ -153,7 +153,7 @@ function SignupFormModal() {
             onChange={(e) => setProfilePic(e.target.value)}
           />
         </label>
-        {errors.profilePic && <p>{errors.profilePic}</p>}
+        {errors.profilePic && <p className="error">{errors.profilePic}</p>}
         <button 
         type="submit"
         aria-label="Sign Up"
@@ -162,7 +162,7 @@ function SignupFormModal() {
         >
           Sign Up</button>
       </form>
-    </>
+    </div>
   );
 }
 
