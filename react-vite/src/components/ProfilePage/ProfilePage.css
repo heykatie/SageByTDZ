@@ -1,0 +1,266 @@
+/* General Layout */
+.profile-page {
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* NavBar Section */
+.navbar {
+  margin-bottom: 20px;
+}
+
+/* User Info Section */
+.user-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.profile-picture {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile-picture img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
+
+.profile-picture button {
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.profile-picture button:hover {
+  background-color: #217dbb;
+}
+
+.dashboard-title {
+  flex: 1;
+  text-align: center;
+}
+
+.dashboard-title h2 {
+  font-size: 24px;
+  margin: 0 0 5px;
+}
+
+.dashboard-title p {
+  font-size: 16px;
+  color: #666;
+  margin: 5px 0;
+}
+
+.dashboard-title nav {
+  margin-top: 10px;
+}
+
+.dashboard-title button {
+  margin: 0 5px;
+  background-color: transparent;
+  border: 1px solid #ddd;
+  padding: 8px 16px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dashboard-title button.active {
+  background-color: #3498db;
+  color: #fff;
+}
+
+.dashboard-title button:hover {
+  background-color: #f0f0f0;
+}
+
+/* Badges Section */
+.badges,
+.events,
+.friends,
+.groups,
+.edit-profile {
+  margin-top: 20px;
+}
+
+.badge-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 20px;
+}
+
+.badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.badge img {
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.badge p {
+  font-size: 14px;
+  color: #333;
+}
+
+/* Events Section */
+.events ul {
+  list-style: none;
+  padding: 0;
+}
+
+.events li {
+  background-color: #f9f9f9;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.events li h4 {
+  font-size: 18px;
+  margin: 0 0 5px;
+}
+
+.events li p {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Friends Section */
+.friends ul {
+  list-style: none;
+  padding: 0;
+}
+
+.friends li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.friends li img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.friends li h4 {
+  font-size: 16px;
+  margin: 0;
+}
+
+.friends li p {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Groups Section */
+.groups ul {
+  list-style: none;
+  padding: 0;
+}
+
+.groups li {
+  background-color: #f9f9f9;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.groups li h4 {
+  font-size: 18px;
+  margin: 0 0 5px;
+}
+
+.groups li p {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Edit Profile Section */
+.edit-profile form {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.edit-profile form div {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-profile form label {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.edit-profile form input {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.edit-profile form button {
+  grid-column: span 2;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.edit-profile form button:hover {
+  background-color: #217dbb;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .user-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .dashboard-title {
+    text-align: left;
+    margin-top: 20px;
+  }
+
+  .edit-profile form {
+    grid-template-columns: 1fr;
+  }
+}

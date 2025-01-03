@@ -154,7 +154,7 @@ function SignupFormModal() {
           />
         </label>
         {errors.profilePic && <p className="error">{errors.profilePic}</p>}
-        <button 
+        <button
         type="submit"
         aria-label="Sign Up"
         disabled={email.length<1 || username.length<1 || firstName.length<1 || lastName.length<1 ||

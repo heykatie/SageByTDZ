@@ -26,7 +26,7 @@ export const receive = (event) => ({
 
 //thunk actions
 export const getAllEvents = () => async dispatch => {
-    const res = await csrfFetch('/api/events')
+    const res = await csrfFetch('/api/events/')
 
     if( res.status === 200 ){
 
@@ -60,6 +60,32 @@ export const singleEvent = (id) => async dispatch => {
         return errors;
     }
 };
+
+//move to rsvps reducer
+
+export const addOrgFeedback = (feedback) => async dispatch => {
+    const res = await fetch("/api/profile/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(feedback)
+      });
+
+    if ( res.status === 200 ) {
+        // console.log('I AM IN THUNK')
+        const info = await res.json();
+
+        // console.log('FEEDBACK HAS BEEN MADE  ----->', info)
+        dispatch(receive(info));
+        return info;
+    } else {
+        const errors = res.errors;
+
+        // console.log('IM THE PROBLEM HELLO')
+
+        return errors;
+    }
+};
+
 
 //reducer
 const eventsReducer = (state = {}, action) => {

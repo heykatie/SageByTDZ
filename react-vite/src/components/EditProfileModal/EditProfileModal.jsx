@@ -2,11 +2,11 @@
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { useState } from "react";
-import { thunkLogin } from "../../redux/session";
+import { thunkEditProfile, thunkLogin } from "../../redux/session";
 import './EditProfileModal.css'
 import { Link } from "react-router-dom";
 
-const EditProfileModal = ({ user }) => {
+const EditProfileModal = ({ user, newData }) => {
     const { closeModal } = useModal();
 
     const [password, setPassword] = useState("");
@@ -25,7 +25,13 @@ const EditProfileModal = ({ user }) => {
         }
 
         if (password === confirmPassword){
-            return dispatch(thunkLogin(credentials))
+            const serverResponse = await dispatch(
+                thunkLogin(credentials)
+              );
+
+            if (serverResponse) setErrors(serverResponse);
+
+            return dispatch(thunkEditProfile(newData))
             .then(closeModal)
             .catch(async (res) => {
             const data = await res.json();
