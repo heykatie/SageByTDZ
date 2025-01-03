@@ -2,7 +2,7 @@
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { useState } from "react";
-import { thunkEditProfile, thunkLogin } from "../../redux/session";
+import { thunkLogin } from "../../redux/session";
 import './EditProfileModal.css'
 import { Link } from "react-router-dom";
 

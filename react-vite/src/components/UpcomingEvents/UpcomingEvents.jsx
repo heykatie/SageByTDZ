@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUpcomingEvents } from '../../redux/event';
+import { getAllEvents } from '../../redux/event';
 import { useEffect } from 'react';
-import './ListEvents.css'
+import './UpcomingEvents.css'
 
 
 const UpcomingEvents = ({user}) => {
@@ -12,7 +12,7 @@ const UpcomingEvents = ({user}) => {
     // const user = useSelector((state) => state.session.user)
 
     useEffect(() => {
-        dispatch(getUpcomingEvents(user.id))
+        dispatch(getAllEvents(user.id))
     }, [dispatch, user.id])
 
     const upcomingEvents = useSelector((state) => state.session.upcoming)
