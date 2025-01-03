@@ -5,14 +5,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as friendActions from '../../redux/friends';
 
 export default function SingleFriend() {
-    let { friendId } = useParams();
+    const { friendId } = useParams();
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(friendActions.thunkSingleFriend(friendId))
-    }, [dispatch])
+    }, [dispatch, friendId])
 
-    let friend = useSelector(state=>state.friends.friend);
+    const friend = useSelector(state=>state.friends.friend);
     let friendArr;
 
     if(friend) { friendArr = Object.values({...friend})}
