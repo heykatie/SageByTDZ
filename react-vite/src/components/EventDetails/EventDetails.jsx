@@ -10,7 +10,7 @@ import { GoLinkExternal } from "react-icons/go";
 import { TfiEmail } from "react-icons/tfi";
 import { useEffect } from 'react';
 import OpenModalButton  from '../OpenModalButton/OpenModalButton'
-import FeedbackModal from '../FeedbackRatingInput/FeebackModal';
+import FeedbackModal from '../FeedbackModal/FeedbackModal'
 import './EventDetails.css';
 
 const EventDetails = () => {

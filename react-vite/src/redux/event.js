@@ -2,7 +2,7 @@
 // import { createSelector } from 'reselect';
 
 // export const getEvents = createSelector(
-//     (state) => state.events,
+//     (state) => state.events.events
 //     (allEvents) => Object.values(allEvents)
 // )
 
@@ -30,12 +30,14 @@ export const receive = (event) => ({
 export const getAllEvents = () => async dispatch => {
     const res = await csrfFetch('/api/events')
 
+    // console.log('WE HAVE THUNK')
+
     if( res.status === 200 ){
 
         const events = await res.json();
 
-        // console.log('EVENTS HAVE BEEN FOUND  ----->', events)
-        dispatch(load(events.events));
+        // console.log('EVENTS HAVE BEEN FOUND  ----->', events.events)
+        dispatch(load(events.events, null));
         return null;
     } else {
         const errors = res.errors;
@@ -100,7 +102,7 @@ export const getAllUpcomingEvents = () => async dispatch => {
         const events = await res.json();
 
         // console.log('EVENTS HAVE BEEN FOUND  ----->', events)
-        dispatch(load(events.rsvps));
+        dispatch(load(null, events.rsvps));
         return null;
     } else {
         const errors = res.errors;
@@ -109,27 +111,35 @@ export const getAllUpcomingEvents = () => async dispatch => {
     }
 };
 
+//normailzer
+const normalData = (data) => {
+    const normalData = {}
+    data.forEach((event) => {
+        normalData[event.id] = event
+    })
 
+    return normalData
+}
 //reducer
-const initialState = {evetns: null, upcoming: null}
+const initialState = {events: {}, upcoming: {}}
 const eventsReducer = (state = initialState, action) => {
     switch(action.type) {
         case LOAD_EVENTS:{
-            const eventState = {
-                ...state,
-                events: action.events.forEach((event) => {
-                eventState.events[event.id] = event;
-                }),
-                upcoming: action.upcoming.forEach((event) => {
-                    eventState.upcoming[event.id] = event;
-                }),
-             };
-            // console.log('DO I MAKE IT ?', action.events)
-            return eventState;
-        }
-        case RECEIVE_EVENT:
-            return { ...state, [action.event.id]: action.event }
+            // console.log('IN REDUCER -->',action.events)
+            const eventState = {...state}
+                if (action.events) eventState.events = normalData(action.events)
 
+                if (action.upcoming) eventState.upcoming = normalData(action.upcoming)
+
+                return eventState;
+             }
+            // console.log('DO I MAKE IT ?', action.events)
+        case RECEIVE_EVENT: {
+            const eventState = { ...state}
+            eventState.events[action.event.id]= action.event
+
+            return eventState
+        }
         default:
             return state
     }

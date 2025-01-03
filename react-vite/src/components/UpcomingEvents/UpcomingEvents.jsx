@@ -15,7 +15,7 @@ const UpcomingEvents = ({user}) => {
         dispatch(getAllUpcomingEvents())
     }, [dispatch, user.id])
 
-    const upcomingEvents = useSelector((state) => state.session.upcoming)
+    const upcomingEvents = Object.values(useSelector((state) => state.events.upcoming))
 
     const eventTiles = (events) => {events.map((event)=>{
         <li key = {event.id}>
@@ -44,7 +44,10 @@ const UpcomingEvents = ({user}) => {
         <>
         <div className='event-list-container'>
         <ul className='event-list'>
-            {eventTiles(upcomingEvents)}
+            { upcomingEvents ?
+            eventTiles(upcomingEvents) :
+            <h1>RSVP to see Upcoming Events</h1>
+            }
         </ul>
         </div>
         </>

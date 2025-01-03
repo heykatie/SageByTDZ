@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllEvents } from '../../redux/event';
+// import { getAllEvents } from '../../redux/event';
+import * as eventActions from '../../redux/event';
 import './ListEvents.css'
 import { useEffect } from 'react';
 import UpcomingEvents from '../UpcomingEvents/UpcomingEvents';
@@ -11,15 +12,18 @@ const ListEvents = () => {
 
 
     useEffect(() => {
-        dispatch(getAllEvents())
+        dispatch(eventActions.getAllEvents())
     }, [dispatch])
 
     const user = useSelector((state) => state.session.user)
-    const events = useSelector((state) => state.session.events)
+    const events = Object.values(useSelector((state) => state.events.events))
     // const upcomingEvents = useSelector((state) => state.session.upcoming)
 
+    // console.log('I AM YOUR EVENTS --->', events)
+
     const eventTiles = (events) => {events.map((event)=>{
-        <li key = {event.id}>
+        <>
+       <li key = {event.id}>
             <div className='li-event-list'>
                 <Link to={ `/events/${event.id}` } > {event.title}
                 <img src={event.preview} alt={event.title} />
@@ -39,13 +43,18 @@ const ListEvents = () => {
                 </Link>
             </div>
         </li>
+        </>
     })}
 
     return (
         <>
+        <h1>{events[0].title}</h1>
         <div className='event-list-container'>
         <ul className='event-list'>
-            {eventTiles(events)}
+            { events ?
+            eventTiles(events) :
+            <h1>No Events Found</h1>
+            }
         </ul>
         </div>
         {

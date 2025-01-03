@@ -78,7 +78,7 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { addOrgFeedback } from "../../redux/event";
 import FeedbackRatingInput from "../FeedbackRatingInput/FeedbackRatingInput";
-import './FeedbackFormModal.css';
+import './FeedbackModal.css';
 
 const FeedbackFormModal = ({ eventId, organizer }) => {
     const [reaction, setReaction] = useState(0);
