@@ -5,6 +5,7 @@ import { thunkLogout } from "../../redux/session";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import { Link } from "react-router-dom";
 
 function ProfileButton() {
   const dispatch = useDispatch();
@@ -50,6 +51,13 @@ function ProfileButton() {
             <>
               <li>{user.username}</li>
               <li>{user.email}</li>
+              <div>
+                <Link onClick={toggleMenu} to='/dashboard'>Dashboard</Link>
+                <Link onClick={toggleMenu} to='/friends'>Friends</Link>
+                <Link onClick={toggleMenu} to='/events'>Events</Link>
+                <Link onClick={toggleMenu} to='/groups'>Manage Groups</Link>
+                <Link onClick={toggleMenu} to='/Notifications'>Notifications</Link>
+              </div>
               <li>
                 <button onClick={logout}>Log Out</button>
               </li>

@@ -1,3 +1,15 @@
 .profile-dropdown {
   position: absolute;
 }
+
+.navigation-bar{
+  display: flex;
+}
+
+.logo-container{
+  display: flex;
+  padding: 5px;
+  justify-content: center;
+  align-items: center;
+  border:  1px;
+}
