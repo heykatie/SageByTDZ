@@ -1,10 +1,10 @@
-import './Friends.css';
+import './AllFriends.css';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import * as friendActions from '../../redux/friends';
 
-export default function Friends() {
+export default function AllFriends() {
     const dispatch = useDispatch();
 
     useEffect(() => {
