@@ -99,6 +99,8 @@ const inviteReducer = ( state = initialState, action) => {
             return state.map( invite => invite.id === action.invite.id ? action.invite : invite)
         case DELETE_INVITE:
             return state.filter(invite => invite.id !== action.invite.id)
+        default:
+            return state;
     }
 }
 

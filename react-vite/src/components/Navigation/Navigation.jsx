@@ -3,7 +3,7 @@ import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
 
 
-function Navigation({ isLoaded }) {
+function Navigation() {
 
   return (
     <div className="navigation-bar">
@@ -11,7 +11,7 @@ function Navigation({ isLoaded }) {
         <div className="logo-container">
           <li>
             <NavLink to="/">
-            <img src="https://res.cloudinary.com/dozliephp/image/upload/v1729123642/Jujutsu_favicon_igilzz.png" alt="Sage-Mascot" />
+            <img src="react-vite/public/favicon.ico" alt="Sage-Mascot" />
             </NavLink>
           </li>
         </div>
@@ -21,11 +21,10 @@ function Navigation({ isLoaded }) {
           </li>
         </div>
         <div className="profile-button">
-          {isLoaded && (
           <li>
             <ProfileButton />
           </li>
-        )}</div>
+        </div>
         
       </ul>
     </div>

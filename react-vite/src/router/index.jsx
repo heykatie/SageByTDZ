@@ -10,6 +10,7 @@ import EventRSVPs from '../components/EventRSVPs';
 import SingleFriend from '../components/SingleFriend';
 import SharedEvents from '../components/SharedEvents';
 import ListEvents from '../components/ListEvents';
+import GroupInvites from '../components/InvitePage/InvitePage';
 import Layout from './Layout';
 
 export const router = createBrowserRouter([
@@ -63,6 +64,10 @@ export const router = createBrowserRouter([
       {
         path: "events/:eventId",
         element: <ListEvents />,
+      },
+      {
+        path: "invites/:userId",
+        element: <GroupInvites />
       },
     ],
   },
