@@ -15,7 +15,7 @@ import friendReducer from './friends';
     session: sessionReducer,
     user: userReducer,
     events: eventsReducer,
-    group: groupReducer
+    group: groupReducer,
     friends: friendReducer
 });
 
