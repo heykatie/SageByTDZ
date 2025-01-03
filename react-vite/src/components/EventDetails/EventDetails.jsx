@@ -1,10 +1,10 @@
 // import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { TbHexagonNumber4, TbMoodSadSquint } from "react-icons/tb";
+import { TbMoodSadSquint } from "react-icons/tb";
 import { BiHappy } from "react-icons/bi";
 import { PiSmileyMeh } from "react-icons/pi";
-import { singleEvent } from '../../redux/event';
+import { singleEvent, addOrgFeedback } from '../../redux/event';
 import './EventDetails.css'
 import { useEffect } from 'react';
 
@@ -88,6 +88,11 @@ const EventDetails = () => {
                     <p>Be the first to voice your feeback !</p>
                 }
                 <img src={avgReaction(event.avgFeedback)} alt={event.organizer.name} />
+                {
+                    user?
+                    <FeedbackRatingInput /> :
+                    <Link to={'/login'}>Log In</Link>
+                }
             </div>
         </div>
         </>
