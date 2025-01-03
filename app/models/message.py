@@ -1,6 +1,4 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-from .group import Group
-from .user import User
 import datetime
 
 
@@ -17,8 +15,6 @@ class Message(db.Model):
     created_at = db.Column(db.String(255), default=datetime.datetime.now().strftime("%Y-%m-%d"))
     updated_at = db.Column(db.String(255), default=datetime.datetime.now().strftime("%Y-%m-%d"))
 
-    # Relationships
-    # event = db.relationship('Event', backref='groups', lazy=True)
 
     def to_dict(self):
         return {

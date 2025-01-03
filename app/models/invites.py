@@ -32,4 +32,3 @@ class Invites(db.Model):
 from .event import Event
 from .group import Group
 from .user import User
-#  db.ForeignKey(add_prefix_for_prod('friend.id')),
