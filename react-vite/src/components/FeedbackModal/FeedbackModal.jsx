@@ -1,14 +1,19 @@
 import './FeedbackModal.css';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { useParams } from 'react-router-dom';
+import { singleEvent } from '../../redux/event';
 
 export default function FeedbackFormModal() {
     const dispatch = useDispatch();
     const [reaction, setReaction] = useState(0);
     const { closeModal } = useModal();
     const { eventId } = useParams();
+
+    useEffect(() => {
+        dispatch(singleEvent(eventId))
+    }, [dispatch, eventId])
 
     //find event by id thunk
 

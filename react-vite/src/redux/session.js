@@ -73,7 +73,7 @@ export const thunkDeleteProfile = (user) => async dispatch => {
   });
 
   if(response.ok) {
-    const data = await response.json();
+    // const data = await response.json();
     dispatch(removeUser(user));
   } else if (response.status < 500) {
     const errorMessages = await response.json();
@@ -91,7 +91,7 @@ export const thunkEditProfile = (user) => async dispatch => {
   });
 
   if(response.ok) {
-    const data = await response.json();
+    // const data = await response.json();
     dispatch(setUser(user));
   } else if (response.status < 500) {
     const errorMessages = await response.json();

@@ -11,7 +11,7 @@ import friendReducer from "./friends";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
-  events: eventsReducer
+  events: eventsReducer,
   friends: friendReducer
 });
 
