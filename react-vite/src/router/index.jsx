@@ -7,6 +7,7 @@ import EditProfileModal from '../components/EditProfileModal';
 import UpcominngEvents from '../components/UpcomingEvents';
 import ProfilePage from '../components/ProfilePage';
 import Layout from './Layout';
+import GroupComponent from '../components/GroupPage';
 
 export const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ export const router = createBrowserRouter([
       {
         path: "profile/rsvps",
         element: <UpcominngEvents />,
+      },
+      {
+        path: "group",
+        element: <GroupComponent />,
       },
     ],
   },
