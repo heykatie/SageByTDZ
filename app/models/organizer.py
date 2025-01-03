@@ -1,6 +1,4 @@
-from .db import db, environment, SCHEMA, add_prefix_for_prod
-# from .feedback import Feedback
-import datetime
+from .db import db, environment, SCHEMA
 
 
 class Organizer(db.Model):
@@ -16,7 +14,6 @@ class Organizer(db.Model):
     link = db.Column(db.String(255), nullable=False)
     phone_number = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(255), nullable=False)
-    # feedback_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('feedback.id')), nullable=True)
 
     def to_dict(self):
         return {
@@ -27,5 +24,4 @@ class Organizer(db.Model):
             'link': self.link,
             'phone_number': self.phone_number,
             'email': self.email,
-            # 'feedback_id': self.feedback_id,
         }
