@@ -65,6 +65,42 @@ export const thunkLogout = () => async (dispatch) => {
   dispatch(removeUser());
 };
 
+export const thunkDeleteProfile = (user) => async dispatch => {
+  const response = await fetch("/api/prfoile/delete", {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(user)
+  });
+
+  if(response.ok) {
+    const data = await response.json();
+    dispatch(removeUser(user));
+  } else if (response.status < 500) {
+    const errorMessages = await response.json();
+    return errorMessages
+  } else {
+    return { server: "Something went wrong. Please try again" }
+  }
+};
+
+export const thunkEditProfile = (user) => async dispatch => {
+  const response = await fetch("/api/prfoile/edit", {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(user)
+  });
+
+  if(response.ok) {
+    const data = await response.json();
+    dispatch(setUser(user));
+  } else if (response.status < 500) {
+    const errorMessages = await response.json();
+    return errorMessages
+  } else {
+    return { server: "Something went wrong. Please try again" }
+  }
+};
+
 const initialState = { user: null };
 
 function sessionReducer(state = initialState, action) {
