@@ -13,7 +13,7 @@ const removeUser = () => ({
 });
 
 export const thunkAuthenticate = () => async (dispatch) => {
-	const response = await fetch("/api/auth/");
+	const response = await csrfFetch("/api/auth/");
 	if (response.ok) {
 		const data = await response.json();
 		if (data.errors) {
@@ -66,7 +66,7 @@ export const thunkLogout = () => async (dispatch) => {
 };
 
 export const thunkDeleteProfile = (user) => async dispatch => {
-  const response = await fetch("/api/prfoile/delete", {
+  const response = await csrfFetch("/api/prfoile/delete", {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(user)
@@ -84,7 +84,7 @@ export const thunkDeleteProfile = (user) => async dispatch => {
 };
 
 export const thunkEditProfile = (user) => async dispatch => {
-  const response = await fetch("/api/prfoile/edit", {
+  const response = await csrfFetch("/api/prfoile/edit", {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(user)

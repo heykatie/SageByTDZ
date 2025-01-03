@@ -20,7 +20,7 @@ const getSharedEvents = (payload) => ({
 });
 
 export const thunkAllFriends = () => async dispatch => {
-    const res = await csrfFetch("/api/friends");
+    const res = await csrfFetch("/api/friends/");
     
     if (res.ok) {
         const friends = await res.json();

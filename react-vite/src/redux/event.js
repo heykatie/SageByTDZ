@@ -26,7 +26,7 @@ export const receive = (event) => ({
 
 //thunk actions
 export const getAllEvents = () => async dispatch => {
-    const res = await csrfFetch('/api/events')
+    const res = await csrfFetch('/api/events/')
 
     if( res.status === 200 ){
 
@@ -64,7 +64,7 @@ export const singleEvent = (id) => async dispatch => {
 //move to rsvps reducer
 
 export const addOrgFeedback = (feedback) => async dispatch => {
-    const res = await fetch("/api/prfoile/feedback", {
+    const res = await fetch("/api/profile/feedback", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(feedback)

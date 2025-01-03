@@ -1,4 +1,4 @@
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { TbMoodSadSquint } from "react-icons/tb";
@@ -10,6 +10,7 @@ import { GoLinkExternal } from "react-icons/go";
 import { TfiEmail } from "react-icons/tfi";
 import { useEffect } from 'react';
 import FeedbackModal from '../FeedbackRatingInput/FeebackModal';
+import OpenModalButton from '../OpenModalButton/OpenModalButton';
 import './EventDetails.css';
 
 const EventDetails = () => {
@@ -22,7 +23,7 @@ const EventDetails = () => {
         dispatch(singleEvent(eventId))
     }, [dispatch, eventId])
 
-    // const user = useSelector((state) => state.session.user)
+    const user = useSelector((state) => state.session.user)
     const events = useSelector((state) => state.session.events)
     const event = events[eventId]
 
