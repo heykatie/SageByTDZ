@@ -46,7 +46,7 @@ export const router = createBrowserRouter([
         element: <UpcominngEvents />,
       },
       {
-        path: "group",
+        path: "groups/new",
         element: <GroupComponent />,
       },
     ],

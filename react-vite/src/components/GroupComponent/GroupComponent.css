@@ -1,159 +1,135 @@
-/* Container for the entire group form page */
 .group-form-page {
-  max-width: 800px;
-  margin: 2rem auto;
   padding: 2rem;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
-/* Header for form */
-.group-form-page h2 {
-  text-align: center;
-  font-size: 1.8rem;
-  color: #333;
-  margin-bottom: 1.5rem;
-}
-
-/* Form styling */
 .group-form {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
 }
 
-/* Labels for inputs */
-.group-form label {
-  font-weight: 600;
-  margin-bottom: 0.3rem;
-  color: #555;
+textarea {
+  width: 100%;
+  height: 100px;
+  margin-top: 0.5rem;
+  border-radius: 5px;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
 }
 
-/* Textarea styling for group description */
-.group-form textarea {
-  min-height: 120px;
-  padding: 0.8rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  resize: vertical;
-  font-size: 1rem;
-  color: #333;
-  background-color: #fff;
+.friends-section {
+  margin-top: 2rem;
 }
 
-/* Event selection dropdown */
-.event-selection select {
-  padding: 0.6rem;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
-  color: #333;
-  background-color: #fff;
-  cursor: pointer;
+.friends-list {
+  margin: 1rem 0;
 }
 
-/* Buttons */
-button {
-  padding: 0.8rem 1.2rem;
-  font-size: 1rem;
-  font-weight: 600;
+.friend-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: #f9f9f9;
+  margin-bottom: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.remove-friend {
+  background-color: #d32f2f;
+  color: white;
   border: none;
-  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Save group button */
-.save-group-button {
+.add-friend-options {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1rem;
+}
+
+.add-friend-button,
+.invite-email-button {
   background-color: #4caf50;
   color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-.save-group-button:hover {
-  background-color: #45a049;
+.group-buttons {
+  margin-top: 2rem;
 }
 
-/* Delete group button */
+.save-group-button,
 .delete-group-button {
-  background-color: #d9534f;
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.save-group-button {
+  background-color: #3498db;
   color: white;
 }
 
-.delete-group-button:hover {
-  background-color: #c9302c;
+.delete-group-button {
+  background-color: #d32f2f;
+  color: white;
 }
 
-/* Modal styling */
-.delete-modal {
+.modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
-  justify-content: center;
   align-items: center;
-  z-index: 999;
+  justify-content: center;
 }
 
-.delete-modal-content {
-  background-color: #fff;
+.modal-content {
+  background-color: white;
   padding: 2rem;
   border-radius: 8px;
-  max-width: 400px;
-  width: 100%;
+  width: 400px;
   text-align: center;
 }
 
-.delete-modal-content p {
-  font-size: 1.2rem;
-  margin-bottom: 1.5rem;
-}
-
-/* Modal buttons */
 .modal-buttons {
+  margin-top: 1rem;
   display: flex;
-  gap: 1rem;
-  justify-content: center;
+  justify-content: space-around;
 }
 
-.modal-buttons .confirm-delete {
-  background-color: #d9534f;
+.confirm-remove,
+.cancel-remove,
+.confirm-delete,
+.cancel-delete {
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.confirm-remove,
+.confirm-delete {
+  background-color: #d32f2f;
   color: white;
 }
 
-.modal-buttons .confirm-delete:hover {
-  background-color: #c9302c;
-}
-
-.modal-buttons .cancel-delete {
-  background-color: #6c757d;
+.cancel-remove,
+.cancel-delete {
+  background-color: #4caf50;
   color: white;
-}
-
-.modal-buttons .cancel-delete:hover {
-  background-color: #5a6268;
-}
-
-/* Responsive design */
-@media (max-width: 600px) {
-  .group-form-page {
-    padding: 1rem;
-  }
-
-  .group-form textarea {
-    min-height: 80px;
-  }
-
-  .modal-buttons {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  button {
-    width: 100%;
-  }
 }
