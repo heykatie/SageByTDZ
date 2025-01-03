@@ -7,6 +7,7 @@ import SignupFormPage from '../components/SignupFormPage';
 // import UpcominngEvents from '../components/UpcomingEvents';
 import ProfilePage from '../components/ProfilePage';
 import Friends from '../components/Friends';
+import EventRSVPs from '../components/EventRSVPs';
 import Layout from './Layout';
 import GroupComponent from '../components/GroupComponent';
 
@@ -28,23 +29,23 @@ export const router = createBrowserRouter([
 			},
 			{
 				path: 'events',
-				element: <EventDetails />,
+				// element: <EventDetails />,
 			},
-			// {
-			//   path: "events/:eventId",
-			//   element: <ListEvents />,
-			// },
+			{
+				path: 'events/:eventId',
+				// element: <EventsIndex />,
+			},
 			{
 				path: 'profile',
 				element: <ProfilePage />,
 			},
 			{
 				path: 'profile/edit',
-				element: <EditProfileModal />,
+				// element: <EditProfileModal />,
 			},
 			{
 				path: 'profile/rsvps',
-				element: <UpcominngEvents />,
+				// element: <UpcominngEvents />,
 			},
 			{
 				path: 'groups/new',
@@ -53,6 +54,10 @@ export const router = createBrowserRouter([
 			{
 				path: 'friends',
 				element: <Friends />,
+			},
+			{
+				path: 'events/:eventId/rsvps',
+				element: <EventRSVPs />,
 			},
 		],
 	},
