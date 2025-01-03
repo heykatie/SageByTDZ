@@ -7,7 +7,7 @@ import {
 	fetchUserFriends,
 	fetchUserGroups,
 } from '../../redux/user'; // Ensure correct import path
-import Navigation from '../Navigation';
+// import Navigation from '../Navigation';
 import './ProfilePage.css';
 
 const ProfilePage = () => {
@@ -166,7 +166,7 @@ const ProfilePage = () => {
 	return (
 		<div className='profile-page'>
 			{/* NavBar */}
-			<Navigation />
+			{/* <Navigation /> */}
 
 			{/* User Info Section */}
 			<section className='user-info'>

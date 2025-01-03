@@ -1,3 +1,3 @@
-// import EventsIndex from './EventsIndex';
+import ListEvents from '.';
 
-// export default EventsIndex;
+export default ListEvents;

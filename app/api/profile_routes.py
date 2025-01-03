@@ -63,3 +63,14 @@ def delete_profile():
         return { 'message': "Successfully deleted" }
 
     return {'errors': {'message': "User could not be found"}}, 404
+
+@profile_routes.route('/events')
+@login_required
+def user_events():
+    user_events = RSVP.query.filter_by(user_id=current_user.id).all()
+    return {'events': [event.to_dict() for event in user_events]}
+
+@profile_routes.route('/badges')
+@login_required
+def user_badges():
+    return {'badges': current_user.badges}

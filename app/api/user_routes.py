@@ -54,14 +54,3 @@ def update_user(id):
 
     user.save()  # Assuming `save` is a method that commits the changes to the database
     return user.to_dict()
-
-@user_routes.route('/events')
-@login_required
-def user_events():
-    user_events = RSVP.query.filter_by(user_id=current_user.id).all()
-    return {'events': [event.to_dict() for event in user_events]}
-
-@user_routes.route('/badges')
-@login_required
-def user_badges():
-    return {'badges': current_user.badges}
