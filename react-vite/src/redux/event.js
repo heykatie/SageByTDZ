@@ -64,7 +64,7 @@ export const singleEvent = (id) => async dispatch => {
 //move to rsvps reducer
 
 export const addOrgFeedback = (feedback) => async dispatch => {
-    const response = await fetch("/api/prfoile/feedback", {
+    const res = await fetch("/api/prfoile/feedback", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(feedback)
@@ -75,7 +75,7 @@ export const addOrgFeedback = (feedback) => async dispatch => {
         const info = await res.json();
 
         // console.log('FEEDBACK HAS BEEN MADE  ----->', info)
-        // dispatch(receive(info));
+        dispatch(receive(info));
         return info;
     } else {
         const errors = res.errors;
