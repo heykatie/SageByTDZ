@@ -9,12 +9,20 @@ import sessionReducer from "./session";
 import eventsReducer from "./event";
 import friendReducer from "./friends";
 import inviteReducer from "./invites";
+import userReducer from './user';
+import groupReducer from './group';
+
 
 const rootReducer = combineReducers({
   session: sessionReducer,
+  user: userReducer,
   events: eventsReducer,
+  group: groupReducer,
   friends: friendReducer,
   invite: inviteReducer
+
+
+
 });
 
 let enhancer;

@@ -20,6 +20,8 @@ from .config import Config
 
 app = Flask(__name__, static_folder='../react-vite/dist', static_url_path='/')
 
+# csrf = CSRFProtect(app)
+
 # Setup login manager
 login = LoginManager(app)
 login.login_view = 'auth.unauthorized'
@@ -34,6 +36,11 @@ def load_user(id):
 app.cli.add_command(seed_commands)
 
 app.config.from_object(Config)
+app.config['SESSION_COOKIE_HTTPONLY'] = True
+app.config['REMEMBER_COOKIE_HTTPONLY'] = True
+app.config['SESSION_COOKIE_SAMESITE'] = 'Lax' # Or 'Strict' if needed
+app.config['SESSION_COOKIE_SECURE'] = False  # Set to True in production
+
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(invite_route, url_prefix='/api/invites')
@@ -48,7 +55,7 @@ db.init_app(app)
 Migrate(app, db)
 
 # Application Security
-CORS(app)
+CORS(app, supports_credentials = True)
 
 
 # Since we are deploying with Docker and Flask,

@@ -64,6 +64,21 @@ def delete_profile():
 
     return {'errors': {'message': "User could not be found"}}, 404
 
+@profile_routes.route('/events')
+@login_required
+def user_events():
+    rsvps = RSVP.query.filter_by(user_id=current_user.id).all()
+    events = [Event.query.get(rsvp.event_id).to_dict() for rsvp in rsvps]
+    return {'events': events}
+# def user_events():
+#     user_events = RSVP.query.filter_by(user_id=current_user.id).all()
+#     return {'events': [event.to_dict() for event in user_events]}
+
+@profile_routes.route('/badges')
+@login_required
+def user_badges():
+    return {'badges': current_user.badges}
+
 @profile_routes.route('/feedback')
 @login_required
 def feedback():
