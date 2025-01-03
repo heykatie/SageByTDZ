@@ -1,13 +1,33 @@
 import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { TbMoodSadSquint } from "react-icons/tb";
+import { BiHappy } from "react-icons/bi";
+import { PiSmileyMeh } from "react-icons/pi";
+import { singleEvent } from '../../redux/event';
+import './EventDetails.css'
+import { useEffect } from 'react';
 
-const EventDetails = ({ event }) => {
+const EventDetails = () => {
+
+    const dispatch = useDispatch()
+
+    const { eventId } = useParams()
+
+    useEffect(() => {
+        dispatch(singleEvent(eventId))
+    }, [])
+
+    const user = useSelector((state) => state.session.user)
+    const events = useSelector((state) => state.session.events)
+    const event = events[eventId]
 
     let avgReaction = (rating) => {
-        if (rating === 1) return 'assets/sad.png'
+        if (rating === 1) return <TbMoodSadSquint className='sad-face'/>
 
-        if (rating === 2) return 'assets/meh.png'
+        if (rating === 2) return <PiSmileyMeh className='meh-face'/>
 
-        return 'assets/happy.png'
+        return <BiHappy className='happy-face'/>
     };
 
     const categories = event.categories.split(',');
