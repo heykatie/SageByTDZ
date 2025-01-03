@@ -11,14 +11,18 @@ friends_routes = Blueprint('friends', __name__)
 @friends_routes.route('/')
 @login_required
 def get_all_friends():
+    print(f"Current user: {current_user}") 
     friend_ids = []
     sent_reqs = Request.query.filter(Request.sender_id == current_user.get_id(), Request.accepted == True)
     received_reqs = Request.query.filter(Request.receiver_id == current_user.get_id(), Request.accepted == True)
-    all_reqs = {'sent': [req.to_dict() for req in sent_reqs], 'recieved': [req.to_dict() for req in received_reqs]}
+    all_reqs = {'sent': [req.to_dict() for req in sent_reqs], 'received': [req.to_dict() for req in received_reqs]}
+    if not current_user.is_authenticated:
+        print("User not authenticated!")
+        return {'errors': ['User not authenticated']}, 401
     if all_reqs:
         # change this to a loop!
         [friend_ids.append(req['receiver_id']) for req in all_reqs['sent']]
-        [friend_ids.append(req['sender_id']) for req in all_reqs['recieved']]
+        [friend_ids.append(req['sender_id']) for req in all_reqs['received']]
         return {'friends': [User.query.get(friend_id).to_dict() for friend_id in friend_ids] }
     return {'errors': {'message': "No friends found"}}
 

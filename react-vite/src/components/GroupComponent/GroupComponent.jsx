@@ -7,26 +7,34 @@ import {
 	thunkUpdateGroup,
 	thunkDeleteGroup,
 } from '../../redux/group';
-import { fetchUserEvents } from '../../redux/user';
+import { fetchUserEvents, fetchUserFriends } from '../../redux/user'; // Fetch friends too
 import './GroupComponent.css';
 
 const GroupComponent = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const { groupId } = useParams(); // Get groupId from URL for editing
+	const { groupId } = useParams();
 	const { group, loading, error } = useSelector((state) => state.group);
-	const { events } = useSelector((state) => state.user);
+	const { events, friends } = useSelector((state) => state.user);
 	const [description, setDescription] = useState('');
-	const [selectedFriends, setSelectedFriends] = useState([]); // Track selected friends
+	const [selectedFriends, setSelectedFriends] = useState([]);
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
 	const isEditMode = !!groupId;
+	const { user } = useSelector((state) => state.session);
 
-	// Fetch the events and group data
+	// Fetch events and friends when the component mounts
 	useEffect(() => {
 		dispatch(fetchUserEvents());
-		if (isEditMode) dispatch(thunkFetchGroup(groupId));
-		else setDescription('');
-	}, [dispatch, groupId, isEditMode]);
+		console.log('USER', user)
+		dispatch(fetchUserFriends()); // Fetch friends list
+		console.log('friends after fetch')
+		if (isEditMode) {
+			dispatch(thunkFetchGroup(groupId));
+		} else {
+			setDescription('');
+			setSelectedFriends([]);
+		}
+	}, [dispatch, groupId, isEditMode,user]);
 
 	// Prefill form when editing
 	useEffect(() => {
@@ -36,25 +44,34 @@ const GroupComponent = () => {
 		}
 	}, [group, isEditMode]);
 
-	const selectedEvent = events.find((event) => event.id === group?.eventId);
+	const selectedEvent = events.find((event) => event.id === group?.event_id);
 
 	// Save group (create or update)
-	const handleSaveGroup = (e) => {
+	const handleSaveGroup = async (e) => {
 		e.preventDefault();
-		const groupData = { description, friends: selectedFriends };
-		if (isEditMode) {
-			dispatch(thunkUpdateGroup({ ...groupData, groupId })).then(() =>
-				navigate('/events')
-			);
-		} else {
-			dispatch(thunkCreateGroup(groupData)).then(() => navigate('/events'));
+		const groupData = {
+			description,
+			eventId: selectedEvent?.id || null, // Ensure eventId is correct
+			friends: selectedFriends,
+		};
+
+		if (!groupData.eventId) {
+			alert('Please select an event before saving the group.');
+			return;
 		}
+
+		if (isEditMode) {
+			await dispatch(thunkUpdateGroup({ ...groupData, groupId }));
+		} else {
+			await dispatch(thunkCreateGroup(groupData));
+		}
+		navigate('/events');
 	};
 
 	// Delete group
 	const handleDeleteGroup = async () => {
 		await dispatch(thunkDeleteGroup(groupId));
-		navigate('/dashboard'); // Redirect after delete
+		navigate('/dashboard');
 	};
 
 	// Toggle friend selection
@@ -98,11 +115,15 @@ const GroupComponent = () => {
 			<section className='friends-section'>
 				<h3>Invite Friends!</h3>
 				<div className='friends-list'>
-					{/* Dummy friends list (can be replaced with real friend data) */}
-					{['Friend Name 1', 'Friend Name 2', 'Friend Name 3'].map(
-						(friend, index) => (
-							<div className='friend-item' key={index}>
-								<span>{friend}</span>
+					{friends.length ? (
+						friends.map((friend) => (
+							<div className='friend-item' key={friend.id}>
+								<img
+									src={friend.profile_pic}
+									alt={`${friend.first_name}'s profile`}
+									className='friend-profile-pic'
+								/>
+								<span>{`${friend.first_name} ${friend.last_name}`}</span>
 								<button
 									className={`select-friend-button ${
 										selectedFriends.includes(friend) ? 'selected' : ''
@@ -111,7 +132,9 @@ const GroupComponent = () => {
 									{selectedFriends.includes(friend) ? 'Remove' : 'Add'}
 								</button>
 							</div>
-						)
+						))
+					) : (
+						<p>No friends to display. Invite friends to connect!</p>
 					)}
 				</div>
 			</section>
