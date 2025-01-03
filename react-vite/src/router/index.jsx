@@ -7,7 +7,7 @@ import EditProfileModal from '../components/EditProfileModal';
 import UpcominngEvents from '../components/UpcomingEvents';
 import ProfilePage from '../components/ProfilePage';
 import Layout from './Layout';
-import GroupComponent from '../components/GroupPage';
+import GroupComponent from '../components/GroupComponent';
 
 export const router = createBrowserRouter([
   {

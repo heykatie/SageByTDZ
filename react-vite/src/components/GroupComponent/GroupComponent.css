@@ -1,0 +1,159 @@
+/* Container for the entire group form page */
+.group-form-page {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Header for form */
+.group-form-page h2 {
+  text-align: center;
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+/* Form styling */
+.group-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+/* Labels for inputs */
+.group-form label {
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  color: #555;
+}
+
+/* Textarea styling for group description */
+.group-form textarea {
+  min-height: 120px;
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+  font-size: 1rem;
+  color: #333;
+  background-color: #fff;
+}
+
+/* Event selection dropdown */
+.event-selection select {
+  padding: 0.6rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  color: #333;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+/* Buttons */
+button {
+  padding: 0.8rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Save group button */
+.save-group-button {
+  background-color: #4caf50;
+  color: white;
+}
+
+.save-group-button:hover {
+  background-color: #45a049;
+}
+
+/* Delete group button */
+.delete-group-button {
+  background-color: #d9534f;
+  color: white;
+}
+
+.delete-group-button:hover {
+  background-color: #c9302c;
+}
+
+/* Modal styling */
+.delete-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.delete-modal-content {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+.delete-modal-content p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Modal buttons */
+.modal-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.modal-buttons .confirm-delete {
+  background-color: #d9534f;
+  color: white;
+}
+
+.modal-buttons .confirm-delete:hover {
+  background-color: #c9302c;
+}
+
+.modal-buttons .cancel-delete {
+  background-color: #6c757d;
+  color: white;
+}
+
+.modal-buttons .cancel-delete:hover {
+  background-color: #5a6268;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  .group-form-page {
+    padding: 1rem;
+  }
+
+  .group-form textarea {
+    min-height: 80px;
+  }
+
+  .modal-buttons {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  button {
+    width: 100%;
+  }
+}
