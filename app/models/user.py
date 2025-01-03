@@ -28,8 +28,8 @@ class User(db.Model, UserMixin):
     # badge = db.relationship('Badge', backref=db.backref('users', lazy=True))
     hashed_password = db.Column(db.String(255), nullable=False)
 
-    requests = db.relationship('Request', foreign_keys='Request.sender_id', backref='sender', cascade='all, delete-orphan')
-    invites = db.relationship('Invites', foreign_keys='Invites.user_id', backref='receiver', cascade='all, delete-orphan')
+    # requests = db.relationship('Request', foreign_keys='Request.sender_id', backref='sender', cascade='all, delete-orphan')
+    # invites = db.relationship('Invites', foreign_keys='Invites.user_id', backref='receiver', cascade='all, delete-orphan')
     owned_groups = db.relationship('Group', backref='owner', cascade='all, delete-orphan')
 
     @property
@@ -54,7 +54,7 @@ def to_dict(self):
         'state': self.state,
         'address': self.address,
         'profile_pic': self.profile_pic,
-        'requests': [request.to_dict() for request in self.requests],
-        'invites': [invite.to_dict() for invite in self.invites],
+        # 'requests': [request.to_dict() for request in self.requests],
+        # 'invites': [invite.to_dict() for invite in self.invites],
         # 'badges': [badge.to_dict() for badge in self.badges] if hasattr(self, 'badges') else []
     }

@@ -1,65 +1,117 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom'; // Import for redirection
+import { useNavigate } from 'react-router-dom';
 import {
-	fetchEventById,
-	createNewGroup,
-	// inviteFriendToGroup,
-	// removeFriendFromGroup,
+	thunkFetchGroup,
+	thunkUpdateGroup,
+	thunkDeleteGroup,
 } from '../../redux/group';
 import './GroupPage.css';
 
-const GroupComponent = ({ eventId }) => {
+const EditGroupPage = ({ eventId }) => {
 	const dispatch = useDispatch();
-	const navigate = useNavigate(); // Hook for navigation
-	const { event, invitedFriends } = useSelector((state) => state.group);
+	const navigate = useNavigate();
+	const { group } = useSelector((state) => state.group);
 
-	// Local state for group creation
+	// Local state for editing group description and modal state
 	const [description, setDescription] = useState('');
+	const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-	// Fetch event details when the component mounts
+	// Fetch the group data when the component mounts
 	useEffect(() => {
-		dispatch(fetchEventById(eventId));
+		dispatch(thunkFetchGroup(eventId));
 	}, [dispatch, eventId]);
 
-	// Handle "Save Group" (POST request to create a group)
-	const handleSaveGroup = async () => {
-		const groupData = {
-			eventId,
-			invitedFriends: invitedFriends.map((friend) => friend.id),
-		};
-
-		const result = await dispatch(createNewGroup(groupData));
-		if (result) {
-			// Redirect to the events index after successful creation
-			navigate('/events');
+	// Sync local state with fetched data
+	useEffect(() => {
+		if (group) {
+			setDescription(group.description || '');
 		}
+	}, [group]);
+
+	// Save updated group
+	const handleSaveGroup = () => {
+		dispatch(
+			thunkUpdateGroup({
+				groupId: group.id,
+				description,
+			})
+		).then(() => navigate('/events'));
+	};
+
+	// Handle group deletion
+	const handleDeleteGroup = () => {
+		dispatch(thunkDeleteGroup(group.id)).then(() => navigate('/dashboard'));
 	};
 
 	return (
-		<div className='group-component'>
-			<h2>{event?.name}</h2>
+		<div className='edit-group-page'>
+			<h2>{group?.eventName || 'Event Name'}</h2>
 			<p>
-				{event?.date} | {event?.time} | {event?.category}
+				{group?.eventDate} | {group?.eventTime} | {group?.eventCategory}
 			</p>
-			<p>{event?.location}</p>
-			<a href={`/events/${eventId}`}>Link to event page</a>
+			<p>{group?.location}</p>
+			<a href={`/events/${eventId}`} className='event-link'>
+				Link to event page
+			</a>
 
 			{/* Group Description */}
-			<section className='group-description'>
+			<div className='group-description'>
 				<label htmlFor='description'>Add group description:</label>
 				<textarea
 					id='description'
 					value={description}
 					onChange={(e) => setDescription(e.target.value)}
-					placeholder='Add group description here...'
 				/>
+			</div>
+
+			{/* Friends List */}
+			<section className='friends-section'>
+				<h3>Friends Invited</h3>
+				<div className='friends-list'>
+					{group?.invitedFriends?.map((friend) => (
+						<div className='friend-item' key={friend.id}>
+							<span>{friend.name}</span>
+							<button
+								className='remove-friend'
+								onClick={() => console.log(`Remove ${friend.name}`)}>
+								X
+							</button>
+						</div>
+					))}
+					<p className='add-friend-option'>+ Add New Friend</p>
+					<p className='invite-by-email'>+ Invite by Email</p>
+				</div>
+			</section>
+
+			{/* Save and Delete Buttons */}
+			<div className='group-buttons'>
 				<button className='save-group-button' onClick={handleSaveGroup}>
 					Save Group
 				</button>
-			</section>
+				<button
+					className='delete-group-button'
+					onClick={() => setShowDeleteModal(true)}>
+					Delete Group
+				</button>
+			</div>
+
+			{/* Delete Group Modal */}
+			{showDeleteModal && (
+				<div className='delete-modal'>
+					<div className='delete-modal-content'>
+						<p>Are you sure you want to delete this group?</p>
+						<div className='modal-buttons'>
+							<button onClick={handleDeleteGroup}>Yes, Delete</button>
+							<button onClick={() => setShowDeleteModal(false)}>
+								No, Go Back
+							</button>
+						</div>
+					</div>
+				</div>
+			)}
 		</div>
 	);
 };
 
-export default GroupComponent;
+export default EditGroupPage;
