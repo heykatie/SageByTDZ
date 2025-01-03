@@ -17,7 +17,7 @@ const UpcomingEvents = ({user}) => {
 
     const upcomingEvents = Object.values(useSelector((state) => state.events.upcoming))
 
-    const eventTiles = (events) => {events.map((event)=>{
+    const eventTiles = (events) => (events.map((event)=>(
         <li key = {event.id}>
             <div className='li-event-list'>
                 <Link to={ `/events/${event.id}` } > {event.title}
@@ -38,11 +38,12 @@ const UpcomingEvents = ({user}) => {
                 </Link>
             </div>
         </li>
-    })}
+    )))
 
     return (
         <>
         <div className='event-list-container'>
+        <h1>UPCOMING EVENTS</h1>
         <ul className='event-list'>
             { upcomingEvents ?
             eventTiles(upcomingEvents) :
