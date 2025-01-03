@@ -20,7 +20,7 @@ from .config import Config
 
 app = Flask(__name__, static_folder='../react-vite/dist', static_url_path='/')
 
-csrf = CSRFProtect(app)
+# csrf = CSRFProtect(app)
 
 # Setup login manager
 login = LoginManager(app)

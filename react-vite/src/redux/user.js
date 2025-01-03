@@ -150,26 +150,26 @@ export const fetchUserGroups = () => async (dispatch) => {
 export const fetchUserFriends = () => async (dispatch) => {
 	dispatch(setStatus('loading'));
 	try {
-		console.log('Fetching friends...');
-	const res = await csrfFetch('/api/friends', {
-		method: 'GET',
-		credentials: 'include', // Ensures cookies are sent with the request
-	});
+		console.log('Fetching friends...'); // Debug log
+		const res = await csrfFetch('/api/friends', {
+			method: 'GET',
+			credentials: 'include',
+		});
 		if (res.ok) {
-			const friends = await res.json();
-			dispatch(loadUserFriends(friends.friends)); // Ensure correct path
+			const data = await res.json();
+			console.log('Fetched friends:', data.friends); // Log the friends array
+			dispatch(loadUserFriends(data.friends));
 			dispatch(setStatus('succeeded'));
-			console.log('Fetched friends:', friends);
 		} else {
 			const errors = await res.json();
+			console.error('Fetch failed:', errors);
 			dispatch(setError(errors));
 			dispatch(setStatus('failed'));
-			console.error('Fetch failed:', errors);
 		}
 	} catch (error) {
+		console.error('Error fetching friends:', error);
 		dispatch(setError(error.message));
 		dispatch(setStatus('failed'));
-		console.error('Error fetching friends:', error);
 	}
 };
 
@@ -198,7 +198,7 @@ const userReducer = (state = initialState, action) => {
 		case LOAD_USER_GROUPS:
 			return { ...state, groups: action.groups };
 		case LOAD_USER_FRIENDS:
-			console.log('Loaded friends:', action.friends);
+			console.log('Loaded friends:', action.friends); // Should print the array
 			return { ...state, friends: action.friends };
 		case SET_STATUS:
 			return { ...state, status: action.status };

@@ -11,7 +11,7 @@ friends_routes = Blueprint('friends', __name__)
 @friends_routes.route('/')
 @login_required
 def get_all_friends():
-    print(f"Current user: {current_user}") 
+    print(f"heyyy Current user: {current_user}")
     friend_ids = []
     sent_reqs = Request.query.filter(Request.sender_id == current_user.get_id(), Request.accepted == True)
     received_reqs = Request.query.filter(Request.receiver_id == current_user.get_id(), Request.accepted == True)
