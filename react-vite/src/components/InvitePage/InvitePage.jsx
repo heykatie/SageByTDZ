@@ -4,7 +4,7 @@ import { fetchGroupInvites } from "../../redux/invites";
 
 
 function GroupInvite({ invite }){
-
+    console.log(invite)
     return (
         <div>
             <p>{invite}</p>
