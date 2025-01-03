@@ -34,7 +34,7 @@ def seed_requests():
         accepted=False
     )
     request7 = Request(
-        sender_id=3,
+        sender_id=6,
         receiver_id=1,
         accepted=True
     )
