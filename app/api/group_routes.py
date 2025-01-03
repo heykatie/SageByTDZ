@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
 from app.models import User, Group, RSVP, Invites, Message
 from app.models.db import db
+from sqlalchemy import and_
 
 group_routes = Blueprint('groups', __name__)
 
@@ -12,7 +13,8 @@ def get_user_groups():
     Get all groups the current user is in.
     """
 
-    groups = Invites.query.filter(Invites.going and Invites.user_id == current_user.id).all()
+    # groups = Invites.query.filter(Invites.going and Invites.user_id == current_user.id).all()
+    groups = Invites.query.filter(and_(Invites.going == True, Invites.user_id == current_user.id)).all()
     if not groups:
         return {"message": "No groups could be found"}, 404
     return {"Groups": [group.to_dict() for group in groups]}
@@ -76,9 +78,10 @@ def get_group_members(groupId):
     if not group:
         return {"message": "Group not found"}, 404
 
-    members = User.query.join(RSVP, RSVP.user_id == User.id).filter(
-        RSVP.event_id == group.event_id
-    ).all()
+    members = User.query.join(RSVP, (RSVP.user_id == User.id) & (RSVP.event_id == group.event_id)).all()
+    # members = User.query.join(RSVP, RSVP.user_id == User.id).filter(
+    #     RSVP.event_id == group.event_id
+    # ).all()
 
     return {"Members": [member.to_dict() for member in members]}
 
@@ -87,10 +90,11 @@ def get_group_members(groupId):
 def get_all_messages(groupId):
     messages = Message.query.filter(Message.group_id == groupId)
     members = get_group_members(groupId)['Members']
-    member = [member for member in members if member['id'] == current_user.id]
-    if messages and member:
+    # member = [member for member in members if member['id'] == current_user.id]
+    members = [member for member in get_group_members(groupId) if member['id'] == current_user.id]
+    if messages and members:
         return {'messages': [message.to_dict() for message in messages]}
-        
+
     return { 'error': { 'message': 'No messages found' } }
 
 @group_routes.route('/<int:groupId>/messages', methods=['POST'])
