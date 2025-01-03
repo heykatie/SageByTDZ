@@ -2,7 +2,6 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 import datetime
-# from .badge import Badge
 
 
 class User(db.Model, UserMixin):
@@ -23,8 +22,6 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=datetime.datetime.now())
     requests = db.relationship('Request', backref='sender', cascade='all, delete-orphan')
     invites = db.relationship('Invites', backref='sender', cascade='all, delete-orphan')
-    # badge_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('badges.id')), nullable=True)
-    # badge = db.relationship('Badge', backref=db.backref('users', lazy=True))
     hashed_password = db.Column(db.String(255), nullable=False)
 
     owned_groups = db.relationship('Group', backref='owner', cascade='all, delete-orphan')
@@ -45,11 +42,10 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'username': self.username,
             'email': self.email,
-            'first_name': self.firstName,
-            'last_name': self.lastName,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
             'city': self.city,
             'state': self.state,
             'address': self.address,
             'profile_pic': self.profile_pic
-            # 'badge_id': self.badge_id
         }
