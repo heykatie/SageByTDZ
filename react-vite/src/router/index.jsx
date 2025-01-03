@@ -30,11 +30,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "events",
-        element: <EventDetails />,
+        element: <EventsIndex />,
       },
       {
         path: "events/:eventId",
-        element: <EventsIndex />,
+        element: <EventDetails />,
       },
       {
         path: "profile/edit",
