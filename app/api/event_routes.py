@@ -31,3 +31,13 @@ def event(id):
         'rsvps': [User.query.get(userId).firstName for userId in rsvpList]
         }
     return {'errors': {'message': "Event couldn't be found"}}, 404
+
+@event_routes.route('/<int:eventId>/rsvps')
+def rsvps(eventId):
+    """
+    Get all rsvps of event by event id
+    """
+    rsvp = RSVP.query.filter(RSVP.event_id == eventId)
+    if not rsvp:
+        return {"message": "No RSVPs found"}, 404
+    return {"RSVPs": [r.to_dict() for r in rsvp]}
