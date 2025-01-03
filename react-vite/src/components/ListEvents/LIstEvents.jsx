@@ -16,7 +16,7 @@ const ListEvents = () => {
 
     const user = useSelector((state) => state.session.user)
     const events = useSelector((state) => state.session.events)
-    const upcomingEvents = useSelector((state) => state.session.upcoming)
+    // const upcomingEvents = useSelector((state) => state.session.upcoming)
 
     const eventTiles = (events) => {events.map((event)=>{
         <li key = {event.id}>
@@ -57,4 +57,4 @@ const ListEvents = () => {
     )
 }
 
-export default ListEvents
+export default ListEvents;

@@ -1,9 +1,7 @@
 import './EventRSVPs.css';
 
-function EventRSVPs() {
+export default function EventRSVPs() {
     return (
         <h1>Event RSVPs</h1>
     )
 }
-
-export default EventRSVPs;
