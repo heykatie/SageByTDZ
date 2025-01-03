@@ -5,8 +5,9 @@ import SignupFormPage from '../components/SignupFormPage';
 // import EventDetails from '../components/EventDetails';
 // import EditProfileModal from '../components/EditProfileModal';
 // import UpcominngEvents from '../components/UpcomingEvents';
-import Friends from '../components/Friends';
+import Friends from '../components/AllFriends';
 import EventRSVPs from '../components/EventRSVPs';
+import SingleFriend from '../components/SingleFriend';
 import Layout from './Layout';
 
 export const router = createBrowserRouter([
@@ -44,6 +45,10 @@ export const router = createBrowserRouter([
       {
         path: "friends",
         element: <Friends />
+      },
+      {
+        path: "friends/:friendId",
+        element: <SingleFriend />
       },
       {
         path: "events/:eventId/rsvps",
