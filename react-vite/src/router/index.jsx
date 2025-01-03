@@ -6,6 +6,7 @@ import SignupFormPage from '../components/SignupFormPage';
 // import EditProfileModal from '../components/EditProfileModal';
 // import UpcominngEvents from '../components/UpcomingEvents';
 import Friends from '../components/Friends';
+import EventRSVPs from '../components/EventRSVPs';
 import Layout from './Layout';
 
 export const router = createBrowserRouter([
@@ -43,6 +44,10 @@ export const router = createBrowserRouter([
       {
         path: "friends",
         element: <Friends />
+      },
+      {
+        path: "events/:eventId/rsvps",
+        element: <EventRSVPs />
       }
     ],
   },
