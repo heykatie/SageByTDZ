@@ -6,10 +6,12 @@ import {
 } from "redux";
 import thunk from "redux-thunk";
 import sessionReducer from "./session";
+import eventsReducer from "./event";
 import friendReducer from "./friends";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
+  events: eventsReducer
   friends: friendReducer
 });
 

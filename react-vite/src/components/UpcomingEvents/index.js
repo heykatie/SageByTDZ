@@ -1,3 +1,3 @@
-// import UpcominngEvents from './UpcomingEvents';
+import UpcomingEvents from './UpcomingEvents';
 
-// export default UpcominngEvents;
+export default UpcomingEvents;

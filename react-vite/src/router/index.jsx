@@ -4,11 +4,12 @@ import SignupFormPage from '../components/SignupFormPage';
 import EventsIndex from '../components/EventsIndex';
 import EventDetails from '../components/EventDetails';
 import EditProfileModal from '../components/EditProfileModal';
-import UpcominngEvents from '../components/UpcomingEvents';
+import UpcomingEvents from '../components/UpcomingEvents';
 import AllFriends from '../components/AllFriends';
 import EventRSVPs from '../components/EventRSVPs';
 import SingleFriend from '../components/SingleFriend';
 import SharedEvents from '../components/SharedEvents';
+import ListEvents from '../components/ListEvents';
 import Layout from './Layout';
 
 export const router = createBrowserRouter([
@@ -41,7 +42,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "profile/rsvps",
-        element: <UpcominngEvents />,
+        element: <UpcomingEvents />,
       },
       {
         path: "friends",
@@ -58,7 +59,11 @@ export const router = createBrowserRouter([
       {
         path: "events/:eventId/rsvps",
         element: <EventRSVPs />
-      }
+      },
+      {
+        path: "events/:eventId",
+        element: <ListEvents />,
+      },
     ],
   },
 ]);
