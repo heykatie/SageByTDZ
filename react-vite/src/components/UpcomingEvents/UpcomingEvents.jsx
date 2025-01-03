@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllEvents, getAllUpcomingEvents } from '../../redux/event';
+import { getAllUpcomingEvents } from '../../redux/event';
 import { useEffect } from 'react';
 import './UpcomingEvents.css'
 

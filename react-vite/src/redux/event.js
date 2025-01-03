@@ -65,20 +65,24 @@ export const singleEvent = (id) => async dispatch => {
 
 //move to rsvps reducer
 
-export const addOrgFeedback = (feedback) => async dispatch => {
-    const response = await fetch("/api/prfoile/feedback", {
+export const addOrgFeedback = (feedback, eventId) => async dispatch => {
+    const res = await fetch("/api/prfoile/feedback", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(feedback)
       });
 
-    if ( res.status === 200 ) {
+    if ( res.status === 201 ) {
         // console.log('I AM IN THUNK')
-        const info = await res.json();
+        const newFeedback = await res.json();
 
-        // console.log('FEEDBACK HAS BEEN MADE  ----->', info)
-        // dispatch(receive(info));
-        return info;
+        // console.log('FEEDBACK HAS BEEN MADE  ----->', newFeedback)
+        const res = await fetch(`/api/events/${eventId}`);
+        if (res.status === 200) {
+            const event = await res.json()
+            dispatch(receive(event))
+        }
+        return newFeedback;
     } else {
         const errors = res.errors;
 
@@ -108,7 +112,7 @@ export const getAllUpcomingEvents = () => async dispatch => {
 
 //reducer
 const initialState = {evetns: null, upcoming: null}
-const eventsReducer = (state = {}, action) => {
+const eventsReducer = (state = initialState, action) => {
     switch(action.type) {
         case LOAD_EVENTS:{
             const eventState = {

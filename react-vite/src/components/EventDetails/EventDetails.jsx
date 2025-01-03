@@ -1,4 +1,4 @@
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { TbMoodSadSquint } from "react-icons/tb";
@@ -9,6 +9,7 @@ import { MdLocalPhone } from "react-icons/md";
 import { GoLinkExternal } from "react-icons/go";
 import { TfiEmail } from "react-icons/tfi";
 import { useEffect } from 'react';
+import OpenModalButton  from '../OpenModalButton/OpenModalButton'
 import FeedbackModal from '../FeedbackRatingInput/FeebackModal';
 import './EventDetails.css';
 
@@ -22,7 +23,7 @@ const EventDetails = () => {
         dispatch(singleEvent(eventId))
     }, [dispatch, eventId])
 
-    // const user = useSelector((state) => state.session.user)
+    const user = useSelector((state) => state.session.user)
     const events = useSelector((state) => state.session.events)
     const event = events[eventId]
 
@@ -102,7 +103,7 @@ const EventDetails = () => {
                     user?
                     <OpenModalButton
                     buttonText="Give Your Feedback"
-                    modalComponent={<FeedbackModal organizer={event.organizer} user={user}/>}
+                    modalComponent={<FeedbackModal eventId={event.event.id} organizer={event.organizer} user={user}/>}
                     onButtonClick
                     onModalClose
                     /> :
