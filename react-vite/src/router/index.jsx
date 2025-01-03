@@ -1,11 +1,16 @@
 import { createBrowserRouter } from 'react-router-dom';
 import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
-// import ListEvents from '../components/ListEvents';
+import EventsIndex from '../components/EventsIndex';
 import EventDetails from '../components/EventDetails';
 import EditProfileModal from '../components/EditProfileModal';
-import UpcominngEvents from '../components/UpcomingEvents';
+import UpcomingEvents from '../components/UpcomingEvents';
+import AllFriends from '../components/AllFriends';
+import EventRSVPs from '../components/EventRSVPs';
+import SingleFriend from '../components/SingleFriend';
+import SharedEvents from '../components/SharedEvents';
 import ProfilePage from '../components/ProfilePage';
+import ListEvents from '../components/ListEvents';
 import Layout from './Layout';
 import GroupComponent from '../components/GroupComponent';
 
@@ -27,15 +32,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "events",
-        element: <EventDetails />,
+        element: <EventsIndex />,
       },
-      // {
-      //   path: "events/:eventId",
-      //   element: <ListEvents />,
-      // },
       {
-        path: "profile",
-        element: <ProfilePage />,
+        path: "events/:eventId",
+        element: <EventDetails />,
       },
       {
         path: "profile/edit",
@@ -43,7 +44,27 @@ export const router = createBrowserRouter([
       },
       {
         path: "profile/rsvps",
-        element: <UpcominngEvents />,
+        element: <UpcomingEvents />,
+      },
+      {
+        path: "friends",
+        element: <AllFriends />
+      },
+      {
+        path: "friends/:friendId",
+        element: <SingleFriend />
+      },
+      {
+        path: "friends/:friendId/events",
+        element: <SharedEvents />
+      },
+      {
+        path: "events/:eventId/rsvps",
+        element: <EventRSVPs />
+      },
+      {
+        path: "profile",
+        element: <ProfilePage />,
       },
       {
         path: "groups/new",

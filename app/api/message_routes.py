@@ -11,7 +11,7 @@ message_routes = Blueprint('messages', __name__)
 def edit_messages(messageId):
     message = Message.query.get(messageId)
     if not message or not message.user_id == current_user.get_id():
-        return { 'errors': { 'message': 'No message found.' } }
+        return { 'errors': { 'message': 'No message found.' } }, 404
 
     data = request.get_json()
     editedMessage = data.get("message")
@@ -26,11 +26,11 @@ def edit_messages(messageId):
 def delete_message(messageId):
     message = Message.query.get(messageId)
     if not message or not message.user_id == current_user.get_id():
-        return { 'errors': { 'message': 'No message found.' } }
+        return { 'errors': { 'message': 'No message found.' } }, 404
 
     db.session.delete(message)
     db.session.commit()
-    return { 'message': 'Message successfully deleted.' }
+    return { 'message': 'Message successfully deleted.' }, 201
 
 # @message_routes.route('/', methods=['POST'])
 # @login_required

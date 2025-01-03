@@ -78,3 +78,11 @@ def user_events():
 @login_required
 def user_badges():
     return {'badges': current_user.badges}
+
+@profile_routes.route('/feedback')
+@login_required
+def feedback():
+    feedback = Feedback.query.filter(Feedback.user_id == current_user.get_id()).all()
+    if feedback:
+        return {'feedback': [f.to_dict() for f in feedback] }
+    return {'errors': {'message': "No feedback found"}}, 404

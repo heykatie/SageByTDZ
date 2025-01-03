@@ -12,7 +12,7 @@ def get_sent_requests():
     sent_requests = Request.query.filter(Request.sender_id == current_user.get_id())
     received_requests = Request.query.filter(Request.receiver_id == current_user.get_id())
     if not sent_requests and not received_requests:
-        return { 'errors': { 'message': 'No requests found.' } }
+        return { 'errors': { 'message': 'No requests found.' } }, 404
     return { 'sent_requests': [request.to_dict() for request in sent_requests], 'received_requests': [request.to_dict() for request in received_requests] }
 
 @request_routes.route('/', methods=['POST'])
@@ -39,7 +39,7 @@ def create_request():
 def delete_request(requestId):
     request = Request.query.get(requestId)
     if not request or not request.sender_id == current_user.id:
-        return { 'error': { 'massage': 'No request found.' } }
+        return { 'error': { 'massage': 'No request found.' } }, 404
 
     db.session.delete(request)
     db.session.commit()

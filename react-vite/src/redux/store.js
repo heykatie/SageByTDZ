@@ -9,12 +9,14 @@ import sessionReducer from "./session";
 import eventsReducer from "./event";
 import userReducer from './user';
 import groupReducer from './group';
+import friendReducer from './friends';
 
   const rootReducer = combineReducers({
     session: sessionReducer,
     user: userReducer,
     events: eventsReducer,
     group: groupReducer
+    friends: friendReducer
 });
 
 let enhancer;
