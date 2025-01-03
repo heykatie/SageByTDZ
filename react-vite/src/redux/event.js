@@ -14,9 +14,10 @@ const LOAD_EVENTS = 'session/LOAD_EVENTS';
 const RECEIVE_EVENT = 'session/RECEIVE_EVENT';
 
 //action-creators
-export const load = (events) => ({
+export const load = (events, upcoming) => ({
     type: LOAD_EVENTS,
-    events
+    events,
+    upcoming
 });
 
 export const receive = (event) => ({
@@ -25,6 +26,7 @@ export const receive = (event) => ({
 });
 
 //thunk actions
+
 export const getAllEvents = () => async dispatch => {
     const res = await csrfFetch('/api/events')
 
@@ -86,16 +88,39 @@ export const addOrgFeedback = (feedback) => async dispatch => {
     }
 };
 
+export const getAllUpcomingEvents = () => async dispatch => {
+    const res = await csrfFetch('/api/profile/rsvps')
+
+    if( res.status === 200 ){
+
+        const events = await res.json();
+
+        // console.log('EVENTS HAVE BEEN FOUND  ----->', events)
+        dispatch(load(events.rsvps));
+        return null;
+    } else {
+        const errors = res.errors;
+        // console.log('IM A PROBLEM', errors)
+        return errors;
+    }
+};
+
 
 //reducer
+const initialState = {evetns: null, upcoming: null}
 const eventsReducer = (state = {}, action) => {
     switch(action.type) {
         case LOAD_EVENTS:{
-            const eventState = {};
+            const eventState = {
+                ...state,
+                events: action.events.forEach((event) => {
+                eventState.events[event.id] = event;
+                }),
+                upcoming: action.upcoming.forEach((event) => {
+                    eventState.upcoming[event.id] = event;
+                }),
+             };
             // console.log('DO I MAKE IT ?', action.events)
-            action.events.forEach((event) => {
-                eventState[event.id] = event;
-            });
             return eventState;
         }
         case RECEIVE_EVENT:
