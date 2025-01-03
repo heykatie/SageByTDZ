@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models.db import db
-from app.models import RSVP
+from app.models import RSVP, Feedback
 
 rsvp_routes = Blueprint('rsvps', __name__)
 
