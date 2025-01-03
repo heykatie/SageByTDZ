@@ -13,7 +13,7 @@ const UpcomingEvents = ({user}) => {
 
     useEffect(() => {
         dispatch(getUpcomingEvents(user.id))
-    }, [])
+    }, [dispatch, user.id])
 
     const upcomingEvents = useSelector((state) => state.session.upcoming)
 

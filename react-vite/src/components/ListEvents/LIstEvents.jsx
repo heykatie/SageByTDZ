@@ -12,7 +12,7 @@ const ListEvents = () => {
 
     useEffect(() => {
         dispatch(getAllEvents())
-    }, [])
+    }, [dispatch])
 
     const user = useSelector((state) => state.session.user)
     const events = useSelector((state) => state.session.events)

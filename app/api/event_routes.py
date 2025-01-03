@@ -18,7 +18,7 @@ def event(id):
         rsvps = RSVP.query.filter(RSVP.event_id == id)
         rsvpList = [rsvp.user_id for rsvp in rsvps]
         def avgFeedback(feedbackList):
-            feedback_count = list(feedbackList.count(3), feedback_count(2), feedback_count(1) )
+            feedback_count = [feedbackList.count(3), feedbackList.count(2), feedbackList.count(1)]
             mode = max(feedback_count)
             if mode == feedback_count[0]: return 2
             if mode == feedback_count[1]: return 1
@@ -28,7 +28,7 @@ def event(id):
         'event': event.to_dict(),
         'organizer': organizer.to_dict(),
         'avgFeedback': avgFeedback(feedbackList),
-        'rsvps': [User.query.get(userId).firstName for userId in rsvpList]
+        'rsvps': [User.query.get(userId).first_name for userId in rsvpList]
         }
     return {'errors': {'message': "Event couldn't be found"}}, 404
 

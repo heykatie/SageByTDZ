@@ -19,7 +19,7 @@ const EditProfileModal = ({ user }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        creditials = {
+        let credentials = {
             email: user.email,
             password
         }

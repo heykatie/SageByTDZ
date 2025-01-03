@@ -16,7 +16,7 @@ const EventDetails = () => {
 
     useEffect(() => {
         dispatch(singleEvent(eventId))
-    }, [])
+    }, [dispatch, eventId])
 
     const user = useSelector((state) => state.session.user)
     const events = useSelector((state) => state.session.events)

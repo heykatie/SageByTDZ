@@ -15,8 +15,8 @@ import friendReducer from "./friends";
     session: sessionReducer,
     user: userReducer,
     events: eventsReducer,
-    group: groupReducer
-  friends: friendReducer
+    group: groupReducer,
+    friends: friendReducer
 });
 
 let enhancer;
