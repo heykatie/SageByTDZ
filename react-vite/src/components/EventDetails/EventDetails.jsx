@@ -4,9 +4,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { TbMoodSadSquint } from "react-icons/tb";
 import { BiHappy } from "react-icons/bi";
 import { PiSmileyMeh } from "react-icons/pi";
-import { singleEvent, addOrgFeedback } from '../../redux/event';
-import './EventDetails.css'
+import { singleEvent } from '../../redux/event';
+import { MdLocalPhone } from "react-icons/md";
+import { GoLinkExternal } from "react-icons/go";
+import { TfiEmail } from "react-icons/tfi";
 import { useEffect } from 'react';
+import FeedbackModal from '../FeedbackRatingInput/FeebackModal';
+import './EventDetails.css';
 
 const EventDetails = () => {
 
@@ -73,12 +77,18 @@ const EventDetails = () => {
             <h2>{event.organizer.name}</h2>
             <div className='li-organizer-description'>
                 <p>{event.organizer}</p>
-                <div className='li-organizer-logo'></div>
-                <img src={event.organizer.logo} alt={event.organizer.name} />
-                <div className='li-organizer-contact'></div>
-                <p>{event.organizer.link}</p>
-                <p>{event.organizer.phone_number}</p>
-                <p>{event.organizer.email}</p>
+                <div className='li-organizer-logo'>
+                    <img src={event.organizer.logo} alt={event.organizer.name} />
+                </div>
+                <div className='li-organizer-contact'>
+                <h3>Contact Us!</h3>
+                <MdLocalPhone className='icon' />
+                    <p>{event.organizer.phone_number}</p>
+                <GoLinkExternal className='icon' />
+                    <p>{event.organizer.link}</p>
+                <TfiEmail className='icon' />
+                    <p>{event.organizer.email}</p>
+                </div>
             </div>
             <div className='li-organizer-feedback'>
                 <h3>Community Feedback: </h3>
@@ -90,7 +100,12 @@ const EventDetails = () => {
                 <img src={avgReaction(event.avgFeedback)} alt={event.organizer.name} />
                 {
                     user?
-                    <FeedbackRatingInput /> :
+                    <OpenModalButton
+                    buttonText="Give Your Feedback"
+                    modalComponent={<FeedbackModal organizer={event.organizer} user={user}/>}
+                    onButtonClick
+                    onModalClose
+                    /> :
                     <Link to={'/login'}>Log In</Link>
                 }
             </div>
