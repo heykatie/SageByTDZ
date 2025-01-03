@@ -61,6 +61,32 @@ export const singleEvent = (id) => async dispatch => {
     }
 };
 
+//move to rsvps reducer
+
+export const addOrgFeedback = (feedback) => async dispatch => {
+    const response = await fetch("/api/prfoile/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(feedback)
+      });
+
+    if ( res.status === 200 ) {
+        // console.log('I AM IN THUNK')
+        const info = await res.json();
+
+        // console.log('FEEDBACK HAS BEEN MADE  ----->', info)
+        // dispatch(receive(info));
+        return info;
+    } else {
+        const errors = res.errors;
+
+        // console.log('IM THE PROBLEM HELLO')
+
+        return errors;
+    }
+};
+
+
 //reducer
 const eventsReducer = (state = {}, action) => {
     switch(action.type) {
