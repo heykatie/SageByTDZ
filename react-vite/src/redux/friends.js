@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf";
 
 const GET_FRIENDS = 'friends/getFriends';
 const SINGLE_FRIEND = 'friends/singleFriend';
+const SHARED_EVENTS = 'friends/sharedEvents';
 
 const getFriends = (payload) => ({
     type: GET_FRIENDS,
@@ -10,6 +11,11 @@ const getFriends = (payload) => ({
 
 const getSingleFriend = (payload) => ({
     type: SINGLE_FRIEND,
+    payload
+});
+
+const getSharedEvents = (payload) => ({
+    type: SHARED_EVENTS,
     payload
 });
 
@@ -31,11 +37,23 @@ export const thunkSingleFriend = (friendId) => async dispatch => {
         const friend = await res.json();
         if(friend.errors) { return; }
 
-        dispatch(getSingleFriend(friend))
+        dispatch(getSingleFriend(friend));
     }
 }
 
-const initialState = { allFriends: {}, friend: {} };
+export const thunkSharedEvents = (friendId) => async dispatch => {
+    const res = await csrfFetch(`/api/friends/${friendId}/events`);
+
+    if(res.ok) {
+        const events = await res.json();
+
+        if(events.errors) { return; }
+
+        dispatch(getSharedEvents(events));
+    }
+}
+
+const initialState = { allFriends: {}, friend: {}, sharedEvents: {} };
 
 export default function friendReducer(state = initialState, action) {
     switch (action.type){
@@ -45,7 +63,7 @@ export default function friendReducer(state = initialState, action) {
             friendsArray.forEach((friend) => {
                 newState.allFriends[friend.id] = friend;
             });
-            return newState
+            return newState;
         }
         case SINGLE_FRIEND: {
             const newState = { ...state, friend: {} };
@@ -53,7 +71,15 @@ export default function friendReducer(state = initialState, action) {
             friend.forEach((friend) => {
                 newState.friend[friend.id] = friend;
             })
-            return newState
+            return newState;
+        }
+        case SHARED_EVENTS: {
+            const newState = { ...state, sharedEvents: {} };
+            const events = action.payload;
+            events.forEach((event) => {
+                newState.sharedEvents[event.id] = event;
+            })
+            return newState;
         }
         default:
             return state;
