@@ -63,8 +63,12 @@ export const singleEvent = (id) => async dispatch => {
 
 //move to rsvps reducer
 
-export const addOrgFeedback = (id) => async dispatch => {
-    const res = await csrfFetch(`/api/events/${id}`)
+export const addOrgFeedback = (feedback) => async dispatch => {
+    const response = await fetch("/api/prfoile/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(feedback)
+      });
 
     if ( res.status === 200 ) {
         // console.log('I AM IN THUNK')
