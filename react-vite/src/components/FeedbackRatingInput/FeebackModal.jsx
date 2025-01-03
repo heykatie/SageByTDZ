@@ -57,7 +57,7 @@ const FeedbackModal = ({ organizer, user }) => {
                 <FeedbackRatingInput
                 disabled={false}
                 onChange={onChange}
-                id='reactions'
+                className='reactions'
                 rating={reaction}
                  />
             </label>
