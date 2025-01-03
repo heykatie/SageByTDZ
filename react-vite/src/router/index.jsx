@@ -10,7 +10,6 @@ import EventRSVPs from '../components/EventRSVPs';
 import SingleFriend from '../components/SingleFriend';
 import SharedEvents from '../components/SharedEvents';
 import ProfilePage from '../components/ProfilePage';
-import ListEvents from '../components/ListEvents';
 import Layout from './Layout';
 import GroupComponent from '../components/GroupComponent';
 

@@ -153,8 +153,6 @@ function SignupFormModal() {
             onChange={(e) => setProfilePic(e.target.value)}
           />
         </label>
-        {errors.profilePic && <p>{errors.profilePic}</p>}
-        <button
         {errors.profilePic && <p className="error">{errors.profilePic}</p>}
         <button
         type="submit"
