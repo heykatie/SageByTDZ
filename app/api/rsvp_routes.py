@@ -27,3 +27,21 @@ def delete_rsvp(id):
         db.session.commit()
         return { 'message': "Successfully deleted" }
     return {'errors': {'message': "No RSVPS could be found"}}, 404
+
+@rsvp_routes.route('/feedback', methods=['POST'])
+@login_required
+def add_feedback(id):
+    userId = current_user.get_id()
+    data=request.json()
+    feedbackList = Feedback.query.filter(Feedback.organizer_id == id and Feedback.user_id == userId)
+
+    if not feedbackList:
+        feedback = Feedback(
+        organizer_id=id,
+        user_id=userId,
+        reaction=data['reaction']
+        )
+        db.session.add(feedback)
+        db.session.commit()
+        return feedback.to_dict(), 201
+    return {'errors': {'message': "You have already left feedback for this organizer."}}, 404
