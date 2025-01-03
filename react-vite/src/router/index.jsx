@@ -5,6 +5,7 @@ import ListEvents from '../components/ListEvents';
 import EventDetails from '../components/EventDetails';
 import EditProfileModal from '../components/EditProfileModal';
 import UpcominngEvents from '../components/UpcomingEvents';
+import ProfilePage from '../components/ProfilePage';
 import Layout from './Layout';
 
 export const router = createBrowserRouter([
@@ -34,6 +35,10 @@ export const router = createBrowserRouter([
       {
         path: "events/:eventId",
         element: <ListEvents />,
+      },
+      {
+        path: "profile",
+        element: <ProfilePage />,
       },
       {
         path: "profile/edit",

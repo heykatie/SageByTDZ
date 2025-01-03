@@ -1,3 +1,3 @@
-import EventsIndex from './EventsIndex';
+// import EventsIndex from './EventsIndex';
 
-export default EventsIndex;
+// export default EventsIndex;
