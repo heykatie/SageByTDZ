@@ -1,9 +1,10 @@
 import './Friends.css';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import * as friendActions from '../../redux/friends';
 
-function Friends() {
+export default function Friends() {
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -21,11 +22,11 @@ function Friends() {
         <div>
             {friendsArr && friendsArr.map(friend=>(
                 <div key={friend.id}>
-                    <span>{friend.first_name}</span>
+                    <Link to={`/friends/${friend.id}`}>
+                    {friend.first_name}
+                    </Link>
                 </div>
             ))}
         </div>
     )
 }
-
-export default Friends;
