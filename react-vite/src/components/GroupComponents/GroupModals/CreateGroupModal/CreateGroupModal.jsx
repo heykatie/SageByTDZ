@@ -15,6 +15,12 @@ const CreateGroupModal = ({ onClose }) => {
 		dispatch(fetchUserEvents());
 	}, [dispatch]);
 
+	// useEffect(() => {
+	// 	dispatch(fetchUserEvents()).then((response) => {
+	// 		console.log('Fetched events:', response);
+	// 	});
+	// }, [dispatch]);
+
 	// Handle event selection
 	const handleEventChange = (e) => {
 		const eventId = e.target.value;
@@ -29,7 +35,7 @@ const CreateGroupModal = ({ onClose }) => {
 			alert('Please select an event before continuing.');
 			return;
 		}
-		navigate('/groups/new', { state: { event: selectedEvent } });
+		navigate('/groups/new', { state: { eventData: selectedEvent } });
 		onClose();
 	};
 
