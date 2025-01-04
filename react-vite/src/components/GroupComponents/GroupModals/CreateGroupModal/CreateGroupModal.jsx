@@ -11,15 +11,15 @@ const CreateGroupModal = ({ onClose }) => {
 	const [selectedEventId, setSelectedEventId] = useState('');
 	const [selectedEvent, setSelectedEvent] = useState(null);
 
-	useEffect(() => {
-		dispatch(fetchUserEvents());
-	}, [dispatch]);
-
 	// useEffect(() => {
-	// 	dispatch(fetchUserEvents()).then((response) => {
-	// 		console.log('Fetched events:', response);
-	// 	});
+	// 	dispatch(fetchUserEvents());
 	// }, [dispatch]);
+
+	useEffect(() => {
+		dispatch(fetchUserEvents()).then((response) => {
+			console.log('Fetched events:', response);
+		});
+	}, [dispatch]);
 
 	// Handle event selection
 	const handleEventChange = (e) => {
