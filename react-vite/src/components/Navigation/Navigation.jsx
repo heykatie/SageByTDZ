@@ -3,7 +3,7 @@ import ProfileButton from './ProfileButton';
 import './Navigation.css';
 import { useState } from 'react';
 import { useSelector } from 'react-redux'; // Import to get the session user
-import CreateGroupModal from '../CreateGroupModal';
+import CreateGroupModal from '../GroupComponents/GroupModals/CreateGroupModal';
 
 function Navigation() {
 	const [showCreateGroupModal, setShowCreateGroupModal] = useState(false);
