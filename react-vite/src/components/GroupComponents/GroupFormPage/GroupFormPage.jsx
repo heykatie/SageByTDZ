@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate, useLocation } from 'react-router-dom'; // Import useLocation
+import { useDispatch, useSelector } from 'react-redux'; // Added useSelector
+import { useNavigate, useLocation } from 'react-router-dom';
 import {
 	CreateGroupModal,
 	DeleteGroupModal,
@@ -16,8 +16,11 @@ import { fetchUserFriends } from '../../../redux/user';
 const GroupFormPage = ({ isEditMode, groupData }) => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const location = useLocation(); // Get data from route state
-	const eventData = location.state?.eventData; // Get eventData from modal navigation
+	const location = useLocation();
+	const eventData = location.state?.eventData;
+
+	// Get the current user from session slice
+	const currentUser = useSelector((state) => state.session.user);
 
 	const [description, setDescription] = useState('');
 	const [friendsList, setFriendsList] = useState([]);
@@ -29,7 +32,7 @@ const GroupFormPage = ({ isEditMode, groupData }) => {
 	useEffect(() => {
 		if (!eventData) {
 			alert('No event data provided. Redirecting to events page...');
-			navigate('/events'); // Redirect if event data is missing
+			navigate('/events');
 			return;
 		}
 		if (isEditMode && groupData) {
@@ -43,7 +46,7 @@ const GroupFormPage = ({ isEditMode, groupData }) => {
 		e.preventDefault();
 		const payload = {
 			description,
-			eventId: eventData.id, // Use event ID passed from modal
+			eventId: eventData.id,
 			friends: selectedFriends,
 		};
 		if (isEditMode) {
@@ -64,7 +67,13 @@ const GroupFormPage = ({ isEditMode, groupData }) => {
 					? `Edit Group - ${eventData.title}`
 					: `Create Group - ${eventData.title}`}
 			</h2>
-			<p>Hosted by: {eventData.organizer}</p>
+			{/* Show current user as host */}
+			<p>
+				Hosted by:{' '}
+				{currentUser
+					? `${currentUser.first_name} ${currentUser.last_name}`
+					: 'Loading...'}
+			</p>
 			<p>{`${eventData.event_date} | ${eventData.start_time} | ${eventData.categories}`}</p>
 			<p>{eventData.address}</p>
 			<a href={`/events/${eventData.id}`} className='event-link'>
