@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useLocation, useParams } from 'react-router-dom'; // Import useLocation
 import {
 	CreateGroupModal,
 	DeleteGroupModal,
@@ -13,9 +13,15 @@ import {
 } from '../../../redux/group';
 import { fetchUserFriends } from '../../../redux/user';
 
-const GroupFormPage = ({ isEditMode, groupData, eventData }) => {
+const GroupFormPage = ({ isEditMode, groupData }) => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	const location = useLocation(); // Get data from route state
+	const eventData = location.state?.eventData; // Get eventData from modal navigation
+	const { groupId } = useParams();
+	const currentUser = useSelector((state) => state.session.user);
+	const { group, loading, error } = useSelector((state) => state.group);
+	const { events, friends } = useSelector((state) => state.user);
 	const [description, setDescription] = useState('');
 	const [friendsList, setFriendsList] = useState([]);
 	const [selectedFriends, setSelectedFriends] = useState([]);
@@ -23,18 +29,28 @@ const GroupFormPage = ({ isEditMode, groupData, eventData }) => {
 	const [friendToRemove, setFriendToRemove] = useState(null);
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-	// Load data on mount
 	useEffect(() => {
+		if (!eventData) {
+			alert('No event data provided. Redirecting to events page...');
+			navigate('/events'); // Redirect if event data is missing
+			return;
+		}
 		if (isEditMode && groupData) {
 			setDescription(groupData.description || '');
 			setSelectedFriends(groupData.invitedFriends || []);
 		}
-		dispatch(fetchUserFriends()).then((res) => {
-			if (res?.friends) setFriendsList(res.friends);
-		});
-	}, [dispatch, isEditMode, groupData]);
+		dispatch(fetchUserFriends()).then((friends) => setFriendsList(friends));
+	}, [dispatch, isEditMode, groupData, eventData, navigate]);
 
-	// Handle Save Group
+	// Toggle friend selection
+	const toggleFriendSelection = (friend) => {
+		setSelectedFriends((prev) =>
+			prev.includes(friend)
+				? prev.filter((f) => f !== friend)
+				: [...prev, friend]
+		);
+	};
+
 	const handleSaveGroup = async (e) => {
 		e.preventDefault();
 		if (!eventData) {
@@ -43,7 +59,7 @@ const GroupFormPage = ({ isEditMode, groupData, eventData }) => {
 		}
 		const payload = {
 			description,
-			eventId: eventData.id,
+			eventId: eventData.id, // Use event ID passed from modal
 			friends: selectedFriends,
 		};
 		if (isEditMode) {
@@ -57,39 +73,14 @@ const GroupFormPage = ({ isEditMode, groupData, eventData }) => {
 		}
 	};
 
-	// Handle Delete Group
+	// Delete group
 	const handleDeleteGroup = async () => {
-		await dispatch(thunkDeleteGroup(groupData.id));
+		await dispatch(thunkDeleteGroup(groupId));
 		navigate('/dashboard');
 	};
 
-	// Open remove friend modal
-	const openRemoveModal = (friend) => {
-		setFriendToRemove(friend);
-		setShowRemoveModal(true);
-	};
-
-	// Confirm removing a friend
-	const handleRemoveFriend = () => {
-		setSelectedFriends((prev) =>
-			prev.filter((f) => f.id !== friendToRemove.id)
-		);
-		setShowRemoveModal(false);
-	};
-
-	// Toggle friend selection
-	const toggleFriendSelection = (friend) => {
-		setSelectedFriends((prev) =>
-			prev.some((f) => f.id === friend.id)
-				? prev.filter((f) => f.id !== friend.id)
-				: [...prev, friend]
-		);
-	};
-
-	// Check if event data is loading
-	if (!eventData) {
-		return <p>Loading event details...</p>;
-	}
+	if (loading) return <p>Loading...</p>;
+	if (error) return <p>Error: {error}</p>;
 
 	return (
 		<div className='group-form-page'>
@@ -98,11 +89,14 @@ const GroupFormPage = ({ isEditMode, groupData, eventData }) => {
 					? `Edit Group - ${eventData.title || 'Event Title'}`
 					: `Create Group - ${eventData.title || 'Event Title'}`}
 			</h2>
-			<p>Hosted by: {`Organizer #${eventData.organizer_id}`}</p>
-			<p>{`${eventData.event_date || 'Date'} | ${
-				eventData.start_time || 'Time'
-			} | ${eventData.categories || 'Categories'}`}</p>
-			<p>{eventData.address || 'Address'}</p>
+			<p>
+				Hosted by:{' '}
+				{currentUser
+					? `${currentUser.first_name} ${currentUser.last_name}`
+					: 'Loading...'}
+			</p>
+			<p>{`${eventData.event_date} | ${eventData.start_time} | ${eventData.categories}`}</p>
+			<p>{eventData.address}</p>
 			<a href={`/events/${eventData.id}`} className='event-link'>
 				Link to Event Page
 			</a>
@@ -116,79 +110,67 @@ const GroupFormPage = ({ isEditMode, groupData, eventData }) => {
 				required
 			/>
 
-			{/* Friends Section */}
+			{/* Friends Selection */}
 			<section className='friends-section'>
-				<h3>{isEditMode ? 'Invited Friends' : 'Invite Friends'}</h3>
+				<h3>Invite Friends!</h3>
 				<div className='friends-list'>
-					{isEditMode ? (
-						selectedFriends.map((friend) => (
-							<div key={friend.id} className='friend-item'>
-								<span>
-									{friend.first_name} {friend.last_name}
-								</span>
-								<button onClick={() => openRemoveModal(friend)}>
-									X
-								</button>
-							</div>
-						))
-					) : friendsList.length > 0 ? (
-						friendsList.map((friend) => (
-							<div key={friend.id} className='friend-item'>
-								<span>
-									{friend.first_name} {friend.last_name}
-								</span>
+					{friends.length ? (
+						friends.map((friend) => (
+							<div className='friend-item' key={friend.id}>
+								<img
+									src={friend.profile_pic}
+									alt={`${friend.first_name}'s profile`}
+									className='friend-profile-pic'
+								/>
+								<span>{`${friend.first_name} ${friend.last_name}`}</span>
 								<button
-									className={
-										selectedFriends.some((f) => f.id === friend.id)
-											? 'selected'
-											: ''
-									}
+									className={`select-friend-button ${
+										selectedFriends.includes(friend) ? 'selected' : ''
+									}`}
 									onClick={() => toggleFriendSelection(friend)}>
-									{selectedFriends.some((f) => f.id === friend.id)
-										? 'Remove'
-										: 'Add'}
+									{selectedFriends.includes(friend) ? 'Remove' : 'Add'}
 								</button>
 							</div>
 						))
 					) : (
-						<p>No friends available to invite.</p>
+						<p>No friends to display. Invite friends to connect!</p>
 					)}
 				</div>
 			</section>
 
-			{/* Save and Cancel Buttons */}
+			{/* Save and Delete Buttons */}
 			<div className='group-buttons'>
-				<button onClick={handleSaveGroup} className='save-group-button'>
+				<button className='save-group-button' onClick={handleSaveGroup}>
 					Save Group
-				</button>
-				<button onClick={() => navigate(`/events/${eventData.id}`)}>
-					Cancel
 				</button>
 				{isEditMode && (
 					<button
-						onClick={() => setShowDeleteModal(true)}
-						className='delete-group-button'>
+						className='delete-group-button'
+						onClick={() => setShowDeleteModal(true)}>
 						Delete Group
 					</button>
 				)}
 			</div>
 
-			{/* Remove Friend Modal */}
-			{showRemoveModal && (
-				<RemoveFriendModal
-					friend={friendToRemove}
-					onConfirm={handleRemoveFriend}
-					onClose={() => setShowRemoveModal(false)}
-				/>
-			)}
-
-			{/* Delete Group Modal */}
+			{/* Delete Modal */}
 			{showDeleteModal && (
-				<DeleteGroupModal
-					groupName={groupData.description}
-					onConfirm={handleDeleteGroup}
-					onClose={() => setShowDeleteModal(false)}
-				/>
+				<div className='delete-modal'>
+					<div className='delete-modal-content'>
+						<p>Are you sure you want to delete this group?</p>
+						<div className='modal-buttons'>
+							<button
+								className='confirm-delete'
+								onClick={handleDeleteGroup}>
+								Yes, Delete
+							</button>
+							<button
+								className='cancel-delete'
+								onClick={() => setShowDeleteModal(false)}>
+								No, Go Back
+							</button>
+						</div>
+					</div>
+				</div>
 			)}
 		</div>
 	);
